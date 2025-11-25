@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> {{ title }} </title>
+  <link rel="stylesheet" href="/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+   
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="{{ title | default('Hi, I\'m Maroof Lone') }}">
+  <meta property="og:description" content="{{ description | default('Blogger | OSINT Enthusiast | Media Analyst | Cybersecurity Explorer | Kashmiri at Heart | Exploring stories, trends, and insights that matter.') }}">
+  <meta property="og:image" content="{{ site.url }}{% if image %}{{ image }}{% else %}/assets/images/main-assets/og-discription-image.png{% endif %}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:image:alt" content="{{ title | default('Maroof Lone - Blogger and Media Analyst') }}">
+
+{% if page.url %}
+{% if page.url.startsWith('/blog/') %}
+    <meta property="og:type" content="article">
+  {% else %}
+    <meta property="og:type" content="website">
+  {% endif %}
+{% else %}
+  <meta property="og:type" content="website">
+{% endif %}
+
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:width" content="1200">
+<meta name="twitter:image:height" content="630">
+<meta name="twitter:title" content="{{ title | default('Hi, I\'m Maroof Lone') }}">
+<meta name="twitter:description" content="{{ description | default('Blogger | OSINT Enthusiast | Media Analyst | Cybersecurity Explorer | Kashmiri at Heart | Exploring stories, trends, and insights that matter.') }}">
+<meta name="twitter:image" content="{{ site.url }}{% if image %}{{ image }}{% else %}/assets/images/main-assets/og-discription-image.png{% endif %}">
+<meta name="twitter:image:alt" content="{{ title | default('Maroof Lone - Blogger and Media Analyst') }}">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T20K3YKJP9"></script>
+<script>
+
+<!-- Netlify CMS -->
+ <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+
+</head>
+<body>
+  <div class="page-wrapper">
+    {% include 'header.njk' %}
+    <main>
+      {{ content | safe }}
+    </main>
+    {% include 'footer.njk' %}
+  </div>
+
+  <script>
+    // Netlify Identity
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", (user) => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+
+    // Header Scroll Behavior
+    let lastScroll = 0;
+    const header = document.getElementById('mainHeader');
+    const threshold = 50;
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      // Only trigger if scrolled more than threshold
+      if (Math.abs(currentScroll - lastScroll) < 10) return;
+
+      if (currentScroll > lastScroll && currentScroll > threshold) {
+        // Scroll Down
+        header.classList.add('hidden');
+      } else {
+        // Scroll Up
+        header.classList.remove('hidden');
+      }
+      lastScroll = currentScroll;
+    });
+
+    // Mobile Menu Toggle
+    function toggleMenu() {
+      const nav = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      nav.classList.toggle('active');
+      hamburger.classList.toggle('active');
+      document.body.classList.toggle('no-scroll');
+    }
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        const nav = document.getElementById('navMenu');
+        const hamburger = document.querySelector('.hamburger');
+        if (nav.classList.contains('active')) {
+          nav.classList.remove('active');
+          hamburger.classList.remove('active');
+          document.body.classList.remove('no-scroll');
+        }
+      });
+    });
+    
+    // Work/Education Accordion
+    function toggleAccordion(element) {
+ 
+        /*
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            if (item !== element) item.classList.remove('open');
+        });
+        */
+        
+       element.classList.toggle('open');
+    }
+    // Scroll Animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

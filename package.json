@@ -1,0 +1,27 @@
+{
+  "name": "marooflone-website",
+  "version": "1.0.0",
+  "description": "marooflone.com new website with updated design v2",
+  "main": "index.js",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maroofmedia/marooflone-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maroofmedia/marooflone-website/issues"
+  },
+  "homepage": "https://github.com/maroofmedia/marooflone-website#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  },
+  "dependencies": {
+    "@sindresorhus/slugify": "^2.2.1"
+  }
+}

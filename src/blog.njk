@@ -1,0 +1,21 @@
+---
+title: All Articles by Maroof Lone
+layout: 'base.njk'
+---
+
+<div class="section">
+  
+  <div class="container">
+    
+    <div class="blog-header"> 
+        <h1 class="blog-section-title">All Posts</h1>
+        <p class="blog-description">I write about the things I learn, notice, and care about — all collected here in one place.</p>
+    </div>
+
+    <div class="blog-list">
+         {%- for post in collections.post | reverse -%}
+         {% include 'article-snippet.njk' %}
+         {%- endfor -%}
+    </div>
+
+  </div>

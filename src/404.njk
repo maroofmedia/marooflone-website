@@ -1,0 +1,211 @@
+---
+layout: 'base.njk'
+title: '404 - Not Found'
+---
+
+<div class="container section error-page-wrapper">
+    
+    <div class="system-popup">
+        
+        <div class="popup-header">
+            <span class="window-title">root@kashmir: ~/errors</span>
+            <div class="window-controls">
+                <span class="control close"></span>
+                <span class="control min"></span>
+                <span class="control max"></span>
+            </div>
+        </div>
+
+        <div class="popup-body">
+            
+            <div class="error-banner">
+                <span class="error-code">ERR_404</span>
+                <span class="error-msg">PAGE_NOT_FOUND</span>
+            </div>
+
+            <div class="log-output">
+                <div class="log-line">
+                    <span class="timestamp">[12:00:01]</span> 
+                    <span class="process">init_request:</span> 
+                    <span class="message">Locating target...</span>
+                </div>
+                <div class="log-line">
+                    <span class="timestamp">[12:00:02]</span> 
+                    <span class="process">trace_path:</span> 
+                    <span class="message fail">Failed (Snow_Blockage)</span>
+                </div>
+                <div class="log-line">
+                    <span class="timestamp">[12:00:03]</span> 
+                    <span class="process">kernel:</span> 
+                    <span class="message">Chillai Kalan frozen.</span>
+                </div>
+                <div class="log-line active-line">
+                    <span class="prompt">></span> <span class="cursor">_</span>
+                </div>
+            </div>
+
+            <div class="action-area">
+                <p class="suggestion">Recommended Action: System Reboot</p>
+                <a href="/" class="primary-btn">
+                    Execute (Go Home)
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<style>
+/* --- Layout Wrapper --- */
+.error-page-wrapper {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* --- The System Popup Card --- */
+.system-popup {
+    width: 100%;
+    max-width: 450px;
+    background: #0d1117;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+}
+
+/* --- Window Title Bar --- */
+.popup-header {
+    background: #161b22;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.window-title {
+    font-size: 0.75rem;
+    color: #8b949e;
+    font-weight: 600;
+}
+
+.window-controls {
+    display: flex;
+    gap: 6px;
+}
+
+.control { width: 10px; height: 10px; border-radius: 50%; display: block; }
+.close { background: #ff5f56; }
+.min { background: #ffbd2e; }
+.max { background: #27c93f; }
+
+/* --- Body Content --- */
+.popup-body {
+    padding: 20px;
+}
+
+/* Error Banner (The "404" part) */
+.error-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.error-code {
+    background: #ff5f56;
+    color: #000;
+    font-weight: bold;
+    padding: 2px 6px;
+    font-size: 0.85rem;
+    border-radius: 2px;
+}
+
+.error-msg {
+    color: #ff5f56;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* Log Output Lines */
+.log-output {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.log-line {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+}
+
+.timestamp { color: #484f58; font-size: 0.75rem; }
+.process { color: var(--accent); } /* Teal */
+.message { color: var(--text-muted); }
+.message.fail { color: #ff5f56; } /* Red */
+.prompt { color: var(--accent); font-weight: bold; }
+.cursor { 
+    display: inline-block; width: 6px; height: 12px; 
+    background: var(--accent); 
+    animation: blink 1s step-end infinite; 
+}
+
+/* --- Action Area (Button) --- */
+.action-area {
+    margin-top: 10px;
+}
+
+.suggestion {
+    font-size: 0.75rem;
+    color: #8b949e;
+    margin: 0 0 8px 0;
+}
+
+.primary-btn {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--text-muted);
+    color: var(--text);
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+
+.primary-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+}
+
+/* --- Animation --- */
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* --- Mobile Tweaks --- */
+@media (max-width: 480px) {
+    .system-popup {
+        max-width: 100%; /* Fill screen on very small devices */
+    }
+    
+    .log-line {
+        flex-wrap: wrap; /* Let logs wrap if needed */
+    }
+}
+</style>
