@@ -10,7 +10,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets
+  
+  /images/favicon/apple-touch-icon.png?v=2">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png?v=2">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png?v=2">
   <link rel="manifest" href="/assets/images/favicon/site.webmanifest?v=2">
@@ -18,7 +20,7 @@
   <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="{{ title | default('Hi, I\'m Maroof Lone') }}">
   <meta property="og:description" content="{{ description | default('Blogger | CSE Student | Cybersecurity Explorer | Exploring stories, trends, and insights that matter.') }}">
-  <meta property="og:image" content="{{ site.url }}{% if image %}{{ image }}{% else %}/assets/images/main-assets/og-discription-image.png?v=2{% endif %}">
+  <meta property="og:image" content="{{ site.url }}{% if image %}{{ image }}{% else %}/assets/images/main-images/og-discription-image.png?v=2{% endif %}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
@@ -41,7 +43,7 @@
 <meta name="twitter:image:height" content="630">
 <meta name="twitter:title" content="{{ title | default('Hi, I\'m Maroof Lone') }}">
 <meta name="twitter:description" content="{{ description | default('Blogger | CSE Student | Cybersecurity Explorer | Exploring stories, trends, and insights that matter.') }}">
-<meta name="twitter:image" content="{{ site.url }}{% if image %}{{ image }}{% else %}/assets/images/main-assets/og-discription-image.png?v=2{% endif %}">
+<meta name="twitter:image" content="{{ site.url }}{% if image %}{{ image }}{% else %}/assets/images/main-images/og-discription-image.png?v=2{% endif %}">
 <meta name="twitter:image:alt" content="{{ title | default('Maroof Lone - Blogger and CSE Student') }}">
 
 <!-- Google tag (gtag.js) -->
@@ -148,5 +150,77 @@
       observer.observe(el);
     });
   </script>
+
+
+<div id="privacy-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-modal" aria-label="Close modal">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="modal-header">
+            <h3>Privacy Notice</h3>
+        </div>
+        
+        <div class="modal-body">
+            <p>This personal website is created and maintained by me. All information shared here is true to the best of my knowledge and understanding. All writings, photos, projects and/or any other material on this site are original unless clearly stated otherwise.</p>
+            
+            <p>I only collect basic information that helps me understand how visitors use the website. This includes anonymized data such as page views, device type, and general location, which is tracked through Google Analytics. No personally identifiable information is collected unless you choose to share it with me through a contact form or email.</p>
+            
+            <p>Any data you share voluntarily will be used only for the purpose you intended and will never be sold or misused.</p>
+            
+            <div class="modal-agreement">
+                <i class="fas fa-check-circle"></i> 
+                <span>By using this website, you agree to this privacy notice. If you have questions, feel free to contact me.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const trigger = document.getElementById('privacy-trigger');
+    const modal = document.getElementById('privacy-modal');
+    const closeBtn = document.querySelector('.close-modal');
+
+    // 1. Open Modal
+    if(trigger) {
+        trigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        });
+    }
+
+    // 2. Close Modal function
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = ''; 
+    }
+
+    // 3. Close on X button
+    if(closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+    }
+
+    // 4. Close on Click Outside
+    if(modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+
+    // 5. Close on Escape Key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+});
+  </script>
+
+
 </body>
 </html>
