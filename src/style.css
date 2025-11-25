@@ -25,6 +25,7 @@ body {
   color: var(--text);
   line-height: 1.6;
   font-size: 16px;
+
   
 }
 
@@ -249,7 +250,7 @@ code.code-block-1 {
 }
 
 .icon-osint {
-  color: #38b2ac;
+  color: #fbbf24;
 }
 
 .icon-mysql {
@@ -415,14 +416,6 @@ code.code-block-1 {
   white-space: nowrap;
 }
 
-/* --- Footer --- */
-.site-footer {
-  border-top: 1px solid var(--border-color);
-  padding: 40px 0;
-  margin-top: 80px;
-  text-align: center;
-  background: #0d1014;
-}
 
 .social-links {
   display: flex;
@@ -800,10 +793,12 @@ code {
 
 /* --- Footer Positioning --- */
 .site-footer {
-  margin-top: auto;
   padding: 40px 0;
   text-align: center;
   border-top: 1px solid var(--border-color);
+  margin-top: 80px;
+  text-align: center;
+  background: #0d1014;
 }
 
 .social-links {

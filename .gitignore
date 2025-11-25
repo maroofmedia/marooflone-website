@@ -1,13 +1,14 @@
-# dependencies installed by npm
-node_modules
+# Dependencies
+node_modules/
 
-# build artefacts
-public
-css
+# 11ty Build Output (Change this to match your output folder name)
+_site/
+public/
 
-# secrets and errors
+# System files
+.DS_Store
+Thumbs.db
+
+# Environment variables (if you have API keys)
 .env
 .log
-
-# macOS related files
-.DS_Store
