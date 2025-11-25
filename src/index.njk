@@ -6,7 +6,7 @@ layout: 'base.njk'
     <div class="container main-content">
       <div class="profile-section">
         <div class="profile-photo-wrapper">
-            <img src="assets/images/main-images/hero-image.jpg" alt="Maroof Lone" class="profile-photo">
+            <img src="assets/images/main-images/hero-image.jpg?v=2" alt="Maroof Lone" class="profile-photo">
         </div>
       </div>
 
@@ -142,8 +142,11 @@ layout: 'base.njk'
            {%- endfor -%}
         </div>
         
-        <div style="text-align: center; margin-top: 2rem;">
-            <a href="/blog" class="view-all-btn">Read All Posts <i class="fas fa-arrow-right"></i></a>
-        </div>
+<div style="text-align: center; margin-top: 3rem; margin-bottom: 3rem;">
+    <a href="/blog" class="view-all-btn">
+        <span>Read All Posts</span>
+        <i class="fas fa-arrow-right"></i>
+    </a>
+</div>
     </div>
   </section>

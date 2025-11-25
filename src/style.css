@@ -26,7 +26,18 @@ body {
   line-height: 1.6;
   font-size: 16px;
 
-  
+
+}
+
+/* --- Sticky Footer Layout --- */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
 }
 
 /* --- Container --- */
@@ -658,23 +669,52 @@ code.code-block-1 {
 
 /* --- View All Button --- */
 .view-all-btn {
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
-  -webkit-font-smoothing: subpixel-antialiased;
-  backface-visibility: hidden;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; 
+  padding: 10px 24px; 
+  
+  /* Outline Style */
+  background: transparent;
+  color: #222; 
+  border: 2px solid #222;
+  border-radius: 6px; 
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px; 
+  font-size: 0.7rem; 
+  overflow: hidden; 
+  transition: color 0.3s ease;
+  z-index: 1;
+}
+
+/* The Sliding Background */
+.view-all-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%; 
+  height: 100%;
+  background: #222; 
+  transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: -1; 
 }
 
 .view-all-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  color: #fff; 
 }
 
-.view-all-btn:active {
-  transform: scale(0.96);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.view-all-btn:hover::before {
+  width: 100%; 
 }
 
 .view-all-btn i {
   transition: transform 0.3s ease;
+  font-size: 0.9em; 
 }
 
 .view-all-btn:hover i {
@@ -748,14 +788,16 @@ code {
 }
 
 .blog-section-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
+  margin-top: 0;
+  padding-top: 0;
   color: #e5e7eb;
 }
 
 /* Blog description paragraph */
 .blog-description {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #9ca3af;
   max-width: 600px;
   margin-left: auto;
@@ -796,7 +838,7 @@ code {
   padding: 40px 0;
   text-align: center;
   border-top: 1px solid var(--border-color);
-  margin-top: 80px;
+  margin-top: 2rem;
   text-align: center;
   background: #0d1014;
 }
@@ -827,13 +869,13 @@ code {
 
 /* --- Article Spacing --- */
 .main-article {
-  margin-bottom: 80px;
+  margin-bottom:35px;
 }
 
 /* --- Single Post Tags Section --- */
 .post-tags {
   max-width: 1100px;
-  margin: 3rem auto 0;
+  margin: 0.1rem auto 0;
   padding: 1.5rem 20px 0;
   border-top: 1px solid var(--border-color);
   display: flex;
@@ -886,7 +928,7 @@ code {
   }
 
   .main-article {
-    margin-bottom: 60px;
+    margin-bottom: 30px;
   }
 
   .article-title {

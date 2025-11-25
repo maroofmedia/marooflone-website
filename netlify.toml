@@ -1,0 +1,23 @@
+# Redirect all unknown routes to 404
+[[redirects]]
+  from = "/*"
+  to = "/404"
+  status = 404
+
+# Cache settings for all images and assets. (Fonts, css, and all image types (png, jpg, webp) )
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    # Cache for 1 year. "immutable" means the file content won't change.
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Default security and performance headers for the whole site
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Protects against clickjacking
+    X-Frame-Options = "DENY"
+    # Protects against MIME sniffing
+    X-Content-Type-Options = "nosniff"
+    # Basic XSS protection
+    X-XSS-Protection = "1; mode=block"
