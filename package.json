@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/maroofmedia/marooflone-website#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0"
+    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2"
   },
   "dependencies": {
     "@sindresorhus/slugify": "^2.2.1"

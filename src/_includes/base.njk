@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
 
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="/assets
@@ -219,6 +220,40 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
   </script>
+
+
+  <script>
+  // Find all code blocks
+  document.querySelectorAll('pre').forEach((pre) => {
+    // 1. Create the button
+    const button = document.createElement('button');
+    button.className = 'copy-button';
+    // Use the FontAwesome Copy Icon
+    button.innerHTML = '<i class="far fa-copy"></i>';
+    button.ariaLabel = 'Copy code';
+
+    // 2. Add Click Event
+    button.addEventListener('click', () => {
+      const code = pre.querySelector('code').innerText;
+      
+      navigator.clipboard.writeText(code).then(() => {
+        // Change icon to Checkmark on success
+        button.innerHTML = '<i class="fas fa-check"></i>';
+        button.classList.add('copied');
+        
+        // Reset back to Copy icon after 2 seconds
+        setTimeout(() => {
+          button.innerHTML = '<i class="far fa-copy"></i>';
+          button.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy:', err);
+      });
+    });
+
+    pre.appendChild(button);
+  });
+</script>
 
 
 </body>

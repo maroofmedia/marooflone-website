@@ -66,19 +66,19 @@ If you’d like to add this widget to your website, here’s what you need to do
 
 1. Add the widget's CSS file to your HTML <head> section:
 
-```
+```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/maroofmedia/iftarkar-widgets/widget.min.css">
 ```
 
 2. Add this code snippet where the widget will be displayed:
 
-```
+```html
 <div id="prayer-timings-widget"></div>
 ```
 
 3. Include the widget's JavaScript file at the end of your HTML <body> section:
 
-```
+```html
 <script src="https://cdn.jsdelivr.net/gh/maroofmedia/iftarkar-widgets/widget.min.js"></script>
 ```
 
