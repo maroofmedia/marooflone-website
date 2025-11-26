@@ -144,27 +144,31 @@ eleventyComputed:
     padding-bottom: 2rem;
 }
 
+/* --- View All Button --- */
 .view-all-btn {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px; 
-  padding: 12px 28px;
+  padding: 10px 24px; 
+  
+  /* Outline Style */
   background: transparent;
-  color: var(--accent);
-  border: 2px solid var(--accent);
+  color: #f0f0f0;
+  border: 2px solid #222;
   border-radius: 6px; 
   text-decoration: none;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px; 
-  font-size: 0.75rem; 
+  font-size: 0.7rem; 
   overflow: hidden; 
   transition: color 0.3s ease;
   z-index: 1;
 }
 
+/* The Sliding Background */
 .view-all-btn::before {
   content: '';
   position: absolute;
@@ -172,13 +176,13 @@ eleventyComputed:
   left: 0;
   width: 0%; 
   height: 100%;
-  background: var(--accent);
+  background: #222; 
   transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: -1; 
 }
 
 .view-all-btn:hover {
-  color: #000;
+  color: #fff; 
 }
 
 .view-all-btn:hover::before {
@@ -187,7 +191,7 @@ eleventyComputed:
 
 .view-all-btn i {
   transition: transform 0.3s ease;
-  font-size: 1.1em; 
+  font-size: 0.9em; 
 }
 
 .view-all-btn:hover i {
