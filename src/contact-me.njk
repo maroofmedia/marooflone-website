@@ -1,21 +1,198 @@
 ---
 title: Contact Me
-layout: 'base.njk'
+layout: base.njk
 ---
 
-<div class="section">
-    <div class="container">
-            <h1 class="section-title">Get In Touch</h1>
-            <p>
-                Have a question or just want to say hi? I'd love to hear from you. Reach out through any of the platforms below.
-            </p>
-  <div class="social-links">
-      <a href=mailto:hello@marooflone.com aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-      <a href="https://github.com/maroofmedia" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-      <a href="https://twitter.com/marooflone13" target="_blank" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-      <a href="https://www.linkedin.com/in/marooflone13/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-      <a href="https://instagram.com/marooflone13" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-    </div>          
-            
+<style>
+  /* Terminal Container */
+  .terminal-wrapper {
+    padding: 2rem 1rem;
+    min-height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  /* The Main Window */
+  .terminal-window {
+    width: 100%;
+    max-width: 700px;
+    background-color: #0d1117; /* GitHub Dark Dim */
+    border-radius: 8px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border: 1px solid #30363d;
+    overflow: hidden;
+  }
+
+  /* Title Bar */
+  .terminal-bar {
+    background-color: #161b22;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #30363d;
+  }
+
+  .dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .red { background-color: #ff5f56; }
+  .yellow { background-color: #ffbd2e; }
+  .green { background-color: #27c93f; }
+
+  .title {
+    margin-left: 20px;
+    color: #8b949e;
+    font-size: 0.85rem;
+  }
+
+  /* Content Area */
+  .terminal-content {
+    padding: 25px;
+    color: #c9d1d9;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  /* Text Colors */
+  .prompt { color: #58a6ff; font-weight: bold; } /* Blue */
+  .path { color: #7ee787; } /* Green */
+  .cmd { color: #fff; }
+  .comment { color: #8b949e; font-style: italic; } /* Grey comment */
+
+  /* The Link List */
+  .connection-list {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .terminal-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #e6edf3;
+    transition: all 0.2s ease;
+  }
+
+  .terminal-link:hover {
+    background: rgba(88, 166, 255, 0.15); /* Blue tint */
+    border-color: #58a6ff;
+    transform: translateX(5px);
+  }
+
+  .terminal-link i {
+    width: 30px;
+    color: #7ee787; /* Green Icons */
+    font-size: 1.2rem;
+  }
+
+  .link-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 10px;
+    height: 18px;
+    background-color: #58a6ff;
+    animation: blink 1s infinite;
+    vertical-align: middle;
+    margin-left: 5px;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Mobile Adjustments */
+  @media (max-width: 600px) {
+    .terminal-content { padding: 15px; font-size: 0.95rem; }
+    .terminal-link { padding: 10px; }
+  }
+</style>
+
+<div class="terminal-wrapper">
+  <div class="terminal-window">
+    
+    <!-- Top Bar -->
+    <div class="terminal-bar">
+      <div class="dots">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <div class="title">maroof — -zsh — 80x24</div>
     </div>
+
+    <!-- Main Content -->
+    <div class="terminal-content">
+      
+      <!-- Command 1 -->
+      <div>
+        <span class="prompt">visitor@maroof:</span><span class="path">~</span>$ <span class="cmd">whoami</span>
+      </div>
+      <div style="margin-bottom: 1.5rem; color: #a5d6ff;">
+        > Full Stack Developer & Tech Writer based in Kashmir.
+      </div>
+
+      <!-- Command 2 -->
+      <div>
+        <span class="prompt">visitor@maroof:</span><span class="path">~</span>$ <span class="cmd">./connect.sh --list</span>
+      </div>
+      <div class="comment"># Click a protocol to initiate connection:</div>
+
+      <!-- Links Grid -->
+      <div class="connection-list">
+        
+        <a href="mailto:hello@marooflone.com" class="terminal-link">
+          <i class="fa-solid fa-envelope"></i>
+          <span class="link-text">Send Email</span>
+        </a>
+
+        <a href="https://twitter.com/marooflone13" target="_blank" class="terminal-link">
+          <i class="fa-brands fa-x-twitter"></i>
+          <span class="link-text">Follow on Twitter / X</span>
+        </a>
+
+        <a href="https://github.com/maroofmedia" target="_blank" class="terminal-link">
+          <i class="fa-brands fa-github"></i>
+          <span class="link-text">Check GitHub Repos</span>
+        </a>
+
+        <a href="https://www.linkedin.com/in/marooflone13/" target="_blank" class="terminal-link">
+          <i class="fa-brands fa-linkedin"></i>
+          <span class="link-text">Connect on LinkedIn</span>
+        </a>
+
+        <a href="https://instagram.com/marooflone13" target="_blank" class="terminal-link">
+          <i class="fa-brands fa-instagram"></i>
+          <span class="link-text">View Instagram</span>
+        </a>
+
+      </div>
+
+      <!-- Live Cursor -->
+      <div style="margin-top: 1.5rem;">
+        <span class="prompt">visitor@maroof:</span><span class="path">~</span>$ <span class="cursor"></span>
+      </div>
+
+    </div>
+  </div>
 </div>
