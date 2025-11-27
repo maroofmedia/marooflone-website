@@ -1,0 +1,23 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{# 1. SORT pages by URL so Homepage comes first #}
+{% for page in collections.all | sort(attribute='url') %}
+  
+  {# 2. EXCLUDE specific pages here #}
+  {% if page.url 
+      and page.url != '/404/' 
+      and page.url != '/admin/' 
+      and not page.data.draft %}
+      
+  <url>
+    <loc>{{ site.url }}{{ page.url | url }}</loc>
+    <lastmod>{% if page.date %}{{ page.date.toISOString() }}{% else %}2024-01-01T00:00:00.000Z{% endif %}</lastmod>
+  </url>
+  
+  {% endif %}
+{% endfor %}
+</urlset>
