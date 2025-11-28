@@ -7,7 +7,7 @@ author:
 date: 2025-11-28T16:21:00.000+05:30
 tags:
   - post
-  - kashmir
+  - Kashmir
   - education
   - writings
   - blog
