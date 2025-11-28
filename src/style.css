@@ -894,7 +894,6 @@ pre {
   padding: 40px 0;
   text-align: center;
   border-top: 1px solid var(--border-color);
-  margin-top: 2rem;
   text-align: center;
   background: #0d1014;
 }
@@ -1135,7 +1134,7 @@ pre {
 
 /* --- Article Share Section --- */
 .share-container {
-  margin-top: 40px !important;
+  margin-top: 20px !important;
   margin-bottom: 60px !important;
   
   /* Visual separation line */
