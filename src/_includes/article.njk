@@ -1,36 +1,71 @@
 ---
 layout: 'base.njk'
 ---
-<article class="main-article">
-<div class="container container--narrow flow">
-  
-    <h1 class="article-title">
+<article class="main-article" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="container container--narrow flow">
+    
+    <h1 class="article-title" itemprop="headline">
       {{ title }}
     </h1>
+    
     <figure class="main-article__figure">
-      <img src="{{ image }}" alt="{{ imageAlt }}">
+      <img src="{{ image }}" alt="{{ imageAlt }}" decoding="async">
       <figcaption>
         {{ imageAlt }}
       </figcaption>
     </figure>
+    
     <div class="post-meta">
-      <p><i class="fa-solid fa-user"></i> Written By: {{ author }}</p>
-      <p><i class="fas fa-calendar-alt"></i> Published On: {{ date | postDate }}</p>
+      <p><i class="fa-solid fa-user"></i> Written By: <span itemprop="author">{{ author }}</span></p>
+      
+      <p>
+        <i class="fas fa-calendar-alt"></i> Published On: 
+        <time datetime="{{ date }}">{{ date | postDate }}</time>
+      </p>
     </div>
       
-  {{ content | safe }}
-  
-</div>
+    <div itemprop="articleBody">
+      {{ content | safe }}
+    </div>
+
+    {% if tags.length > 0 %}
+      <div class="post-tags">
+        <p>Tags:</p>
+        <p>
+          {% for tag in tags %}
+            {% if tag != "post" %}
+              <a href="/tags/{{ tag }}/" class="tag-link">#{{ tag }}</a>{% if not loop.last %}, {% endif %}
+            {% endif %}
+          {% endfor %}
+        </p>
+      </div>
+    {% endif %}
+
+    <div class="share-container">
+        <span class="share-label">Enjoyed reading? Share this:</span>
+        
+        <div class="share-btn-group">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url | url }}" target="_blank" rel="noopener noreferrer" class="share-btn fb" aria-label="Share on Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+                <span>Facebook</span>
+            </a>
+
+            <a href="https://twitter.com/intent/tweet?url={{ site.url }}{{ page.url | url }}&text={{ title | urlencode }}" target="_blank" rel="noopener noreferrer" class="share-btn tw" aria-label="Share on Twitter">
+                <i class="fa-brands fa-x-twitter"></i>
+                <span>Post</span>
+            </a>
+
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.url }}{{ page.url | url }}" target="_blank" rel="noopener noreferrer" class="share-btn in" aria-label="Share on LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+                <span>LinkedIn</span>
+            </a>
+
+            <a href="https://api.whatsapp.com/send?text={{ title | urlencode }}%20{{ site.url }}{{ page.url | url }}" target="_blank" rel="noopener noreferrer" class="share-btn wa" aria-label="Share on WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
+        </div>
+    </div>
+
+  </div> 
 </article>
-{% if tags.length > 0 %}
-  <div class="post-tags">
-    <p>Tags:</p>
-    <p>
-      {% for tag in tags %}
-        {% if tag != "post" %}  {# Exclude default "post" tag #}
-          <a href="/tags/{{ tag }}/" class="tag-link">#{{ tag }}</a>{% if not loop.last %}, {% endif %}
-        {% endif %}
-      {% endfor %}
-    </p>
-  </div>
-{% endif %}
