@@ -23,6 +23,8 @@
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2"
   },
   "dependencies": {
-    "@sindresorhus/slugify": "^2.2.1"
+    "@sindresorhus/slugify": "^2.2.1",
+    "markdown-it": "^14.1.0",
+    "markdown-it-link-attributes": "^4.0.1"
   }
 }

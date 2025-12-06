@@ -1,5 +1,6 @@
 const { DateTime } = require("luxon");
 const markdownIt = require("markdown-it");
+const markdownItLinkAttributes = require("markdown-it-link-attributes");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight"); 
 
 module.exports = function (eleventyConfig) {
@@ -7,11 +8,20 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight); 
 
   // Markdown-it configuration
-  const md = markdownIt({
+  const markdownOptions = {
     html: true,
     breaks: true,
     linkify: true,
-  });
+  };
+
+  const md = markdownIt(markdownOptions)
+    .use(markdownItLinkAttributes, {
+      pattern: /^https?:\/\//, 
+      attrs: {
+        target: "_blank",
+        rel: "noopener noreferrer" 
+      }
+    });
 
   // Add this missing date filter
   eleventyConfig.addFilter("date", (dateObj, format = "yyyy-MM-dd") => {
@@ -69,11 +79,6 @@ module.exports = function (eleventyConfig) {
       const tags = Array.isArray(item.data.tags) ? item.data.tags : [item.data.tags];
       return tags.includes(tag);
     });
-  });
-
-  // Slugify filter for clean URLs
-  eleventyConfig.addFilter("slug", (input) => {
-    return slugify(input || "");
   });
 
   // Global Data (Site URL & Analytics)
