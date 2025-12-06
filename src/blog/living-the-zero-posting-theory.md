@@ -12,10 +12,9 @@ tags:
   - writings
   - tech
   - seo
-  - content creation
+  - content-creation
   - google
-  - zero posting
-  - ""
+  - zero-posting
 image: /assets/blog/zero-posting-theory.png
 imageAlt: "Silence is the new status symbol. | Illustration: AI Generated"
 ---

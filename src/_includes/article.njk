@@ -34,7 +34,7 @@ layout: 'base.njk'
         <p>
           {% for tag in tags %}
             {% if tag != "post" %}
-              <a href="/tags/{{ tag }}/" class="tag-link">#{{ tag }}</a>{% if not loop.last %}, {% endif %}
+              <a href="/tags/{{ tag | slugify }}/" class="tag-link">#{{ tag }}</a>{% if not loop.last %}, {% endif %}
             {% endif %}
           {% endfor %}
         </p>
