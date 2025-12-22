@@ -839,13 +839,13 @@ pre {
   text-align: center;
   margin-bottom: 3rem;
   margin-top: 0rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .blog-section-title {
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
   margin-top: 0;
   padding-top: 0;
   color: #e5e7eb;
@@ -998,12 +998,16 @@ pre {
 .privacy-link {
     color: var(--text-muted);
     font-size: 0.85rem;
-    text-decoration: underline;
     text-underline-offset: 4px;
     margin-top: 8px;
     display: inline-block;
     cursor: pointer;
     transition: color 0.2s;
+    margin-right: 15px;
+
+}
+.privacy-link:last-child {
+    margin-right: 0;
 }
 
 .privacy-link:hover {
