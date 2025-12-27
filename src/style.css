@@ -930,7 +930,7 @@ pre {
 /* --- Single Post Tags Section --- */
 .post-tags {
   max-width: 1100px;
-  padding: 1.5rem 0 0;
+  padding: 1.5rem 0 1.5rem;
   border-top: 1px solid var(--border-color);
   display: flex;
   align-items: baseline;
@@ -1138,13 +1138,8 @@ pre {
 
 /* --- Article Share Section --- */
 .share-container {
-  margin-top: 20px !important;
-  margin-bottom: 60px !important;
-  
-  /* Visual separation line */
   border-top: 1px solid var(--border-color);
-  padding-top: 30px;
-  
+  padding-top: 30px;  
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -1333,4 +1328,81 @@ pre {
   .project-image {
     height: 160px;
   }
+}
+
+/* --- Recent Posts Section --- */
+.recent-posts-section {
+  border-top: 1px solid var(--border-color);
+  margin-top: 0;
+  padding-top: 40px;
+  padding-bottom: 60px;
+  width: 100%;
+}
+
+.recent-heading {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  letter-spacing: -0.5px;
+}
+
+/* Grid Layout */
+.recent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+  gap: 25px;
+}
+
+/* Card Container */
+.recent-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 12px;
+  
+  height: 100%; 
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recent-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+}
+
+/* Title */
+.recent-card-title {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  margin: 0;
+  transition: color 0.2s;
+}
+
+.recent-card:hover .recent-card-title {
+  color: #fff;
+}
+
+/* Date Section */
+.recent-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-family: 'Courier New', monospace;
+  margin-top: 0;
+}
+
+.recent-card-meta i {
+  color: var(--accent);
+  font-size: 0.9rem;
 }

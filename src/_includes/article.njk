@@ -66,6 +66,30 @@ layout: 'base.njk'
             </a>
         </div>
     </div>
+</div>
 
-  </div> 
-</article>
+  </div> <div class="container">
+    <div class="recent-posts-section">
+      <h3 class="recent-heading">Read Next</h3>
+      
+      <div class="recent-grid">
+        {% set recentPosts = collections.post | reverse %}
+        {% set count = 0 %}
+        
+        {% for post in recentPosts %}
+          {% if post.url != page.url and count < 3 %}
+            
+            <a href="{{ post.url }}" class="recent-card">
+              <span class="recent-card-title">{{ post.data.title }}</span>
+              <div class="recent-card-meta">
+                 <i class="fas fa-calendar-alt"></i>
+                 <time datetime="{{ post.date }}">{{ post.date | postDate }}</time>
+              </div>
+            </a>
+
+            {% set count = count + 1 %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div> </article>
