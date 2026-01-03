@@ -2,9 +2,11 @@ const { DateTime } = require("luxon");
 const markdownIt = require("markdown-it");
 const markdownItLinkAttributes = require("markdown-it-link-attributes");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight"); 
+const pluginRss = require("@11ty/eleventy-plugin-rss");
 
 module.exports = function (eleventyConfig) {
-
+  
+  eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(syntaxHighlight); 
 
   // Markdown-it configuration
