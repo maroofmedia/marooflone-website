@@ -12,3 +12,5 @@ Thumbs.db
 # Environment variables (if you have API keys)
 .env
 .log
+# Local Netlify folder
+.netlify

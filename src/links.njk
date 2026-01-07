@@ -1,0 +1,263 @@
+---
+title: Quick Links | Maroof Lone
+layout: 'base.njk'
+---
+
+<div class="container links-wrapper">
+  
+  <div class="links-profile">
+    
+    <div class="square-avatar-container">
+      <img src="/assets/images/main-images/maroof-hero-image-new.png" alt="Maroof Lone" class="square-avatar">
+      
+      <div class="avatar-overlay">
+        <span>One Man Army</span>
+      </div>
+
+      <div class="online-dot"></div>
+    </div>
+
+    <h1>Maroof Lone</h1>
+    <p class="links-role">Code, Context & Curiosity</p>
+    <p class="links-bio">Learning, building, and breaking things (responsibly).</p>
+  </div>
+
+  <div class="links-grid">
+    
+    <a href="/blog" class="link-card featured">
+      <div class="link-icon"><i class="fa-solid fa-pen-nib"></i></div>
+      <div class="link-content">
+        <h3>Read My Blog</h3>
+        <p>Stories, Analysis, and Context.</p>
+      </div>
+      <div class="link-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+    </a>
+
+    <a href="https://shifa.marooflone.com" target="_blank" class="link-card project">
+      <div class="link-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+      <div class="link-content">
+        <h3>Heal Your Heart</h3>
+        <p>AI-Powered Spiritual App</p>
+      </div>
+    </a>
+
+    <a href="mailto:hello@marooflone.com" class="link-card">
+      <div class="link-icon"><i class="fa-solid fa-envelope"></i></div>
+      <div class="link-content">
+        <h3>Email Me</h3>
+        <p>Get in touch directly</p>
+      </div>
+    </a>
+
+  </div>
+
+</div>
+
+
+<style>
+.links-wrapper {
+  max-width: 500px;
+  padding-top: 60px;
+  padding-bottom: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.square-avatar-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.square-avatar {
+  width: 140px;
+  height: 140px;
+  display: block;
+  object-fit: cover;
+  border-radius: 24px;
+  border: 2px solid var(--border-color);
+  background: var(--card-bg);
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease;
+}
+
+.avatar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  background: rgba(8, 9, 10, 0.75);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+}
+
+.avatar-overlay span {
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transform: translateY(10px);
+  transition: transform 0.3s ease;
+}
+
+.online-dot {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  background-color: #10B981;
+  border: 3px solid var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+  animation: pulse-green 2s infinite;
+  z-index: 10;
+}
+
+.square-avatar-container:hover .square-avatar {
+  transform: scale(1.05);
+  border-color: var(--accent);
+}
+
+.square-avatar-container:hover .avatar-overlay {
+  opacity: 1;
+}
+
+.square-avatar-container:hover .avatar-overlay span {
+  transform: translateY(0);
+}
+
+.links-profile {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.links-profile h1 {
+  font-size: 1.6rem;
+  margin: 0 0 4px 0;
+  color: #fff;
+}
+
+.links-role {
+  color: var(--accent);
+  font-family: monospace;
+  font-size: 0.9rem;
+  margin: 0 0 8px 0;
+}
+
+.links-bio {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.links-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.link-card {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.link-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  background: #161b22;
+  box-shadow: 0 4px 20px rgba(79, 209, 197, 0.05);
+}
+
+.link-icon {
+  width: 42px;
+  height: 42px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-right: 15px;
+  transition: color 0.2s;
+}
+
+.link-card:hover .link-icon {
+  color: var(--accent);
+  background: rgba(79, 209, 197, 0.1);
+}
+
+.link-content h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.link-content p {
+  margin: 2px 0 0 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.link-card:hover .link-content h3 {
+  color: #fff;
+}
+
+.link-arrow {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.2s ease;
+}
+
+.link-card:hover .link-arrow {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--accent);
+}
+
+.link-card.featured {
+  border-color: rgba(79, 209, 197, 0.3);
+  background: rgba(79, 209, 197, 0.03);
+}
+
+.link-card.project {
+  border-left: 3px solid var(--accent);
+}
+
+@keyframes pulse-green {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+@media (max-width: 600px) {
+  .links-wrapper {
+    padding-top: 40px;
+}
+
+  .link-card {
+    padding: 14px;
+}
+
+}
+</style>

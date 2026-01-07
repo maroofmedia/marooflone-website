@@ -1,4 +1,10 @@
-# Redirect all unknown routes to 404
+[[redirects]]
+  from = "/hi"
+  to = "mailto:hello@marooflone.com"
+  status = 302
+  force = true
+
+# 2. Catch-all / Redirect all unknown routes to 404
 [[redirects]]
   from = "/*"
   to = "/404.html"
