@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> {{ title | default("Maroof Lone | Code, Context & Curiosity") }} </title>
-  <meta name="description" content="{{ description | default('Blogger, CSE Student, and Cybersecurity Explorer. Exploring stories, trends, and technology insights.') }}">
-  <link rel="canonical" href="https://www.marooflone.com{{ page.url }}">
+  <meta name="description" content="{{ description | default('Computer Science Engineer, Web Developer and Blogger from Kashmir. Specializing in OSINT, cybersecurity, and digital research solutions.') }}">  <link rel="canonical" href="https://www.marooflone.com{{ page.url }}">
   <link rel="stylesheet" href="/style.css?v=fix4">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -22,7 +21,7 @@
   <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="{{ title | default('Maroof Lone | Code, Context & Curiosity') }}">
   <meta property="og:site_name" content="Maroof Lone">
-  <meta property="og:description" content="{{ description | default('Blogger | CSE Student | Cybersecurity Explorer | Exploring stories, trends, and insights that matter.') }}">
+  <meta property="og:description" content="{{ description | default('Computer Science Engineer, Web Developer and Blogger from Kashmir. Specializing in OSINT, cybersecurity, and digital research solutions.') }}">
   <meta property="og:image" content="{{ site.url }}{% if image %}{{ image }}{% else %}/assets/images/main-images/og-discription-image.png?v=2{% endif %}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -45,7 +44,7 @@
 <meta name="twitter:image:width" content="1200">
 <meta name="twitter:image:height" content="630">
 <meta name="twitter:title" content="{{ title | default('Maroof Lone | Code, Context & Curiosity') }}">
-<meta name="twitter:description" content="{{ description | default('Blogger | CSE Student | Cybersecurity Explorer | Exploring stories, trends, and insights that matter.') }}">
+<meta name="twitter:description" content="{{ description | default('Computer Science Engineer, Web Developer and Blogger from Kashmir. Specializing in OSINT, cybersecurity, and digital research solutions.') }}">
 <meta name="twitter:image" content="{{ site.url }}{% if image %}{{ image }}{% else %}/assets/images/main-images/og-discription-image.png?v=2{% endif %}">
 <meta name="twitter:image:alt" content="{{ title | default('Maroof Lone | Code, Context & Curiosity') }}">
 
@@ -59,10 +58,28 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Maroof Lone",
-  "alternateName": ["Maroof Lone Portfolio", "Maroof's Blog"],
-  "url": "https://www.marooflone.com/"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "Maroof Lone",
+      "url": "https://www.marooflone.com/"
+    },
+    {
+      "@type": "Person",
+      "name": "Maroof Lone",
+      "jobTitle": "Computer Science Engineer, Web Developer & Blogger",
+      "url": "https://www.marooflone.com/",
+      "image": "https://www.marooflone.com/assets/images/main-images/maroof-hero-image-new.png",
+      "description": "Computer Science Engineer, Web Developer, and Blogger hailing from Kashmir. Specializing in OSINT, cybersecurity, and digital research.",
+      "sameAs": [
+        "https://www.linkedin.com/in/marooflone13",
+        "https://github.com/maroofmedia",
+        "https://twitter.com/marooflone13",
+        "https://www.instagram.com/marooflone13",
+        "https://share.google/jHH04LLUWHG9WncGx"
+      ]
+    }
+  ]
 }
 </script>
 
