@@ -13,7 +13,8 @@ pagination:
   addAllPagesToCollections: true
 permalink: /tags/{{ tag | slugify }}/
 eleventyComputed:
-  title: "Topic: {{ tag | capitalize }} by Maroof Lone"
+  title: "Topic: {{ tag | title }} by Maroof Lone"
+  description: "Read all essays and posts about {{ tag | title }} written by Maroof Lone. Deep dives into {{ tag }} and related topics."
 ---
 
 <div class="container section">
