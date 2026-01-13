@@ -231,6 +231,7 @@ description: "Get in touch with Maroof Lone. Email me for collaborations, freela
         <h2>Send a Message</h2>
         
         <form name="contact-page-form" method="POST" data-netlify="true" action="/success/">
+         <input type="hidden" name="subject" id="hidden-subject" value="New Website Inquiry" />
           <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" required placeholder="John Doe">
@@ -263,3 +264,19 @@ description: "Get in touch with Maroof Lone. Email me for collaborations, freela
     </div>
   </div>
 </section>
+
+<script>
+  const nameInput = document.getElementById('name');
+  const subjectInput = document.getElementById('hidden-subject');
+
+  if (nameInput && subjectInput) {
+    nameInput.addEventListener('input', function() {
+      // Updates subject to: "New Message from Maroof"
+      if (this.value.trim() !== '') {
+        subjectInput.value = "New Message from " + this.value;
+      } else {
+        subjectInput.value = "New Website Inquiry";
+      }
+    });
+  }
+</script>
