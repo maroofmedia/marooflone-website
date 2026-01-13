@@ -5,195 +5,261 @@ description: "Get in touch with Maroof Lone. Email me for collaborations, freela
 ---
 
 <style>
-  /* Terminal Container */
-  .terminal-wrapper {
-    padding: 2rem 1rem;
-    min-height: 60vh;
+  
+  /* Main Container */
+  .contact-section {
+    padding: 3rem 1rem;
+    min-height: 80vh;
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    font-family: 'Courier New', Courier, monospace;
   }
 
-  /* The Main Window */
-  .terminal-window {
+  .contact-wrapper {
     width: 100%;
-    max-width: 700px;
-    background-color: #0d1117; /* GitHub Dark Dim */
-    border-radius: 8px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    border: 1px solid #30363d;
-    overflow: hidden;
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: 1.2fr 0.9fr; 
+    gap: 4rem;
+    align-items: start;
   }
 
-  /* Title Bar */
-  .terminal-bar {
-    background-color: #161b22;
-    padding: 12px 15px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #30363d;
+  /* --- LEFT SIDE: Info & Socials --- */
+  .contact-info h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #fff, #a0aec0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.1;
   }
 
-  .dots {
-    display: flex;
-    gap: 8px;
-  }
-
-  .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-  }
-
-  .red { background-color: #ff5f56; }
-  .yellow { background-color: #ffbd2e; }
-  .green { background-color: #27c93f; }
-
-  .title {
-    margin-left: 20px;
-    color: #8b949e;
-    font-size: 0.85rem;
-  }
-
-  /* Content Area */
-  .terminal-content {
-    padding: 25px;
-    color: #c9d1d9;
-    font-size: 1.1rem;
+  .contact-desc {
+    color: #a0aec0;
+    font-size: 1rem;
     line-height: 1.6;
+    margin-bottom: 2.5rem;
   }
 
-  /* Text Colors */
-  .prompt { color: #58a6ff; font-weight: bold; } /* Blue */
-  .path { color: #7ee787; } /* Green */
-  .cmd { color: #fff; }
-  .comment { color: #8b949e; font-style: italic; } /* Grey comment */
-
-  /* The Link List */
-  .connection-list {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  /* Social Grid */
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
   }
 
-  .terminal-link {
+  .social-card {
     display: flex;
     align-items: center;
+    gap: 15px;
+    padding: 12px 18px;
+    background: #1a202c;
+    border: 1px solid #2d3748;
+    border-radius: 12px;
     text-decoration: none;
-    padding: 12px 15px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid #30363d;
-    border-radius: 6px;
-    color: #e6edf3;
-    transition: all 0.2s ease;
+    color: #fff;
+    transition: all 0.3s ease;
   }
 
-  .terminal-link:hover {
-    background: rgba(88, 166, 255, 0.15); /* Blue tint */
-    border-color: #58a6ff;
-    transform: translateX(5px);
+  .social-card:hover {
+    transform: translateY(-3px);
+    border-color: #4FD1C5;
+    background: #232936;
+    box-shadow: 0 10px 20px rgba(79, 209, 197, 0.1);
   }
 
-  .terminal-link i {
-    width: 30px;
-    color: #7ee787; /* Green Icons */
-    font-size: 1.2rem;
+  .social-card i {
+    font-size: 1.4rem;
+    color: #4FD1C5;
   }
 
-  .link-text {
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
+  .social-card span {
+    font-weight: 600;
+    font-size: 0.95rem;
   }
 
-  .cursor {
-    display: inline-block;
-    width: 10px;
-    height: 18px;
-    background-color: #58a6ff;
-    animation: blink 1s infinite;
-    vertical-align: middle;
-    margin-left: 5px;
+  /* --- RIGHT SIDE: Form --- */
+  .contact-form-card {
+    background: #1a202c;
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid #2d3748;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
   }
 
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+  .contact-form-card h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    font-size: 1.5rem;
   }
 
-  /* Mobile Adjustments */
-  @media (max-width: 600px) {
-    .terminal-content { padding: 15px; font-size: 0.95rem; }
-    .terminal-link { padding: 10px; }
+  .form-group { margin-bottom: 1rem; }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #a0aec0;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .form-group input, 
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: #2d3748;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    box-sizing: border-box;
+  }
+
+  .form-group input:focus, 
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #4FD1C5;
+    background: #171923;
+  }
+
+  /* WhatsApp Field specific styles */
+  .phone-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .phone-input-wrapper .country-code {
+    position: absolute;
+    left: 14px;
+    color: #a0aec0;
+    font-size: 0.95rem;
+    pointer-events: none;
+    font-weight: 500;
+  }
+  .phone-input-wrapper input {
+    padding-left: 50px !important;
+  }
+
+  .full-submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: #4FD1C5;
+    color: #111;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .full-submit-btn:hover {
+    background: #3dbcb2;
+    transform: translateY(-2px);
+  }
+
+  /* --- MOBILE RESPONSIVE FIXES --- */
+  @media (max-width: 850px) {
+    .contact-section {
+        padding-top: 1rem; 
+        align-items: flex-start;
+    }
+
+    .contact-wrapper {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    
+    .contact-info h1 { 
+        font-size: 2rem;
+        margin-top: 1;
+    }
+    
+    .contact-form-card {
+      padding: 1.5rem;
+    }
   }
 </style>
 
-<div class="terminal-wrapper">
-  <div class="terminal-window">
-    
-    <!-- Top Bar -->
-    <div class="terminal-bar">
-      <div class="dots">
-        <div class="dot red"></div>
-        <div class="dot yellow"></div>
-        <div class="dot green"></div>
-      </div>
-      <div class="title">maroof — -zsh — 80x24</div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="terminal-content">
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-wrapper">
       
-      <!-- Command 1 -->
-      <div>
-        <span class="prompt">visitor@maroof:</span><span class="path">~</span>$ <span class="cmd">whoami</span>
-      </div>
-      <div style="margin-bottom: 1.5rem; color: #a5d6ff;">
-        > Full Stack Developer & Tech Writer based in Kashmir.
+      <div class="contact-info">
+        <h1>Let's Connect.</h1>
+        <p class="contact-desc">
+          I'm currently open for freelance opportunities. Whether you need a high-performance static website, a custom WordPress solution, or help managing your digital projects — let's discuss how I can help you build it.
+        </p>
+
+        <div class="social-grid">
+          <a href="mailto:hello@marooflone.com" class="social-card">
+            <i class="fa-solid fa-envelope"></i>
+            <span>Email Me</span>
+          </a>
+
+          <a href="https://twitter.com/marooflone13" target="_blank" class="social-card">
+            <i class="fa-brands fa-x-twitter"></i>
+            <span>Twitter / X</span>
+          </a>
+
+          <a href="https://github.com/maroofmedia" target="_blank" class="social-card">
+            <i class="fa-brands fa-github"></i>
+            <span>GitHub</span>
+          </a>
+
+          <a href="https://www.linkedin.com/in/marooflone13/" target="_blank" class="social-card">
+            <i class="fa-brands fa-linkedin"></i>
+            <span>LinkedIn</span>
+          </a>
+          
+          <a href="https://instagram.com/marooflone13" target="_blank" class="social-card">
+            <i class="fa-brands fa-instagram"></i>
+            <span>Instagram</span>
+          </a>
+        </div>
       </div>
 
-      <!-- Command 2 -->
-      <div>
-        <span class="prompt">visitor@maroof:</span><span class="path">~</span>$ <span class="cmd">./connect.sh --list</span>
-      </div>
-      <div class="comment"># Click a protocol to initiate connection:</div>
-
-      <!-- Links Grid -->
-      <div class="connection-list">
+      <div class="contact-form-card">
+        <h2>Send a Message</h2>
         
-        <a href="mailto:hello@marooflone.com" class="terminal-link">
-          <i class="fa-solid fa-envelope"></i>
-          <span class="link-text">Send Email</span>
-        </a>
+        <form name="contact-page-form" method="POST" data-netlify="true" action="/success/">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required placeholder="John Doe">
+          </div>
 
-        <a href="https://twitter.com/marooflone13" target="_blank" class="terminal-link">
-          <i class="fa-brands fa-x-twitter"></i>
-          <span class="link-text">Follow on Twitter / X</span>
-        </a>
+          <div class="form-group">
+            <label for="phone">Phone (WhatsApp)</label>
+            <div class="phone-input-wrapper">
+                <span class="country-code">+91</span>
+                <input type="tel" id="phone" name="phone" placeholder="99999 99999">
+            </div>
+          </div>
 
-        <a href="https://github.com/maroofmedia" target="_blank" class="terminal-link">
-          <i class="fa-brands fa-github"></i>
-          <span class="link-text">Check GitHub Repos</span>
-        </a>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="john@example.com">
+          </div>
 
-        <a href="https://www.linkedin.com/in/marooflone13/" target="_blank" class="terminal-link">
-          <i class="fa-brands fa-linkedin"></i>
-          <span class="link-text">Connect on LinkedIn</span>
-        </a>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" required placeholder="Write your message here..."></textarea>
+          </div>
 
-        <a href="https://instagram.com/marooflone13" target="_blank" class="terminal-link">
-          <i class="fa-brands fa-instagram"></i>
-          <span class="link-text">View Instagram</span>
-        </a>
-
-      </div>
-
-      <!-- Live Cursor -->
-      <div style="margin-top: 1.5rem;">
-        <span class="prompt">visitor@maroof:</span><span class="path">~</span>$ <span class="cursor"></span>
+          <button type="submit" class="full-submit-btn">
+            Send Message <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
       </div>
 
     </div>
   </div>
-</div>
+</section>
