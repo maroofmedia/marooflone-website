@@ -291,5 +291,33 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const slider = document.querySelector('.testimonials-grid');
+    
+    // Function to scroll to the next card
+    function scrollNext() {
+      // Don't scroll if user is touching/hovering (active interaction)
+      if (slider.matches(':hover')) return;
+
+      const cardWidth = slider.querySelector('.testimonial-card').offsetWidth;
+      const gap = 15; // Matches your CSS gap
+      
+      // Check if we are near the end
+      if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+         // Go back to start
+         slider.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+         // Scroll right
+         slider.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
+      }
+    }
+
+    // Run every 4 seconds
+    setInterval(scrollNext, 4000);
+  });
+</script>
+
+
 </body>
 </html>
