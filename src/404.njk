@@ -1,213 +1,382 @@
 ---
 layout: 'base.njk'
-title: '404 - Not Found'
+title: 404 - Not Found
 permalink: 404.html
 eleventyExcludeFromCollections: true
 ---
 
-<div class="container section error-page-wrapper">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<div class="void-container">
     
-    <div class="system-popup">
+    <div class="content-card">
         
-        <div class="popup-header">
-            <span class="window-title">root@kashmir: ~/errors</span>
-            <div class="window-controls">
-                <span class="control close"></span>
-                <span class="control min"></span>
-                <span class="control max"></span>
+        <div class="header-section">
+            <span class="status-badge">404 - Not Found</span>
+            <h1 class="main-title">You are lost.</h1>
+            <p class="philosophy-text">
+                There is nothing here.<br>
+                <span class="highlight">But where there is nothing, there is poetry.</span>
+            </p>
+        </div>
+
+        <div class="poetry-wrapper">
+            <div id="verse-display">
+                <div class="loading-state">Summoning a verse...</div>
             </div>
         </div>
 
-        <div class="popup-body">
-            
-            <div class="error-banner">
-                <span class="error-code">ERR_404</span>
-                <span class="error-msg">PAGE_NOT_FOUND</span>
-            </div>
-
-            <div class="log-output">
-                <div class="log-line">
-                    <span class="timestamp">[12:00:01]</span> 
-                    <span class="process">init_request:</span> 
-                    <span class="message">Locating target...</span>
-                </div>
-                <div class="log-line">
-                    <span class="timestamp">[12:00:02]</span> 
-                    <span class="process">trace_path:</span> 
-                    <span class="message fail">Failed (Snow_Blockage)</span>
-                </div>
-                <div class="log-line">
-                    <span class="timestamp">[12:00:03]</span> 
-                    <span class="process">kernel:</span> 
-                    <span class="message">Chillai Kalan frozen.</span>
-                </div>
-                <div class="log-line active-line">
-                    <span class="prompt">></span> <span class="cursor">_</span>
-                </div>
-            </div>
-
-            <div class="action-area">
-                <p class="suggestion">Recommended Action: System Reboot</p>
-                <a href="/" class="primary-btn">
-                    Execute (Go Home)
-                </a>
-            </div>
-
+        <div class="actions-deck">
+            <button onclick="loadPoetry()" class="btn secondary-btn">
+                <span class="icon">↻</span> Another Verse
+            </button>
+            <a href="/" class="btn primary-btn">
+                Return Home <span class="icon">→</span>
+            </a>
         </div>
+
     </div>
-
 </div>
 
 <style>
-/* --- Layout Wrapper --- */
-.error-page-wrapper {
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-/* --- The System Popup Card --- */
-.system-popup {
-    width: 100%;
-    max-width: 450px;
-    background: #0d1117;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    font-family: 'Courier New', monospace;
-    overflow: hidden;
-}
-
-/* --- Window Title Bar --- */
-.popup-header {
-    background: #161b22;
-    padding: 8px 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.window-title {
-    font-size: 0.75rem;
-    color: #8b949e;
-    font-weight: 600;
-}
-
-.window-controls {
-    display: flex;
-    gap: 6px;
-}
-
-.control { width: 10px; height: 10px; border-radius: 50%; display: block; }
-.close { background: #ff5f56; }
-.min { background: #ffbd2e; }
-.max { background: #27c93f; }
-
-/* --- Body Content --- */
-.popup-body {
-    padding: 20px;
-}
-
-/* Error Banner (The "404" part) */
-.error-banner {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px dashed var(--border-color);
-}
-
-.error-code {
-    background: #ff5f56;
-    color: #000;
-    font-weight: bold;
-    padding: 2px 6px;
-    font-size: 0.85rem;
-    border-radius: 2px;
-}
-
-.error-msg {
-    color: #ff5f56;
-    font-weight: 700;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-}
-
-/* Log Output Lines */
-.log-output {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 25px;
-}
-
-.log-line {
-    font-size: 0.85rem;
-    line-height: 1.4;
-    display: flex;
-    gap: 8px;
-    align-items: baseline;
-}
-
-.timestamp { color: #484f58; font-size: 0.75rem; }
-.process { color: var(--accent); } /* Teal */
-.message { color: var(--text-muted); }
-.message.fail { color: #ff5f56; } /* Red */
-.prompt { color: var(--accent); font-weight: bold; }
-.cursor { 
-    display: inline-block; width: 6px; height: 12px; 
-    background: var(--accent); 
-    animation: blink 1s step-end infinite; 
-}
-
-/* --- Action Area (Button) --- */
-.action-area {
-    margin-top: 10px;
-}
-
-.suggestion {
-    font-size: 0.75rem;
-    color: #8b949e;
-    margin: 0 0 8px 0;
-}
-
-.primary-btn {
-    display: block;
-    width: 100%;
-    background: transparent;
-    border: 1px solid var(--text-muted);
-    color: var(--text);
-    text-align: center;
-    padding: 10px 0;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    transition: all 0.2s ease;
-}
-
-.primary-btn:hover {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #000;
-}
-
-/* --- Animation --- */
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-/* --- Mobile Tweaks --- */
-@media (max-width: 480px) {
-    .system-popup {
-        max-width: 100%; /* Fill screen on very small devices */
+    /* --- GLOBAL SETTINGS --- */
+    :root {
+        --bg-color: #08080a;
+        --card-bg: rgba(20, 20, 25, 0.6);
+        --text-main: #e0e0e0;
+        --text-muted: #888888;
+        --accent-gold: #d4af37;
+        --font-urdu: 'Noto Nastaliq Urdu', serif;
+        --font-serif: 'Playfair Display', serif;
+        --font-sans: 'Inter', sans-serif;
     }
-    
-    .log-line {
-        flex-wrap: wrap; /* Let logs wrap if needed */
+
+    .void-container {
+        min-height: 90vh;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        position: relative;
+        font-family: var(--font-sans);
     }
-}
+
+    .void-container::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        opacity: 0.04;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        pointer-events: none;
+    }
+
+    /* --- THE CARD DESIGN --- */
+    .content-card {
+        width: 100%;
+        max-width: 600px;
+        background: var(--card-bg);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 3rem 2rem;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        transition: transform 0.3s ease;
+    }
+
+    /* --- HEADER TYPOGRAPHY --- */
+    .status-badge {
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        color: var(--text-muted);
+        border: 1px solid rgba(255,255,255,0.1);
+        padding: 4px 10px;
+        border-radius: 50px;
+        display: inline-block;
+        margin-bottom: 1.5rem;
+    }
+
+    .main-title {
+        font-family: var(--font-serif);
+        font-size: 2.5rem;
+        font-weight: 400;
+        margin: 0 0 1rem 0;
+        color: #fff;
+    }
+
+    .philosophy-text {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--text-muted);
+        margin-bottom: 2.5rem;
+    }
+
+    .highlight {
+        color: var(--text-main);
+        font-style: italic;
+        font-family: var(--font-serif);
+    }
+
+    /* --- POETRY SECTION --- */
+    .poetry-wrapper {
+        min-height: 220px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 2.5rem;
+        position: relative;
+    }
+
+    .poetry-wrapper::before, .poetry-wrapper::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 1px;
+        background: rgba(255,255,255,0.1);
+    }
+    .poetry-wrapper::before { top: 0; }
+    .poetry-wrapper::after { bottom: 0; }
+
+    .urdu-line {
+        font-family: var(--font-urdu);
+        font-size: 1.8rem;
+        line-height: 2.2;
+        color: #fff;
+        direction: rtl;
+        margin: 1.5rem 0 1rem 0;
+        text-shadow: 0 0 15px rgba(255,255,255,0.1);
+    }
+
+    .trans-line {
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+        font-weight: 300;
+        color: #a0a0a0;
+        line-height: 1.5;
+        max-width: 90%;
+        margin: 0 auto 0.5rem auto;
+    }
+
+    .poet-name {
+        font-family: var(--font-serif);
+        font-size: 0.9rem;
+        color: var(--accent-gold);
+        font-style: italic;
+        margin-top: 1rem;
+        display: block;
+    }
+
+    /* --- BUTTONS --- */
+    .actions-deck {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .secondary-btn {
+        background: transparent;
+        color: var(--text-muted);
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+    .secondary-btn:hover {
+        border-color: var(--text-main);
+        color: var(--text-main);
+    }
+
+    .primary-btn {
+        background: #e0e0e0;
+        color: #000;
+        border: 1px solid #e0e0e0;
+    }
+    .primary-btn:hover {
+        background: #fff;
+        transform: translateY(-2px);
+    }
+
+    /* --- MOBILE RESPONSIVENESS --- */
+    @media (max-width: 600px) {
+        .content-card {
+            padding: 2rem 1.5rem;
+        }
+
+        .main-title {
+            font-size: 2rem;
+        }
+
+        .urdu-line {
+            font-size: 1.5rem;
+            line-height: 2;
+        }
+
+        .actions-deck {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
 </style>
+
+<script>
+    // The Database of "Lost" Couplets
+            const archive = [
+    {
+        poet: "Mirza Ghalib",
+        urdu: "ہزاروں خواہشیں ایسی کہ ہر خواہش پہ دم نکلے<br>بہت نکلے مرے ارمان لیکن پھر بھی کم نکلے",
+        trans: "Thousands of desires, each worth dying for;<br>Many of my wishes were fulfilled, yet I remain unsatisfied."
+    },
+    {
+        poet: "Mirza Ghalib",
+        urdu: "بس کہ دشوار ہے ہر کام کا آساں ہونا<br>آدمی کو بھی میسر نہیں انساں ہونا",
+        trans: "Just as it is difficult for every task to be easy;<br>It is not given even to a man to be truly human."
+    },
+    {
+        poet: "Mirza Ghalib",
+        urdu: "رگوں میں دوڑنے پھرنے کے ہم نہیں قائل<br>جب آنکھ ہی سے نہ ٹپکا تو پھر لہو کیا ہے",
+        trans: "I am not convinced by blood merely running through the veins;<br>If it does not drip from the eyes (as tears), what kind of blood is it?"
+    },
+    {
+        poet: "Mirza Ghalib",
+        urdu: "دلِ ناداں تجھے ہوا کیا ہے<br>آخر اس درد کی دوا کیا ہے",
+        trans: "O crazy heart, what has happened to you?<br>What is the cure for this pain, after all?"
+    },
+    {
+        poet: "Mirza Ghalib",
+        urdu: "قیدِ حیات و بندِ غم اصل میں دونوں ایک ہیں<br>موت سے پہلے آدمی غم سے نجات پائے کیوں",
+        trans: "The prison of life and the bondage of grief are essentially the same;<br>Why should a man expect freedom from sorrow before death?"
+    },
+
+    {
+        poet: "Munir Niazi",
+        urdu: "ضروری بات کہنی ہو کوئی وعدہ نبھانا ہو<br>اسے آواز دینی ہو اسے واپس بلانا ہو <br>ہمیشہ دیر کر دیتا ہوں میں",
+        trans: "Whether I have to say something vital, or fulfill a promise; Whether I must call out to someone, or call them back; I always end up being late."
+    },
+
+    {
+        poet: "Parveen Shakir",
+        urdu: "وہ تو خوشبو ہے، ہواؤں میں بکھر جائے گا<br>مسئلہ پھول کا ہے، پھول کدھر جائے گا؟",
+        trans: "He is fragrance, he will scatter in the winds.<br>The problem is the flower's — where will it go?"
+    },
+    {
+        poet: "Parveen Shakir",
+        urdu: "کوبہ کو پھیل گئی بات شناسائی کی<br>اس نے خوشبو کی طرح میری پذیرائی کی",
+        trans: "The news of our acquaintance spread everywhere;<br>He welcomed me just like a fragrance spreads."
+    },
+    {
+        poet: "Faiz Ahmad Faiz",
+        urdu: "دل نا امید تو نہیں ناکام ہی تو ہے<br>لمبی ہے غم کی شام مگر شام ہی تو ہے",
+        trans: "The heart is not hopeless, just unsuccessful.<br>The evening of sorrow is long, but it is just an evening."
+    },
+    {
+        poet: "Faiz Ahmad Faiz",
+        urdu: "مجھ سے پہلی سی محبت مرے محبوب نہ مانگ<br>میں نے سمجھا تھا کہ تو ہے تو درخشاں ہے حیات",
+        trans: "My beloved, do not ask from me that love we once had;<br>I had imagined that life was luminous only because of you."
+    },
+    {
+        poet: "Jaun Elia",
+        urdu: "میں بھی بہت عجیب ہوں اتنا عجیب ہوں کہ بس<br>خود کو تباہ کرلیا اور ملال بھی نہیں",
+        trans: "I am also very strange, so strange that;<br>I destroyed myself and I have no regrets."
+    },
+    {
+        poet: "Jaun Elia",
+        urdu: "شرمندگی ہے ہم کو بہت اپنی زیست پر<br>اب تم سے کیا کہیں کہ ہمیں تم سے کیا ہوا",
+        trans: "I am deeply ashamed of the way I have lived;<br>How can I tell you now what you meant to me?"
+    },
+    {
+        poet: "Jaun Elia",
+        urdu: "جو گزاری نہ جا سکی ہم سے<br>ہم نے وہ زندگی گزاری ہے",
+        trans: "The life that was impossible for me to live;<br>That is the very life I have lived."
+    },
+    {
+        poet: "Ahmad Faraz",
+        urdu: "اب کے ہم بچھڑے تو شاید کبھی خوابوں میں ملیں<br>جس طرح سوکھے ہوئے پھول کتابوں میں ملیں",
+        trans: "If we part now, perhaps we will meet in dreams;<br>Just like dried flowers are found in old books."
+    },
+    {
+        poet: "Ahmad Faraz",
+        urdu: "رنجش ہی سہی دل ہی دکھانے کے لیے آ<br>آ پھر سے مجھے چھوڑ کے جانے کے لیے آ",
+        trans: "Even if it is out of resentment, come to break my heart again;<br>Come, even if it is just to leave me once more."
+    },
+    {
+        poet: "Allama Iqbal",
+        urdu: "ستاروں سے آگے جہاں اور بھی ہیں<br>ابھی عشق کے امتحان اور بھی ہیں",
+        trans: "Beyond the stars, there are even more worlds;<br>There are still more tests of love to face."
+    },
+    {
+        poet: "Allama Iqbal",
+        urdu: "خودی کو کر بلند اتنا کہ ہر تقدیر سے پہلے<br>خدا بندے سے خود پوچھے بتا تیری رضا کیا ہے",
+        trans: "Elevate your Self to such heights that before every decree,<br>God Himself asks His servant: 'Tell me, what is your will?'"
+    },
+    {
+        poet: "Momin Khan Momin",
+        urdu: "وہ جو ہم میں تم میں قرار تھا تمہیں یاد ہو کہ نہ یاد ہو<br>وہی یعنی وعدہ نباہ کا تمہیں یاد ہو کہ نہ یاد ہو",
+        trans: "That connection which was between us, you may remember or not;<br>That promise of loyalty, you may remember or not."
+    },
+    {
+        poet: "Nasir Kazmi",
+        urdu: "دل میں ایک لہر سی اٹھی ہے ابھی<br>کوئی تازہ ہوا چلی ہے ابھی",
+        trans: "A ripple has just risen in the heart;<br>A fresh breeze has just started to blow."
+    },
+    {
+        poet: "Bashir Badr",
+        urdu: "اجالے اپنی یادوں کے ہمارے ساتھ رہنے دو<br>نہ جانے کس گلی میں زندگی کی شام ہو جائے",
+        trans: "Let the light of your memories stay with me;<br>Who knows in which street the evening of my life will fall?"
+    },
+    {
+        poet: "Daagh Dehlvi",
+        urdu: "غضب کیا تیرے وعدے پہ اعتبار کیا<br>تمام رات قیامت کا انتظار کیا",
+        trans: "What a disaster that I trusted your promise;<br>I spent the whole night waiting for Doomsday."
+    },
+    {
+        poet: "Majrooh Sultanpuri",
+        urdu: "میں اکیلا ہی چلا تھا جانبِ منزل مگر<br>لوگ ساتھ آتے گئے اور کارواں بنتا گیا",
+        trans: "I set out alone toward my destination, but;<br>People kept joining in and it turned into a caravan."
+    },
+];
+
+    function loadPoetry() {
+        const display = document.getElementById('verse-display');
+        const random = archive[Math.floor(Math.random() * archive.length)];
+        
+        // Fade Out
+        display.style.opacity = 0;
+        display.style.transform = "translateY(5px)";
+        
+        setTimeout(() => {
+            // Update Text
+            display.innerHTML = `
+                <div class="urdu-line">${random.urdu}</div>
+                <div class="trans-line">${random.trans}</div>
+                <span class="poet-name">― ${random.poet}</span>
+            `;
+            // Fade In
+            display.style.opacity = 1;
+            display.style.transform = "translateY(0)";
+            display.style.transition = "all 0.6s ease"; 
+        }, 300);
+    }
+
+    // Run on load
+    window.onload = loadPoetry;
+</script>
