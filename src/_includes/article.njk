@@ -45,6 +45,62 @@ layout: 'base.njk'
         <span class="share-label">Found this useful? Pass it on.</span>
         
         <div class="share-btn-group">
+            <button id="confetti-like-btn" class="share-btn like-btn" aria-label="Like this post">
+    <i class="far fa-heart heart-icon"></i>
+    <span>Like</span>
+</button>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  const likeBtn = document.getElementById('confetti-like-btn');
+  const heartIcon = likeBtn.querySelector('.heart-icon');
+  const likeText = likeBtn.querySelector('span');
+  
+  // Unique ID for this post
+  const postID = window.location.pathname; 
+  const hasLiked = localStorage.getItem('liked_' + postID);
+
+  // Check state on load
+  if (hasLiked) {
+    setLikedState();
+  }
+
+  likeBtn.addEventListener('click', function(e) {
+    // If already liked, just fire confetti again (fun!)
+    if (likeBtn.classList.contains('liked')) {
+      fireConfetti(e);
+      return;
+    }
+
+    setLikedState();
+    localStorage.setItem('liked_' + postID, 'true');
+    fireConfetti(e);
+  });
+
+  function setLikedState() {
+    likeBtn.classList.add('liked');
+    heartIcon.classList.remove('far');
+    heartIcon.classList.add('fas'); // Solid Heart
+    likeText.innerText = "Liked";
+  }
+
+  function fireConfetti(e) {
+    const rect = likeBtn.getBoundingClientRect();
+    // Calculate position relative to viewport
+    const x = (rect.left + rect.width / 2) / window.innerWidth;
+    const y = (rect.top + rect.height / 2) / window.innerHeight;
+
+    confetti({
+      particleCount: 60,
+      spread: 70,
+      origin: { x: x, y: y },
+      colors: ['#FF5F56', '#4FD1C5', '#FFD700'],
+      disableForReducedMotion: true,
+      scalar: 0.8
+    });
+  }
+</script>
+
             <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url | url }}" target="_blank" rel="noopener noreferrer" class="share-btn fb" aria-label="Share on Facebook">
                 <i class="fa-brands fa-facebook-f"></i>
                 <span>Facebook</span>

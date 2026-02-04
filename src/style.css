@@ -1206,6 +1206,37 @@ pre {
   }
 }
 
+/* --- Like Button Specifics --- */
+.share-btn.like-btn {
+  background-color: var(--card-bg);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Hover: Turn Red */
+.share-btn.like-btn:hover {
+  border-color: #FF5F56;
+  color: #FF5F56;
+  background: rgba(255, 95, 86, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Liked State */
+.share-btn.like-btn.liked {
+  border-color: #FF5F56;
+  color: #FF5F56;
+  background: rgba(255, 95, 86, 0.1);
+}
+
+.share-btn.like-btn.liked .heart-icon {
+  animation: heartPop 0.4s ease-out;
+  font-weight: 900;
+}
+
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
 
 /* --- Featured Projects Section --- */
 
