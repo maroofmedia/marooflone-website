@@ -91,6 +91,7 @@
 
 </head>
 <body>
+<div id="progress-bar"></div>
   <div class="page-wrapper">
     {% include 'header.njk' %}
     <main>
@@ -317,6 +318,23 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(scrollNext, 4000);
   });
 </script>
+
+<script>
+    // Only run on pages with /blog/ in the URL
+    if (window.location.pathname.includes('/blog/')) {
+      const progressBar = document.getElementById('progress-bar');
+      
+      window.addEventListener('scroll', () => {
+        // Calculate scroll percentage
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (scrollTop / scrollHeight) * 100;
+        
+        // Update width
+        progressBar.style.width = scrolled + "%";
+      });
+    }
+  </script>
 
 
 </body>
