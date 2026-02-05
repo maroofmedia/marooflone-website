@@ -60,19 +60,22 @@ layout: 'base.njk'
   const postID = window.location.pathname; 
   const hasLiked = localStorage.getItem('liked_' + postID);
 
-  // Check state on load
+  // 1. Check state on load
   if (hasLiked) {
     setLikedState();
   }
 
+  // 2. Click Handler
   likeBtn.addEventListener('click', function(e) {
-    // TOGGLE LOGIC
+    likeBtn.blur(); 
+
+    // B. Toggle Logic
     if (likeBtn.classList.contains('liked')) {
-      // User is unliking
+      // User is Unliking
       removeLikedState();
       localStorage.removeItem('liked_' + postID);
     } else {
-      // User is liking
+      // User is Liking
       setLikedState();
       localStorage.setItem('liked_' + postID, 'true');
       fireConfetti(e);
@@ -81,8 +84,8 @@ layout: 'base.njk'
 
   function setLikedState() {
     likeBtn.classList.add('liked');
-    heartIcon.classList.remove('far');
-    heartIcon.classList.add('fas');
+    heartIcon.classList.remove('far'); 
+    heartIcon.classList.add('fas');    
     likeText.innerText = "Liked";
   }
 

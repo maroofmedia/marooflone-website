@@ -1212,46 +1212,62 @@ pre {
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Hover: Turn Red */
-.share-btn.like-btn:hover {
-  border-color: #FF5F56;
-  color: #FF5F56;
-  background: rgba(255, 95, 86, 0.05);
-  transform: translateY(-2px);
+/* 2. PC Hover Effects (Mouse Only) */
+@media (hover: hover) {
+  .share-btn.like-btn:hover {
+    border-color: #FF5F56;
+    color: #FF5F56;
+    background: rgba(255, 95, 86, 0.05);
+    transform: translateY(-2px); 
+  }
 }
 
-/* Liked State */
+/* 3. Mobile */
+@media (hover: none) {
+  
+  /* FORCE Default State when Unliked */
+  .share-btn.like-btn:not(.liked):hover {
+    color: var(--text-muted) !important;     
+    background-color: var(--card-bg) !important; 
+    border-color: var(--border-color) !important;
+    transform: none !important;
+  }
+
+  /* 2. FORCE Red State when Liked */
+  .share-btn.like-btn.liked:hover {
+    color: #FF5F56 !important;
+    border-color: #FF5F56 !important;
+    background-color: rgba(255, 95, 86, 0.1) !important;
+    transform: none !important;
+  }
+  
+  /* 3. Tap/Active Effect*/
+  .share-btn.like-btn:active {
+    transform: scale(0.95) !important;
+  }
+}
+
+/* 5. Liked State */
 .share-btn.like-btn.liked {
   border-color: #FF5F56;
   color: #FF5F56;
   background: rgba(255, 95, 86, 0.1);
 }
 
+/* 6. Heart Animation */
 .share-btn.like-btn.liked .heart-icon {
-  animation: heartPop 0.4s ease-out;
   font-weight: 900;
+  animation: heartPop 0.4s ease-out;
+}
+
+.share-btn.like-btn .heart-icon {
+  transition: transform 0.2s ease;
 }
 
 @keyframes heartPop {
   0% { transform: scale(1); }
   50% { transform: scale(1.4); }
   100% { transform: scale(1); }
-}
-
-/* Ensure icon switches smoothly */
-.share-btn.like-btn .heart-icon {
-  transition: transform 0.2s ease;
-}
-
-/* Add a tiny "shake" animation when unliking */
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-2px); }
-  75% { transform: translateX(2px); }
-}
-
-.share-btn.like-btn:not(.liked):active {
-  animation: shake 0.2s ease-in-out;
 }
 
 /* --- Featured Projects Section --- */
