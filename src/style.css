@@ -1238,6 +1238,22 @@ pre {
   100% { transform: scale(1); }
 }
 
+/* Ensure icon switches smoothly */
+.share-btn.like-btn .heart-icon {
+  transition: transform 0.2s ease;
+}
+
+/* Add a tiny "shake" animation when unliking */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+.share-btn.like-btn:not(.liked):active {
+  animation: shake 0.2s ease-in-out;
+}
+
 /* --- Featured Projects Section --- */
 
 .projects-grid {
