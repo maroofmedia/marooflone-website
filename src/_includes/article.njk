@@ -54,47 +54,22 @@ layout: 'base.njk'
 <script>
   const likeBtn = document.getElementById('confetti-like-btn');
   const heartIcon = likeBtn.querySelector('.heart-icon');
-  const likeText = likeBtn.querySelector('span');
-  
-  // Unique ID for this post
-  const postID = window.location.pathname; 
-  const hasLiked = localStorage.getItem('liked_' + postID);
 
-  // 1. Check state on load
-  if (hasLiked) {
-    setLikedState();
-  }
-
-  // 2. Click Handler
   likeBtn.addEventListener('click', function(e) {
-    likeBtn.blur(); 
+    likeBtn.blur();
 
-    // B. Toggle Logic
-    if (likeBtn.classList.contains('liked')) {
-      // User is Unliking
-      removeLikedState();
-      localStorage.removeItem('liked_' + postID);
-    } else {
-      // User is Liking
-      setLikedState();
-      localStorage.setItem('liked_' + postID, 'true');
-      fireConfetti(e);
-    }
+    // Fire Confetti
+    fireConfetti(e);
+
+    heartIcon.classList.remove('pop-active');
+    void heartIcon.offsetWidth;
+    heartIcon.classList.add('pop-active');
+    
+    // Auto-remove class after animation
+    setTimeout(() => {
+        heartIcon.classList.remove('pop-active');
+    }, 400);
   });
-
-  function setLikedState() {
-    likeBtn.classList.add('liked');
-    heartIcon.classList.remove('far'); 
-    heartIcon.classList.add('fas');    
-    likeText.innerText = "Liked";
-  }
-
-  function removeLikedState() {
-    likeBtn.classList.remove('liked');
-    heartIcon.classList.remove('fas'); 
-    heartIcon.classList.add('far');    
-    likeText.innerText = "Like";
-  }
 
   function fireConfetti(e) {
     const rect = likeBtn.getBoundingClientRect();
@@ -111,7 +86,6 @@ layout: 'base.njk'
     });
   }
 </script>
-
             <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url | url }}" target="_blank" rel="noopener noreferrer" class="share-btn fb" aria-label="Share on Facebook">
                 <i class="fa-brands fa-facebook-f"></i>
                 <span>Facebook</span>

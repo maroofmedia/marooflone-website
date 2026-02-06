@@ -1206,62 +1206,47 @@ pre {
   }
 }
 
-/* --- Like Button Specifics --- */
+/* Like Button */
 .share-btn.like-btn {
   background-color: var(--card-bg);
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* 2. PC Hover Effects (Mouse Only) */
+/* 2. PC Hover */
 @media (hover: hover) {
   .share-btn.like-btn:hover {
     border-color: #FF5F56;
     color: #FF5F56;
     background: rgba(255, 95, 86, 0.05);
-    transform: translateY(-2px); 
+    transform: translateY(-2px);
   }
 }
 
-/* 3. Mobile */
+/* 3. Mobile Logic */
 @media (hover: none) {
-  
-  /* FORCE Default State when Unliked */
-  .share-btn.like-btn:not(.liked):hover {
-    color: var(--text-muted) !important;     
-    background-color: var(--card-bg) !important; 
+  .share-btn.like-btn:hover {
+    color: var(--text-muted) !important;
+    background-color: var(--card-bg) !important;
     border-color: var(--border-color) !important;
     transform: none !important;
   }
-
-  /* 2. FORCE Red State when Liked */
-  .share-btn.like-btn.liked:hover {
-    color: #FF5F56 !important;
-    border-color: #FF5F56 !important;
-    background-color: rgba(255, 95, 86, 0.1) !important;
-    transform: none !important;
-  }
   
-  /* 3. Tap/Active Effect*/
+  /* Tactile Press Effect */
   .share-btn.like-btn:active {
     transform: scale(0.95) !important;
   }
 }
 
-/* 5. Liked State */
-.share-btn.like-btn.liked {
-  border-color: #FF5F56;
-  color: #FF5F56;
-  background: rgba(255, 95, 86, 0.1);
-}
-
-/* 6. Heart Animation */
-.share-btn.like-btn.liked .heart-icon {
-  font-weight: 900;
+/* 4. The Pop Animation Class */
+.share-btn.like-btn .heart-icon.pop-active {
   animation: heartPop 0.4s ease-out;
+  color: #FF5F56;
+  font-weight: 900;
 }
 
+/* Smooth Transition for the icon */
 .share-btn.like-btn .heart-icon {
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 @keyframes heartPop {
