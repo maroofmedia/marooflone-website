@@ -889,37 +889,181 @@ pre {
   transition-delay: 0.4s;
 }
 
-/* --- Footer Positioning --- */
+/* --- SITE FOOTER --- */
 .site-footer {
-  padding: 40px 0;
-  text-align: center;
-  border-top: 1px solid var(--border-color);
-  text-align: center;
   background: #0d1014;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 40px 0 20px;
+  font-family: var(--font-main);
+  font-size: 15px;
 }
 
-.social-links {
+.footer-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* --- Top Section Layout --- */
+.footer-top {
   display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 16px;
+  flex-direction: column;
+  gap: 35px;
+  text-align: left;
 }
 
-.social-links i {
-  font-size: 1.4rem;
-  color: var(--text-muted);
-  transition: 0.2s;
+/* Brand Styling */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
 }
 
-.social-links i:hover {
-  color: var(--accent);
-  transform: scale(1.1);
+.logo-text {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 1px;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
-.footer-text {
-  font-size: 0.9rem;
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.65rem;
+  padding: 3px 8px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  color: #888;
+  font-family: monospace;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #10B981;
+  border-radius: 50%;
+}
+
+.brand-desc {
   color: #666;
+  font-size: 0.9rem;
   margin: 0;
+  line-height: 1.5;
+  max-width: 300px;
+}
+
+/*  Navigation Styling */
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px 25px; 
+}
+
+.footer-nav a {
+  color: #bbb;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  
+  /* Flexbox for Icon Alignment */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  
+  /* Smooth Lift Transition */
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* Tiny Icons */
+.footer-nav a i {
+  color: #666; 
+  font-size: 0.75em;
+  transition: color 0.2s ease;
+}
+
+/* Hover Effect */
+.footer-nav a:hover {
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.footer-nav a:hover i {
+  color: var(--accent);
+}
+
+/* Social Styling */
+.footer-social {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-social a {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 4px;
+  color: #999;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.footer-social a:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #000;
+  transform: translateY(-2px);
+}
+
+/* --- Bottom Section --- */
+.footer-bottom {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  color: #444;
+  font-size: 0.85rem;
+}
+
+.footer-bottom p { margin: 0; }
+
+/* --- PC / Desktop Adjustments --- */
+@media (min-width: 768px) {
+  .site-footer {
+    padding: 50px 0 25px;
+  }
+
+  /* Horizontal Layout */
+  .footer-top {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 80px; 
+  }
+
+  .footer-brand {
+    flex: 0 0 320px;
+  }
+
+  .footer-nav {
+    flex: 1;
+    justify-content: flex-start;
+    align-content: flex-start;
+    padding-top: 5px;
+  }
+
+  .footer-social {
+    flex: 0 0 auto;
+  }
 }
 
 /* --- Article Spacing --- */
@@ -992,26 +1136,6 @@ pre {
   .post-tags {
     flex-direction: column;
   }
-}
-
-/* --- Footer Privacy Link --- */
-.privacy-link {
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    text-underline-offset: 4px;
-    margin-top: 8px;
-    display: inline-block;
-    cursor: pointer;
-    transition: color 0.2s;
-    margin-right: 15px;
-
-}
-.privacy-link:last-child {
-    margin-right: 0;
-}
-
-.privacy-link:hover {
-    color: var(--accent);
 }
 
 /* --- Modal Overlay (Backdrop) --- */
