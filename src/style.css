@@ -861,6 +861,24 @@ pre {
   line-height: 1.6;
 }
 
+/* --- Mobile Specific Styles --- */
+@media (max-width: 768px) {
+  
+  .blog-section-title {
+    margin-top: -28px;
+  }
+
+  .blog-description {
+    text-align: start;
+    border-bottom: 2px solid #4b5563;
+    padding-bottom: 20px;
+    }
+
+  .blog-header {
+    margin-bottom: 0 !important;
+  }
+}
+
 /* --- Scroll Animations --- */
 .animate-on-scroll {
   opacity: 0;
