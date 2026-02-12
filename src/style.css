@@ -386,49 +386,6 @@ code.code-block-1 {
   transform: rotate(180deg);
 }
 
-
-/* --- Blog Section --- */
-.blog-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.blog-item {
-  display: flex;
-  align-items: baseline;
-  padding: 8px 0;
-  font-size: 1rem;
-  transition: transform 0.2s;
-}
-
-.blog-item:hover {
-  transform: translateX(5px);
-}
-
-.blog-item:hover .blog-title {
-  color: var(--accent);
-}
-
-.blog-title {
-  color: #e5e7eb;
-  font-weight: 600;
-}
-
-.blog-dots {
-  flex-grow: 1;
-  border-bottom: 1px dotted #4b5563;
-  margin: 0 15px;
-  position: relative;
-  top: -5px;
-}
-
-.blog-date {
-  font-size: 0.85rem;
-  color: #6b7280;
-  white-space: nowrap;
-}
-
-
 .social-links {
   display: flex;
   justify-content: center;
@@ -579,22 +536,6 @@ code.code-block-1 {
     display: none;
   }
 
-  /* Blog Mobile */
-  .blog-item {
-    justify-content: space-between;
-    margin-bottom: 15px;
-    padding-bottom: 5px;
-  }
-
-  .blog-dots {
-    display: none;
-  }
-
-  .blog-title {
-    margin-right: 10px;
-    font-size: 0.95rem;
-  }
-
   /* Article Mobile */
   .article-title {
     margin-bottom: 1.5rem;
@@ -653,20 +594,6 @@ code.code-block-1 {
 .post-meta i {
   color: #FFD700;
   margin-right: 8px;
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-  .post-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-}
-
-.blog-item {
-  padding-left: 0.7rem;
-  padding-right: 0.7rem;
 }
 
 /* --- View All Button --- */
@@ -853,12 +780,31 @@ pre {
 
 /* Blog description paragraph */
 .blog-description {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  max-width: 680px;
+  margin: 30px auto 40px auto;  
+  padding: 24px;
   font-size: 1rem;
-  color: #9ca3af;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
+  color: var(--text-muted);
+  line-height: 1.7;
+  text-align: center;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .blog-description {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 10px auto 30px auto;
+    max-width: 100%;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: center;
+    color: var(--text-muted);
+  }
 }
 
 /* --- Mobile Specific Styles --- */
@@ -868,11 +814,6 @@ pre {
     margin-top: -28px;
   }
 
-  .blog-description {
-    text-align: start;
-    border-bottom: 2px solid #4b5563;
-    padding-bottom: 20px;
-    }
 
   .blog-header {
     margin-bottom: 0 !important;
@@ -1752,4 +1693,93 @@ pre {
   width: 0%; 
   z-index: 9999;
   transition: width 0.1s ease-out;
+}
+
+/* --- BLOG POSTS --- */
+.blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.blog-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 18px 24px;
+  
+  /* Layout */
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+/* Typography */
+.blog-title {
+  color: #e5e7eb;
+  font-weight: 700;
+  font-size: 1.1rem;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+/* The Dotted Line */
+.blog-dots {
+  flex-grow: 1;
+  border-bottom: 2px dotted #4b5563;
+  margin: 0 20px;
+  opacity: 0.5;
+  height: 0;
+  margin-top: 6px;
+}
+
+.blog-date {
+  color: #9ca3af;
+  font-family: monospace;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* --- HOVER EFFECTS --- */
+.blog-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.blog-item:hover .blog-title {
+  color: var(--accent);
+}
+
+.blog-item:hover .blog-dots {
+  border-color: var(--accent);
+  opacity: 0.8;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 768px) {
+  .blog-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 16px;
+  }
+
+  .blog-title {
+    white-space: normal;
+    font-size: 1.05rem;
+  }
+
+  .blog-dots {
+    display: none;
+  }
+
+  .blog-date {
+    font-size: 0.75rem;  
+    color: #6b7280;
+    margin-top: 2px;
+  }
 }
