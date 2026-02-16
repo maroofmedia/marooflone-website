@@ -570,30 +570,47 @@ code.code-block-1 {
   line-height: 1.1rem;
 }
 
+/* --- Single Post Meta --- */
 .post-meta {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 2rem;
-  background-color: #2D3748;
-  padding: 1rem 1.5rem;
-  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.03); 
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-left: 4px solid #FFD700;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 1.2rem 1.5rem;
   margin: 2rem 0;
-  font-family: 'Poppins';
+  font-family: 'Poppins', sans-serif;
   color: #E2E8F0;
   font-size: 0.95rem;
-  font-weight: 500;
-  letter-spacing: 0rem;
+  font-weight: 400;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
 }
 
 .post-meta p {
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .post-meta i {
   color: #FFD700;
-  margin-right: 8px;
+  font-size: 1.1em;
+  margin-right: 0; 
+}
+
+/* --- Mobile Styles --- */
+@media (max-width: 600px) {
+  .post-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 1rem 1.2rem;
+    font-size: 0.9rem;
+  }
 }
 
 /* --- View All Button --- */
