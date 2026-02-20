@@ -12,7 +12,7 @@ tags:
   - Resilience
   - Nature
   - Chinar
-image: /assets/blog/chinar-tree-seasons-kashmir-comparison.png
+image: /assets/blog/chinar-tree-seasons-kashmir-comparison_new.png
 imageAlt: Two seasons, one Chinar. A visual reminder that losing our leaves is a necessary part of growth. Photos by Maroof Lone
 ---
 
