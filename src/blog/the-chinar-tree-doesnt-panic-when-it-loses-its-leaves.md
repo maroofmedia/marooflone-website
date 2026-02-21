@@ -1,5 +1,5 @@
 ---
-title: The Chinar Tree Doesn’t Panic When It Loses Its Leave
+title: The Chinar Tree Doesn’t Panic When It Loses Its Leaves
 description: Loss isn't always an ending; sometimes it's a requirement for survival. Learn why the Chinar tree's approach to winter is the ultimate lesson in resilience.
 author:
   - Maroof Lone
