@@ -23,6 +23,19 @@ layout: 'base.njk'
         <time datetime="{{ date }}">{{ date | postDate }}</time>
       </p>
     </div>
+
+    {% set tocContent = content | toc %}
+    {% if tocContent %}
+      <div class="toc-container is-open">
+        <div class="toc-heading" onclick="this.parentElement.classList.toggle('is-open')">
+          Table of Contents
+          <span class="toc-hint"></span>
+        </div>
+        <div class="toc-body">
+          {{ tocContent | safe }}
+        </div>
+      </div>
+    {% endif %}
       
     <div itemprop="articleBody">
       {{ content | safe }}

@@ -1,13 +1,20 @@
 const { DateTime } = require("luxon");
 const markdownIt = require("markdown-it");
 const markdownItLinkAttributes = require("markdown-it-link-attributes");
-const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight"); 
+const markdownItAnchor = require("markdown-it-anchor");
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
+const pluginTOC = require("eleventy-plugin-toc");
 
 module.exports = function (eleventyConfig) {
-  
+
   eleventyConfig.addPlugin(pluginRss);
-  eleventyConfig.addPlugin(syntaxHighlight); 
+  eleventyConfig.addPlugin(syntaxHighlight);
+  eleventyConfig.addPlugin(pluginTOC, {
+    tags: ["h2", "h3"],
+    ul: true,
+    wrapperClass: "toc",
+  });
 
   // Markdown-it configuration
   const markdownOptions = {
@@ -18,11 +25,15 @@ module.exports = function (eleventyConfig) {
 
   const md = markdownIt(markdownOptions)
     .use(markdownItLinkAttributes, {
-      pattern: /^https?:\/\//, 
+      pattern: /^https?:\/\//,
       attrs: {
         target: "_blank",
-        rel: "noopener noreferrer" 
+        rel: "noopener noreferrer"
       }
+    })
+    .use(markdownItAnchor, {
+      permalink: false,
+      slugify: (s) => s.trim().toLowerCase().replace(/[\s+]/g, "-").replace(/[^\w-]/g, ""),
     });
 
   // Add this missing date filter
