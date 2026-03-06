@@ -9,6 +9,7 @@ author:
 date: 2025-02-27T20:09:00.000Z
 tags:
   - post
+  - tech
   - writings
 image: /assets/blog/clickbait-culture-the-dark-side-of-kashmirs-youtube.jpg
 imageAlt: "Kashmir’s YouTube boom: Creativity vs. Clickbait. Image generated using AI."

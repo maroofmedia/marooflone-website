@@ -7,6 +7,7 @@ date: 2026-01-30T16:21:00.000+05:30
 permalink: /blog/kamal-e-zabt-parveen-shakir/index.html
 tags:
   - post
+  - writings
   - Poetry
   - Urdu
   - Classics

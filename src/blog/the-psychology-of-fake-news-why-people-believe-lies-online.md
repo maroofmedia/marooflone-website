@@ -9,6 +9,7 @@ author:
 date: 2025-03-15T17:21:00.000Z
 tags:
   - post
+  - tech
   - writings
 image: /assets/blog/the-psychology-of-fake-news-why-people-believe-lies-online.jpg
 imageAlt: "Understanding Fake News: Exploring how misinformation,

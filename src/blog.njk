@@ -12,9 +12,19 @@ layout: 'base.njk'
         <p class="blog-description">My digital workspace for everything I learn and unlearn. A home for the things I notice, the random thoughts I care to keep, and the unfinished drafts worth saving.</p>
     </div>
 
+    <div class="blog-tabs">
+      <button class="blog-tab active" data-tag="all"><i class="fas fa-layer-group"></i> All</button>
+      <button class="blog-tab" data-tag="writings"><i class="fas fa-feather-pointed"></i> Diary</button>
+      <button class="blog-tab" data-tag="tech"><i class="fas fa-code"></i> Tech</button>
+    </div>
+
     <div class="blog-list">
          {%- for post in collections.post | reverse -%}
-         {% include 'article-snippet.njk' %}
+         <a href="{{ post.url }}" class="blog-item" data-tags="{{ post.data.tags | join(',') }}">
+           <span class="blog-title">{{ post.data.title }}</span>
+           <span class="blog-dots"></span>
+           <span class="blog-date">{{ post.date | postDate }}</span>
+         </a>
          {%- endfor -%}
     </div>
 
