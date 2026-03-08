@@ -1,7 +1,7 @@
 # Dependencies
 node_modules/
 
-# 11ty Build Output (Change this to match your output folder name)
+# 11ty Build Output 
 _site/
 public/
 
@@ -9,7 +9,7 @@ public/
 .DS_Store
 Thumbs.db
 
-# Environment variables (if you have API keys)
+# Environment variables
 .env
 .log
 # Local Netlify folder
