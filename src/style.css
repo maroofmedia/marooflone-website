@@ -1601,29 +1601,7 @@ pre {
   }
 }
 
-/* --- Showcase Counter Badge (mobile only) --- */
-.showcase-counter {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .showcase-counter {
-    display: inline-flex;
-    align-items: center;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--accent);
-    background: rgba(79, 209, 197, 0.08);
-    border: 1px solid rgba(79, 209, 197, 0.2);
-    padding: 3px 10px;
-    border-radius: 20px;
-    margin-left: 10px;
-    vertical-align: middle;
-    letter-spacing: 0.5px;
-    font-family: 'Inter', sans-serif;
-    transition: opacity 0.3s ease;
-  }
-}
+/* --- Projects Section Styles --- */
 
 /* --- Recent Posts Section --- */
 .recent-posts-section {

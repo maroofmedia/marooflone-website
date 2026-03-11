@@ -307,36 +307,15 @@
 </script>
 
 <script>
-  // Projects Showcase — Counter Badge + Peek Hint + Auto-scroll
+  // Projects Showcase — Peek Hint + Auto-scroll
   document.addEventListener("DOMContentLoaded", () => {
     const showcase = document.querySelector('.projects-showcase');
-    const counter = document.getElementById('showcaseCounter');
 
     if (!showcase) return;
 
     const cards = showcase.querySelectorAll('.showcase-card');
     if (cards.length <= 1) return; // No navigation for single card
 
-    let currentIndex = 0;
-    let autoScrollTimer;
-
-    // --- Counter badge ---
-    function updateCounter() {
-      if (counter) {
-        counter.textContent = `${currentIndex + 1} / ${cards.length}`;
-      }
-    }
-    updateCounter();
-
-    // --- Scroll tracking ---
-    showcase.addEventListener('scroll', () => {
-      const cardWidth = cards[0].offsetWidth + 15;
-      const newIndex = Math.round(showcase.scrollLeft / cardWidth);
-      if (newIndex !== currentIndex && newIndex >= 0 && newIndex < cards.length) {
-        currentIndex = newIndex;
-        updateCounter();
-      }
-    });
 
     // --- Peek hint animation (one-time on load) ---
     function peekHint() {
