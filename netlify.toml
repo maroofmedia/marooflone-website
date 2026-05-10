@@ -17,3 +17,19 @@
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     X-XSS-Protection = "1; mode=block"
+
+# Noindex specific images
+[[headers]]
+  for = "/assets/images/main-images/bfgi_logo.webp"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+[[headers]]
+  for = "/assets/images/main-images/boomlive-logo.webp"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+[[headers]]
+  for = "/assets/images/main-images/coding.webp"
+  [headers.values]
+    X-Robots-Tag = "noindex"
