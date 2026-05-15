@@ -20,7 +20,7 @@ layout: 'base.njk'
       
       <p>
         <i class="fas fa-calendar-alt"></i> Published On: 
-        <time datetime="{{ date }}">{{ date | postDate }}</time>
+        <time datetime="{{ date | date('yyyy-MM-dd') }}">{{ date | postDate }}</time>
       </p>
     </div>
 
@@ -137,7 +137,7 @@ layout: 'base.njk'
               <span class="recent-card-title">{{ post.data.title }}</span>
               <div class="recent-card-meta">
                  <i class="fas fa-calendar-alt"></i>
-                 <time datetime="{{ post.date }}">{{ post.date | postDate }}</time>
+                 <time datetime="{{ post.date | date('yyyy-MM-dd') }}">{{ post.date | postDate }}</time>
               </div>
             </a>
 
