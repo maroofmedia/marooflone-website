@@ -4,22 +4,32 @@ eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{# 1. SORT pages by URL so Homepage comes first #}
-{% for page in collections.all | sort(attribute='url') %}
-  
-  {# 2. EXCLUDE specific pages here #}
-  {% if page.url 
-      and page.url != '/404/' 
-      and page.url != '/admin/' 
+{%- for page in collections.all | sort(attribute='url') %}
+{%- if page.url
+      and page.url != '/404/'
       and page.url != '/404.html/'
+      and page.url != '/admin/'
+      and page.url != '/hi/'
       and not page.data.draft
+      and not page.data.noindex
       and '/tags/' not in page.url %}
-      
   <url>
-    <loc>{{ site.url }}{{ page.url | url }}</loc>
-    <lastmod>{% if page.date %}{{ page.date.toISOString() }}{% else %}2024-01-01T00:00:00.000Z{% endif %}</lastmod>
+    <loc>{{ page.url | htmlBaseUrl(site.url) }}</loc>
+    <lastmod>{{ page.date.toISOString() }}</lastmod>
+{%- if page.url == '/' %}
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+{%- elif '/blog/' in page.url and page.url != '/blog/' %}
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+{%- elif page.url == '/blog/' %}
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+{%- else %}
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+{%- endif %}
   </url>
-  
-  {% endif %}
-{% endfor %}
+{%- endif %}
+{%- endfor %}
 </urlset>
