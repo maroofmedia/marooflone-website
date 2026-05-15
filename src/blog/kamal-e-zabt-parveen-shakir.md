@@ -234,7 +234,7 @@ Here is the complete ghazal, written as if torn from her diary.
 </div>
 
 <div class="glossary-box">
-    <div class="glossary-title">Glossary / Maani (الفاظ و معنی)</div>
+    <div class="glossary-title">Glossary</div>
     
     <div class="glossary-item">
         <span class="word">Kamal-e-Zabt (کمالِ ضبط):</span> The perfection of self-control; the highest limit of patience.
