@@ -726,13 +726,7 @@ figure.inline-image figcaption {
   font-style: italic;
 }
 
-/*
-code {
-  font-family: "Courier New", monospace;
-  font-size: 0.9em;
-  white-space: pre-wrap;
-  word-wrap: break-word; 
-} */
+
 
 /* FORCE CODE WRAPPING */
 pre[class*="language-"],
