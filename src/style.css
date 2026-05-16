@@ -63,6 +63,7 @@ main {
   font-weight: 700;
   margin-bottom: 2rem;
   color: #fff;
+  text-align: center;
 }
 
 /* --- Header --- */
@@ -305,13 +306,8 @@ code.code-block-1 {
   font-size: 0.9em;
 }
 
-/* --- What I Do Section --- */
-.what-i-do-section {
-  padding: 80px 0;
-  text-align: center;
-}
-
-.what-i-do-subtitle {
+/* --- Section Headers --- */
+.section-subtitle {
   display: block;
   font-size: 0.75rem;
   font-weight: 700;
@@ -319,14 +315,21 @@ code.code-block-1 {
   text-transform: uppercase;
   letter-spacing: 0.15em;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
-.what-i-do-title {
+.section-header-title {
   font-size: 2.2rem;
   font-weight: 800;
   color: #fff;
   margin-bottom: 3.5rem;
   line-height: 1.2;
+  text-align: center;
+}
+
+/* --- What I Do Section --- */
+.what-i-do-section {
+  padding: 80px 0;
 }
 
 .what-i-do-grid {

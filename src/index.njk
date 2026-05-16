@@ -37,8 +37,8 @@ layout: 'base.njk'
 
   <section class="section what-i-do-section animate-on-scroll delay-1" id="skills">
     <div class="container">
-      <span class="what-i-do-subtitle">What I Do</span>
-      <h2 class="what-i-do-title">I build, research & write.</h2>
+      <span class="section-subtitle">What I Do</span>
+      <h2 class="section-header-title">I build, research & write.</h2>
       
       <div class="what-i-do-grid">
         <!-- Build Card -->
@@ -320,7 +320,8 @@ layout: 'base.njk'
 
   <section class="section animate-on-scroll delay-4">
     <div class="container">
-        <h2 class="section-title">Writings</h2>
+        <span class="section-subtitle">Latest from my blog</span>
+        <h2 class="section-header-title">Writings</h2>
 
         <div class="blog-list">
            {%- for post in collections.post | reverse -%}
