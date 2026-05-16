@@ -305,64 +305,124 @@ code.code-block-1 {
   font-size: 0.9em;
 }
 
-/* --- Tools Grid --- */
-.tools-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 16px;
+/* --- What I Do Section --- */
+.what-i-do-section {
+  padding: 80px 0;
+  text-align: center;
 }
 
-.tool-card {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  border-radius: 12px;
+.what-i-do-subtitle {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+.what-i-do-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 3.5rem;
+  line-height: 1.2;
+}
+
+.what-i-do-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.what-i-do-card {
+  position: relative;
+  overflow: hidden;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
-  font-size: 0.95rem;
-  transition: transform 0.2s, border-color 0.2s;
-}
-
-.tool-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent);
-}
-
-.tool-icon {
-  width: 24px;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: left;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
+  flex-direction: column;
+}
+
+.card-bg-icon {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 6rem;
+  opacity: 0.03;
+  transform: rotate(-15deg);
+  pointer-events: none;
+  transition: all 0.4s ease;
+  z-index: 0;
+}
+
+.what-i-do-card:hover .card-bg-icon {
+  opacity: 0.06;
+  transform: rotate(0deg) scale(1.1);
+  color: var(--accent);
+}
+
+.what-i-do-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(79, 209, 197, 0.3);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.card-icon-wrapper {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
   justify-content: center;
+  margin-bottom: 8px;
   font-size: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Icons colors */
-.icon-html {
-  color: #e34f26;
+.icon-build { background: rgba(79, 209, 197, 0.08); color: var(--accent); }
+.icon-research { background: rgba(251, 191, 36, 0.08); color: #fbbf24; }
+.icon-write { background: rgba(245, 158, 11, 0.08); color: #f59e0b; }
+
+.card-h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2px;
 }
 
-.icon-css {
-  color: #264de4;
+.card-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 10px;
+  flex-grow: 1;
 }
 
-.icon-wp {
-  color: #21759b;
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.icon-aws {
-  color: #ff9900;
+.tag-pill {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  color: var(--text-muted);
+  transition: all 0.2s;
 }
 
-.icon-osint {
-  color: #fbbf24;
-}
-
-.icon-mysql {
-  color: #00618a;
-}
-
-.icon-content {
-  color: #fbbf24;
+.what-i-do-card:hover .tag-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* --- Timeline (Work/Education) --- */
@@ -601,9 +661,19 @@ code.code-block-1 {
     margin-bottom: 0.5rem;
   }
 
-  /* Skills Mobile */
-  .tools-grid {
-    grid-template-columns: repeat(2, 1fr);
+  /* What I Do Mobile */
+  .what-i-do-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .what-i-do-card {
+    padding: 32px 24px;
+  }
+
+  .what-i-do-title {
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
   }
 
   /* Timeline Mobile */
