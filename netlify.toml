@@ -4,11 +4,17 @@
   to = "/404.html"
   status = 404
 
-# Cache settings
+# Long-term cache for hashed/versioned assets (images, fonts, js)
 [[headers]]
   for = "/assets/*"
   [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Long-term cache for versioned stylesheet
+[[headers]]
+  for = "/style.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 
 # Default security headers for the whole site
 [[headers]]
