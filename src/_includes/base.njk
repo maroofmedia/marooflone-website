@@ -344,17 +344,33 @@
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const slider = document.querySelector('.testimonials-grid');
+    if (!slider) return;
+
+    const card = slider.querySelector('.testimonial-card');
+    if (!card) return;
+
+    let cardWidth = card.offsetWidth;
+    let clientWidth = slider.clientWidth;
+    let scrollWidth = slider.scrollWidth;
+    const gap = 15;
+
+    // Cache values on resize to avoid layout thrashing
+    window.addEventListener('resize', () => {
+      cardWidth = card.offsetWidth;
+      clientWidth = slider.clientWidth;
+      scrollWidth = slider.scrollWidth;
+    }, { passive: true });
     
     // Function to scroll to the next card
     function scrollNext() {
-      // Don't scroll if user is touching/hovering (active interaction)
+      // Only scroll if container is actually scrollable (e.g. mobile)
+      if (scrollWidth <= clientWidth) return;
       if (slider.matches(':hover')) return;
 
-      const cardWidth = slider.querySelector('.testimonial-card').offsetWidth;
-      const gap = 15;
+      const currentScroll = slider.scrollLeft;
       
       // Check if we are near the end
-      if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+      if (currentScroll + clientWidth >= scrollWidth - 10) {
          // Go back to start
          slider.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
@@ -372,17 +388,27 @@
   // Projects Showcase — Peek Hint + Auto-scroll
   document.addEventListener("DOMContentLoaded", () => {
     const showcase = document.querySelector('.projects-showcase');
-
     if (!showcase) return;
 
     const cards = showcase.querySelectorAll('.showcase-card');
     if (cards.length <= 1) return; // No navigation for single card
 
+    let cardWidth = cards[0].offsetWidth;
+    let clientWidth = showcase.clientWidth;
+    let scrollWidth = showcase.scrollWidth;
+    const gap = 15;
+
+    // Cache values on resize to avoid layout thrashing
+    window.addEventListener('resize', () => {
+      cardWidth = cards[0].offsetWidth;
+      clientWidth = showcase.clientWidth;
+      scrollWidth = showcase.scrollWidth;
+    }, { passive: true });
 
     // --- Peek hint animation (one-time on load) ---
     function peekHint() {
       // Only run on mobile where carousel is active
-      if (showcase.scrollWidth <= showcase.clientWidth) return;
+      if (scrollWidth <= clientWidth) return;
 
       setTimeout(() => {
         showcase.scrollTo({ left: 60, behavior: 'smooth' });
@@ -395,13 +421,12 @@
 
     // --- Auto-swipe ---
     function scrollNext() {
-      if (showcase.scrollWidth <= showcase.clientWidth) return;
+      if (scrollWidth <= clientWidth) return;
       if (showcase.matches(':hover')) return;
 
-      const cardWidth = cards[0].offsetWidth;
-      const gap = 15;
+      const currentScroll = showcase.scrollLeft;
 
-      if (showcase.scrollLeft + showcase.clientWidth >= showcase.scrollWidth - 10) {
+      if (currentScroll + clientWidth >= scrollWidth - 10) {
         showcase.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
         showcase.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
