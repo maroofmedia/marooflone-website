@@ -106,6 +106,26 @@ module.exports = function (eleventyConfig) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   });
 
+  // Filter to inline and minify CSS files
+  eleventyConfig.addFilter("inlineAndMinifyCss", function (filePath) {
+    try {
+      const fs = require("fs");
+      const path = require("path");
+      const absolutePath = path.join(__dirname, filePath);
+      const cssContent = fs.readFileSync(absolutePath, "utf8");
+      
+      // Simple regex-based CSS minifier
+      return cssContent
+        .replace(/\/\*[\s\S]*?\*\//g, "") // remove comments
+        .replace(/\s*([\{\}:;,])\s*/g, "$1") // remove spaces around symbols
+        .replace(/\s+/g, " ") // collapse multiple spaces
+        .trim();
+    } catch (e) {
+      console.error(`Error inlining CSS file: ${filePath}`, e);
+      return "";
+    }
+  });
+
 
   // Eleventy Config Return
   return {
