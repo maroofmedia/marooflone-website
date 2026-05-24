@@ -3,6 +3,8 @@
 <head>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
   <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+  <link rel="preload" href="/assets/fonts/UcCM3FwrK3iLTcvneQg7Ca725JhhKnNqk4j1ebLhAm8SrXTc2dtRh5WFo-4.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2" as="font" type="font/woff2" crossorigin>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> {{ title | default("Maroof Lone | Code, Context & Curiosity") }} </title>
@@ -40,8 +42,8 @@
         window.addEventListener(event, loadFontAwesome, { passive: true });
       });
 
-      // Fallback: load after 3 seconds of inactivity if no interaction has occurred
-      setTimeout(loadFontAwesome, 3000);
+      // Fallback: load after 8 seconds of inactivity if no interaction has occurred
+      setTimeout(loadFontAwesome, 8000);
     })();
   </script>
   <noscript>
@@ -405,23 +407,33 @@
     const slider = document.querySelector('.testimonials-grid');
     if (!slider) return;
 
-    const card = slider.querySelector('.testimonial-card');
-    if (!card) return;
-
-    let cardWidth = card.offsetWidth;
-    let clientWidth = slider.clientWidth;
-    let scrollWidth = slider.scrollWidth;
+    let cardWidth, clientWidth, scrollWidth;
+    let isInitialized = false;
     const gap = 15;
 
-    // Cache values on resize to avoid layout thrashing
-    window.addEventListener('resize', () => {
+    function initGeometry() {
+      const card = slider.querySelector('.testimonial-card');
+      if (!card) return false;
       cardWidth = card.offsetWidth;
       clientWidth = slider.clientWidth;
       scrollWidth = slider.scrollWidth;
+      isInitialized = true;
+      return true;
+    }
+
+    // Cache values on resize to avoid layout thrashing
+    window.addEventListener('resize', () => {
+      if (isInitialized) {
+        initGeometry();
+      }
     }, { passive: true });
     
     // Function to scroll to the next card
     function scrollNext() {
+      if (!isInitialized) {
+        if (!initGeometry()) return;
+      }
+
       // Only scroll if container is actually scrollable (e.g. mobile)
       if (scrollWidth <= clientWidth) return;
       if (slider.matches(':hover')) return;
@@ -452,20 +464,28 @@
     const cards = showcase.querySelectorAll('.showcase-card');
     if (cards.length <= 1) return; // No navigation for single card
 
-    let cardWidth = cards[0].offsetWidth;
-    let clientWidth = showcase.clientWidth;
-    let scrollWidth = showcase.scrollWidth;
+    let cardWidth, clientWidth, scrollWidth;
+    let isInitialized = false;
     const gap = 15;
 
-    // Cache values on resize to avoid layout thrashing
-    window.addEventListener('resize', () => {
+    function initGeometry() {
       cardWidth = cards[0].offsetWidth;
       clientWidth = showcase.clientWidth;
       scrollWidth = showcase.scrollWidth;
+      isInitialized = true;
+    }
+
+    // Cache values on resize to avoid layout thrashing
+    window.addEventListener('resize', () => {
+      if (isInitialized) {
+        initGeometry();
+      }
     }, { passive: true });
 
     // --- Peek hint animation (one-time on load) ---
     function peekHint() {
+      if (!isInitialized) initGeometry();
+
       // Only run on mobile where carousel is active
       if (scrollWidth <= clientWidth) return;
 
@@ -476,10 +496,13 @@
         }, 400);
       }, 1200);
     }
-    peekHint();
+    
+    // Delay peekHint to keep geometric queries out of the initial page load pipeline
+    setTimeout(peekHint, 1000);
 
     // --- Auto-swipe ---
     function scrollNext() {
+      if (!isInitialized) initGeometry();
       if (scrollWidth <= clientWidth) return;
       if (showcase.matches(':hover')) return;
 
