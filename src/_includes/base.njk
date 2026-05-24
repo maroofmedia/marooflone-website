@@ -63,8 +63,42 @@
 <meta name="twitter:image" content="{{ site.url }}{% if image %}{{ image }}{% else %}/assets/images/main-images/og-discription-image.png?v=2{% endif %}">
 <meta name="twitter:image:alt" content="{{ title | default('Maroof Lone | Code, Context & Curiosity') }}">
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-T20K3YKJP9"></script>
+<!-- Google tag (gtag.js) - Deferred loading to improve initial PageSpeed and eliminate unused JS -->
+<script>
+  (function() {
+    let analyticsLoaded = false;
+
+    function loadAnalytics() {
+      if (analyticsLoaded) return;
+      analyticsLoaded = true;
+
+      // Remove the interaction event listeners
+      ['mouseover', 'keydown', 'touchmove', 'touchstart', 'scroll'].forEach(function(event) {
+        window.removeEventListener(event, loadAnalytics);
+      });
+
+      // Dynamically load Google Tag Manager script
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-T20K3YKJP9';
+      document.head.appendChild(script);
+
+      // Initialize the dataLayer and config call
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function() { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', 'G-T20K3YKJP9');
+    }
+
+    // Set up listeners for the first user interaction
+    ['mouseover', 'keydown', 'touchmove', 'touchstart', 'scroll'].forEach(function(event) {
+      window.addEventListener(event, loadAnalytics, { passive: true });
+    });
+
+    // Fallback: load after 4 seconds of inactivity if no interaction has occurred
+    setTimeout(loadAnalytics, 4000);
+  })();
+</script>
 
 <!-- Netlify CMS — only load on admin pages -->
 {% if page.url and '/admin/' in page.url %}
