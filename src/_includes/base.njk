@@ -15,8 +15,38 @@
     {{ "src/style.css" | inlineAndMinifyCss | safe }}
   </style>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+  <script>
+    (function() {
+      let fontAwesomeLoaded = false;
+
+      function loadFontAwesome() {
+        if (fontAwesomeLoaded) return;
+        fontAwesomeLoaded = true;
+
+        // Remove interaction event listeners
+        ['mouseover', 'keydown', 'touchmove', 'touchstart', 'scroll'].forEach(function(event) {
+          window.removeEventListener(event, loadFontAwesome);
+        });
+
+        // Dynamically load FontAwesome stylesheet
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css';
+        document.head.appendChild(link);
+      }
+
+      // Set up listeners for the first user interaction
+      ['mouseover', 'keydown', 'touchmove', 'touchstart', 'scroll'].forEach(function(event) {
+        window.addEventListener(event, loadFontAwesome, { passive: true });
+      });
+
+      // Fallback: load after 3 seconds of inactivity if no interaction has occurred
+      setTimeout(loadFontAwesome, 3000);
+    })();
+  </script>
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  </noscript>
   
   {% if page.url and '/blog/' in page.url %}
   <link rel="stylesheet" href="/assets/prism.css">
