@@ -81,4 +81,3 @@ This project is open-source and available under the **[MIT License](https://gith
 ## 🙏 Acknowledgments
 
   * Built using [Eleventy](https://www.11ty.dev/)
-  * Deployed using [Netlify](https://www.netlify.com/)
