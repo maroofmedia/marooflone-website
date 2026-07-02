@@ -79,6 +79,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("./src/assets");
   eleventyConfig.addPassthroughCopy("./src/admin");
   eleventyConfig.addPassthroughCopy({ "./src/_headers": "./_headers" });
+  eleventyConfig.addPassthroughCopy({ "./src/.htaccess": "./.htaccess" });
   eleventyConfig.addPassthroughCopy({ "./src/assets/images/favicon/favicon.ico": "favicon.ico" });
 
   // Date Filter using Luxon
