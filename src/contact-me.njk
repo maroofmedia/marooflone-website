@@ -230,8 +230,10 @@ description: "Get in touch with Maroof Lone for web development, OSINT, cybersec
       <div class="contact-form-card">
         <h2>Send a Message</h2>
         
-        <form name="contact-page-form" method="POST" data-netlify="true" action="/success/">
-         <input type="hidden" name="subject" id="hidden-subject" value="New Website Inquiry" />
+        <form action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="696a2b6e-b4c9-47bf-919f-d95bd2548b21">
+          <input type="hidden" name="subject" id="hidden-subject" value="New Website Inquiry" />
+          
           <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" required placeholder="John Doe">
@@ -256,7 +258,7 @@ description: "Get in touch with Maroof Lone for web development, OSINT, cybersec
           </div>
 
           <button type="submit" class="full-submit-btn">
-            Send Message <i class="fa-solid fa-paper-plane"></i>
+            Submit <i class="fa-solid fa-paper-plane"></i>
           </button>
         </form>
       </div>
