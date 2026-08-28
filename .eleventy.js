@@ -4,17 +4,11 @@ const markdownItLinkAttributes = require("markdown-it-link-attributes");
 const markdownItAnchor = require("markdown-it-anchor");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
-const pluginTOC = require("eleventy-plugin-toc");
 
 module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(syntaxHighlight);
-  eleventyConfig.addPlugin(pluginTOC, {
-    tags: ["h2", "h3"],
-    ul: true,
-    wrapperClass: "toc",
-  });
 
   // Markdown-it configuration
   const markdownOptions = {
