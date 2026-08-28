@@ -3,174 +3,224 @@ title: Maroof Lone | Code, Context & Curiosity
 description: "Computer Science Engineer, Web Developer, and Blogger hailing from Kashmir. Specializing in OSINT, cybersecurity, and digital research."
 layout: 'base.njk'
 ---
-    <section class="section hero-section animate-on-scroll">
-    <div class="container main-content">
-      <div class="profile-section">
-        <div class="photo-booth-window">
-            <img src="assets/images/main-images/maroof-hero-new-booth-edited.webp" alt="Maroof Lone" class="profile-photo" fetchpriority="high" width="750" height="667">
-        </div>
-      </div>
-
+  <section class="section hero-section animate-on-scroll">
+    <div class="container hero-container">
+      <div class="hero-layout">
         
-      <div class="text-section">
-        <div class="hero-intro">
-          <a href="/contact-me" class="available-badge">
-            <span class="pulse-dot"></span>
-            Available for work
-          </a>
-          <h1>Hi, I'm Maroof <span class="wave">👋</span></h1>
+        <!-- Portrait Frame -->
+        <div class="hero-avatar-wrapper">
+          <div class="hero-avatar-frame">
+            <img src="assets/images/main-images/maroof-hero-new-booth-edited.webp" alt="Maroof Lone" class="hero-avatar-img" fetchpriority="high" width="750" height="667">
+            <div class="hero-avatar-badge">
+              <span class="pulse-dot"></span>
+              <span>Available for work</span>
+            </div>
+          </div>
         </div>
-        <div class="about-section">
-          <p>I'm a <code class="code-block-1">&lt;Computer Science &amp; Engineering/&gt;</code> student. I love
-            working around OSINT, blogging, and anything
-            related to technology and media.
-          </p>
-          <p>My aim is to use my skills to make the internet a safer, better, and more useful place.
-            Here, I share whatever I learn in simple, clear, and easy-to-understand words.
-          </p>
-          <p>When I'm not at my desk 🧑‍💻, you'll probably find me <code class="code-block-1">reading,</code> <code
-              class="code-block-1">running,</code> or going down a deep
-            <code class="code-block-1">YouTube rabbit hole.</code>
-          </p>
+
+        <!-- Content & Bio -->
+        <div class="hero-content">
+          <div class="hero-header-block">
+            <div class="hero-location-chip">
+              <span class="status-dot"></span>
+              <span>Srinagar, Kashmir</span>
+            </div>
+            <h1 class="hero-title">Hi, I'm Maroof <span class="wave">👋</span></h1>
+            <p class="hero-role">Computer Science Engineer, Web Developer &amp; Researcher</p>
+          </div>
+
+          <div class="hero-bio-text">
+            <p>
+              I build fast, accessible web applications and investigate the digital landscape through open-source intelligence (OSINT). Deeply curious about the intersection of code, cybersecurity, and media.
+            </p>
+            <p>
+              My focus is creating software and research that makes the internet more reliable, safe, and transparent. When I'm away from the terminal, I write essays on technology, society, and ideas worth sharing.
+            </p>
+          </div>
+
+          <div class="hero-action-row">
+            <a href="/blog" class="hero-btn hero-btn--primary">Read Blog &rarr;</a>
+            <a href="/contact-me" class="hero-btn hero-btn--secondary">Get in Touch</a>
+            <div class="hero-quick-socials">
+              <a href="https://github.com/maroofmedia" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+              <a href="https://twitter.com/marooflone13" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+              <a href="https://linkedin.com/in/marooflone13" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
 
   <section class="section what-i-do-section animate-on-scroll delay-1" id="skills">
     <div class="container">
-      <span class="section-subtitle">What I Do</span>
-      <h2 class="section-header-title">I build, research & write.</h2>
+      <div class="skills-section-header">
+        <span class="skills-eyebrow">WHAT I DO</span>
+        <h2 class="skills-title">I build, research & write.</h2>
+        <p class="skills-intro">A blend of full-stack web engineering, digital investigations, and clear editorial communication.</p>
+      </div>
       
-      <div class="what-i-do-grid">
+      <div class="skills-compact-grid">
         <!-- Build Card -->
-        <div class="what-i-do-card">
-          <div class="card-bg-icon"><i class="fa-solid fa-laptop-code"></i></div>
-          <div class="card-icon-wrapper icon-build">
-            <i class="fa-solid fa-laptop-code"></i>
+        <div class="skill-card">
+          <div class="skill-card-top">
+            <span class="skill-index">01</span>
+            <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
           </div>
-          <h3 class="card-h3">Build</h3>
-          <p class="card-text">I build fast, responsive, and user-friendly websites and digital tools using modern technologies.</p>
-          <div class="card-tags">
-            <span class="tag-pill">HTML</span>
-            <span class="tag-pill">CSS</span>
-            <span class="tag-pill">WordPress</span>
-            <span class="tag-pill">MySQL</span>
-            <span class="tag-pill">AWS</span>
-            <span class="tag-pill">UI Design</span>
-            <span class="tag-pill">cPanel</span>
+          <h3 class="skill-name">Build</h3>
+          <p class="skill-desc">Engineering fast, responsive websites, web applications, and resilient digital infrastructure with modern web standards.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">HTML / CSS</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">WordPress</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">UI Design</span>
+            <span class="skill-tag">cPanel</span>
           </div>
         </div>
 
         <!-- Research Card -->
-        <div class="what-i-do-card">
-          <div class="card-bg-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-          <div class="card-icon-wrapper icon-research">
-            <i class="fa-solid fa-magnifying-glass-chart"></i>
+        <div class="skill-card">
+          <div class="skill-card-top">
+            <span class="skill-index">02</span>
+            <div class="skill-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
           </div>
-          <h3 class="card-h3">Research</h3>
-          <p class="card-text">I dive deep into OSINT, fact-checking, media analysis, and internet investigations to uncover what others miss.</p>
-          <div class="card-tags">
-            <span class="tag-pill">OSINT Research</span>
-            <span class="tag-pill">SEO</span>
+          <h3 class="skill-name">Research</h3>
+          <p class="skill-desc">Deep-dive open-source intelligence (OSINT), technical fact-checking, and digital investigations to uncover key signals.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">OSINT Research</span>
+            <span class="skill-tag">Digital Forensics</span>
+            <span class="skill-tag">Fact-Checking</span>
+            <span class="skill-tag">Technical SEO</span>
           </div>
         </div>
 
         <!-- Write Card -->
-        <div class="what-i-do-card">
-          <div class="card-bg-icon"><i class="fa-solid fa-feather-pointed"></i></div>
-          <div class="card-icon-wrapper icon-write">
-            <i class="fa-solid fa-feather-pointed"></i>
+        <div class="skill-card">
+          <div class="skill-card-top">
+            <span class="skill-index">03</span>
+            <div class="skill-icon"><i class="fa-solid fa-feather-pointed"></i></div>
           </div>
-          <h3 class="card-h3">Write</h3>
-          <p class="card-text">I write about technology, society, and human experiences with simple and clear wording.</p>
-          <div class="card-tags">
-            <span class="tag-pill">Content Writing</span>
-            <span class="tag-pill">Social Media Management</span>
-            <span class="tag-pill">Copywriting</span>
+          <h3 class="skill-name">Write</h3>
+          <p class="skill-desc">Breaking down complex technical concepts, digital culture, and human stories into simple, compelling prose.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Technical Writing</span>
+            <span class="skill-tag">Content Strategy</span>
+            <span class="skill-tag">Copywriting</span>
+            <span class="skill-tag">Media Analysis</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section animate-on-scroll delay-2" id="work">
+  <section class="section experience-section animate-on-scroll delay-2" id="work">
     <div class="container">
-      <h2 class="section-title">Work Experience</h2>
-      <div class="timeline">
-        
-        <div class="timeline-item" onclick="toggleAccordion(this)">
-          <div class="logo-wrapper">
-            <img src="assets/images/main-images/coding.webp" alt="Freelance" loading="lazy" width="70" height="70" />
+      
+      <div class="experience-grid">
+        <!-- Work Experience Column -->
+        <div class="experience-column">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">EXPERIENCE</span>
+            <h2 class="section-title-modern">Work Experience</h2>
           </div>
-          
-          <div class="timeline-header-wrapper">
-            <div>
-                <h3 class="company">Freelancer</h3>
-                <div class="timeline-sub">
-                    <span class="role">Website Manager</span>
-                    <span class="dot-separator">•</span>
-                    <span class="meta">Mar 2020 – Present</span>
-                </div>
-            </div>
-            <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" /></svg>
-          </div>
+
+          <div class="experience-timeline">
             
-          <div class="description">
-              <p>I provide end-to-end technical management for websites, ranging from static HTML builds to high-traffic WordPress publishers. Responsibilities include site architecture & development, bug fixing, speed optimization, and maintaining a smooth workflow for content teams.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item" onclick="toggleAccordion(this)">
-          <div class="logo-wrapper">
-            <img src="assets/images/main-images/boomlive-logo.webp" alt="BOOMLive" loading="lazy" width="70" height="70" />
-          </div>
-          
-          <div class="timeline-header-wrapper">
-            <div>
-                <h3 class="company">BOOMLive</h3>
-                <div class="timeline-sub">
-                    <span class="role">Researcher & Writer</span>
-                    <span class="dot-separator">•</span>
-                    <span class="meta">Jul 2024 – Jan 2025</span>
+            <!-- Item 1: Freelance -->
+            <div class="exp-card">
+              <div class="exp-card-header">
+                <div class="exp-logo-box">
+                  <img src="assets/images/main-images/coding.webp" alt="Freelance" loading="lazy" width="44" height="44" />
                 </div>
+                <div class="exp-meta-block">
+                  <div class="exp-title-row">
+                    <h3 class="exp-role">Website Manager &amp; Developer</h3>
+                    <span class="exp-date-chip">2020 &mdash; Present</span>
+                  </div>
+                  <div class="exp-company">Freelance <span class="exp-badge">Remote</span></div>
+                </div>
+              </div>
+              <p class="exp-desc">
+                Providing end-to-end technical management, architecture, speed optimization, and development for static sites and high-traffic WordPress publications.
+              </p>
+              <div class="exp-tags">
+                <span class="exp-tag">Web Architecture</span>
+                <span class="exp-tag">WordPress</span>
+                <span class="exp-tag">Performance</span>
+                <span class="exp-tag">SEO</span>
+              </div>
             </div>
-            <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" /></svg>
+
+            <!-- Item 2: BOOMLive -->
+            <div class="exp-card">
+              <div class="exp-card-header">
+                <div class="exp-logo-box">
+                  <img src="assets/images/main-images/boomlive-logo.webp" alt="BOOMLive" loading="lazy" width="44" height="44" />
+                </div>
+                <div class="exp-meta-block">
+                  <div class="exp-title-row">
+                    <h3 class="exp-role">Researcher &amp; Writer</h3>
+                    <span class="exp-date-chip">Jul 2024 &mdash; Jan 2025</span>
+                  </div>
+                  <div class="exp-company">BOOMLive <span class="exp-badge">TFCN India</span></div>
+                </div>
+              </div>
+              <p class="exp-desc">
+                Investigated online misinformation, conducted digital verification, and produced investigative reports promoting digital media literacy and open-source verification.
+              </p>
+              <div class="exp-tags">
+                <span class="exp-tag">OSINT Verification</span>
+                <span class="exp-tag">Fact-Checking</span>
+                <span class="exp-tag">Media Literacy</span>
+                <span class="exp-tag">Forensics</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Education Column -->
+        <div class="experience-column">
+          <div class="section-header-compact">
+            <span class="section-eyebrow">ACADEMICS</span>
+            <h2 class="section-title-modern">Education</h2>
           </div>
 
-          <div class="description">
-              <p>Worked as part of the Teen Fact-Checking Network (TFCN) India. Fact-checked online content, identified misinformation, and produced fact-checking stories to promote digital literacy. Gained hands-on experience in media analysis, fact-checking, digital literacy, critical thinking, and combating misinformation.</p>
+          <div class="experience-timeline">
+            
+            <!-- Item 1: College -->
+            <div class="exp-card exp-card--highlight">
+              <div class="exp-card-header">
+                <div class="exp-logo-box">
+                  <img src="assets/images/main-images/bfgi_logo.webp" alt="Baba Farid College" loading="lazy" width="44" height="44" />
+                </div>
+                <div class="exp-meta-block">
+                  <div class="exp-title-row">
+                    <h3 class="exp-role">B.Tech in Computer Science</h3>
+                    <span class="exp-date-chip">2025 &mdash; 2029</span>
+                  </div>
+                  <div class="exp-company">Baba Farid College of Engg. &amp; Tech.</div>
+                </div>
+              </div>
+              <p class="exp-desc">
+                Undergraduate studies in Computer Science and Engineering with focus on distributed systems, network security, algorithms, and software design at a NAAC A+ accredited institution.
+              </p>
+              <div class="exp-tags">
+                <span class="exp-tag">Computer Science</span>
+                <span class="exp-tag">Cybersecurity</span>
+                <span class="exp-tag">Data Structures</span>
+                <span class="exp-tag">Bathinda, IN</span>
+              </div>
+            </div>
+
           </div>
         </div>
 
       </div>
 
-      <h2 class="section-title section-title--spaced">Education</h2>
-      <div class="timeline animate-on-scroll delay-3">
-        
-        <div class="timeline-item" onclick="toggleAccordion(this)">
-          <div class="logo-wrapper">
-            <img src="assets/images/main-images/bfgi_logo.webp" alt="College" loading="lazy" width="70" height="70" />
-          </div>
-
-          <div class="timeline-header-wrapper">
-             <div>
-                 <h3 class="company">Baba Farid College of Engg. & Tech.</h3>
-                 <div class="timeline-sub">
-                     <span class="role">B.Tech in Computer Science & Engineering</span>
-                     <span class="dot-separator">•</span>
-                     <span class="meta">2025 – 2029</span>
-                 </div>
-             </div>
-             <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" /></svg>
-          </div>
-
-          <div class="description">
-             <p>Currently pursuing a Bachelor of Technology in Computer Science & Engineering at Baba Farid College of Engineering & Technology, Bathinda, a NAAC A+ accredited institution.</p>
-          </div>
-        </div>
-
-      </div>
     </div>
   </section>
 
