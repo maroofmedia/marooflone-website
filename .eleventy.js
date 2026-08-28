@@ -95,6 +95,33 @@ module.exports = function (eleventyConfig) {
     return dt.isValid ? dt.toFormat("LLL d").toUpperCase() : "";
   });
 
+  // Group collection by year
+  eleventyConfig.addFilter("groupByYear", (collection) => {
+    if (!collection) return [];
+    const groups = {};
+    for (const item of collection) {
+      let dt;
+      if (item.date instanceof Date) {
+        dt = DateTime.fromJSDate(item.date, { zone: "utc" });
+      } else if (typeof item.date === "string") {
+        dt = DateTime.fromISO(item.date, { zone: "utc" });
+      } else {
+        dt = DateTime.fromJSDate(new Date(item.date), { zone: "utc" });
+      }
+      const year = dt.isValid ? dt.toFormat("yyyy") : "Other";
+      if (!groups[year]) {
+        groups[year] = [];
+      }
+      groups[year].push(item);
+    }
+    return Object.keys(groups)
+      .sort((a, b) => b.localeCompare(a))
+      .map((year) => ({
+        year,
+        posts: groups[year],
+      }));
+  });
+
   // Filter collection by tag
   eleventyConfig.addFilter("filterByTag", (collection, tag) => {
     return collection.filter((item) => {

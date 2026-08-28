@@ -1,9 +1,22 @@
-<a href="{{ post.url }}" class="posts-list-item">
-  <div class="posts-list-date">{{ post.date | postDateShort }}</div>
+<article class="posts-list-item">
+  <a href="{{ post.url }}" class="posts-list-date-link" tabindex="-1" aria-hidden="true">
+    <div class="posts-list-date">{{ post.date | postDateShort }}</div>
+  </a>
   <div class="posts-list-content">
-    <h3 class="posts-list-title">{{ post.data.title }}</h3>
-    {% if post.data.description %}
-      <p class="posts-list-desc">{{ post.data.description }}</p>
+    <a href="{{ post.url }}" class="posts-list-link">
+      <h3 class="posts-list-title">{{ post.data.title }}</h3>
+      {% if post.data.description %}
+        <p class="posts-list-desc">{{ post.data.description }}</p>
+      {% endif %}
+    </a>
+    {% if showTags and post.data.tags and post.data.tags.length > 0 %}
+      <div class="posts-list-tags">
+        {% for tag in post.data.tags %}
+          {% if tag != "post" and tag != "blog" %}
+            <a href="/tags/{{ tag | slugify }}/" class="posts-list-tag">{{ tag }}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
     {% endif %}
   </div>
-</a>
+</article>
