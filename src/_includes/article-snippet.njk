@@ -1,4 +1,9 @@
-<a href="{{ post.url }}" class="blog-item">
-  <span class="blog-title">{{ post.data.title }}</span>
-  <span class="blog-date">{{ post.date | postDate }}</span>
+<a href="{{ post.url }}" class="posts-list-item">
+  <div class="posts-list-date">{{ post.date | postDateShort }}</div>
+  <div class="posts-list-content">
+    <h3 class="posts-list-title">{{ post.data.title }}</h3>
+    {% if post.data.description %}
+      <p class="posts-list-desc">{{ post.data.description }}</p>
+    {% endif %}
+  </div>
 </a>

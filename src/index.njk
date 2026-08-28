@@ -320,24 +320,22 @@ layout: 'base.njk'
 
 
 
-  <section class="section animate-on-scroll delay-4">
+  <section class="section animate-on-scroll delay-4" id="latest-posts">
     <div class="container">
-        <span class="section-subtitle">Latest from my blog</span>
-        <h2 class="section-header-title">Writings</h2>
+      <div class="posts-section-header">
+        <h2 class="posts-section-title">Latest Posts</h2>
+        <a href="/blog" class="posts-all-link">
+          <span>All Posts</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+      </div>
 
-        <div class="blog-list">
-           {%- for post in collections.post | reverse -%}
-             {% if loop.index0 < 5 %}
-               {% include 'article-snippet.njk' %}
-             {% endif %}
-           {%- endfor -%}
-        </div>
-        
-<div style="text-align: center; margin-top: 3rem; margin-bottom: 3rem;">
-    <a href="/blog" class="view-all-btn">
-        <span>Read All Posts</span>
-        <i class="fas fa-arrow-right"></i>
-    </a>
-</div>
+      <div class="posts-list">
+        {%- for post in collections.post | reverse -%}
+          {% if loop.index0 < 5 %}
+            {% include 'article-snippet.njk' %}
+          {% endif %}
+        {%- endfor -%}
+      </div>
     </div>
   </section>

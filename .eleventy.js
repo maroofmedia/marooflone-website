@@ -87,6 +87,20 @@ module.exports = function (eleventyConfig) {
     return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
   });
 
+  // Short Date Filter for clean list view (e.g., 'AUG 6', 'APR 15')
+  eleventyConfig.addFilter("postDateShort", (dateObj) => {
+    if (!dateObj) return "";
+    let dt;
+    if (dateObj instanceof Date) {
+      dt = DateTime.fromJSDate(dateObj, { zone: "utc" });
+    } else if (typeof dateObj === "string") {
+      dt = DateTime.fromISO(dateObj, { zone: "utc" });
+    } else {
+      dt = DateTime.fromJSDate(new Date(dateObj), { zone: "utc" });
+    }
+    return dt.isValid ? dt.toFormat("LLL d").toUpperCase() : "";
+  });
+
   // Filter collection by tag
   eleventyConfig.addFilter("filterByTag", (collection, tag) => {
     return collection.filter((item) => {
