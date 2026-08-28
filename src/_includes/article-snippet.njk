@@ -12,7 +12,7 @@
     {% if showTags and post.data.tags and post.data.tags.length > 0 %}
       <div class="posts-list-tags">
         {% for tag in post.data.tags %}
-          {% if tag != "post" and tag != "blog" %}
+          {% if tag != "post" and tag != "blog" and tag != "writings" and tag != "Writings" and tag != "featured" and tag != "Featured" %}
             <a href="/tags/{{ tag | slugify }}/" class="posts-list-tag">{{ tag }}</a>
           {% endif %}
         {% endfor %}
