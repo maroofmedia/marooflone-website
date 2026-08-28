@@ -1236,7 +1236,7 @@ code.code-block-1 {
     gap: 2px;
   }
 
-    .dot-separator {
+  .dot-separator {
     display: none;
   }
 }
@@ -1257,7 +1257,7 @@ code.code-block-1 {
   font-size: 2.35rem;
   font-weight: 800;
   color: #ffffff;
-  line-height: 1.25;
+  line-height: 1.32;
   letter-spacing: 0.015em;
   margin: 0 0 0.85rem 0;
 }
@@ -1324,9 +1324,9 @@ code.code-block-1 {
 
   .article-title {
     font-size: 1.75rem;
-    line-height: 1.25;
+    line-height: 1.38;
     letter-spacing: 0.01em;
-    margin-bottom: 0.65rem;
+    margin-bottom: 0.75rem;
   }
 
   .main-article__figure {
@@ -1356,6 +1356,7 @@ code.code-block-1 {
 
   .article-title {
     font-size: 1.5rem;
+    line-height: 1.4;
   }
 }
 
@@ -2202,81 +2203,130 @@ pre {
 
 /* --- Projects Section Styles --- */
 
-/* --- Recent Posts Section --- */
-.recent-posts-section {
+/* ===================================
+   READ NEXT (SINGLE POST FOOTER)
+   =================================== */
+
+.read-next-section {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
   border-top: 1px solid var(--border-color);
-  margin-top: 0;
-  padding-top: 40px;
-  padding-bottom: 60px;
-  width: 100%;
 }
 
-.recent-heading {
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 30px;
-  letter-spacing: -0.5px;
+.read-next-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1.25rem;
 }
 
-/* Grid Layout */
-.recent-grid {
+.read-next-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.read-next-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.read-next-all .arrow {
+  transition: transform 0.2s ease;
+}
+
+.read-next-all:hover {
+  color: var(--accent);
+}
+
+.read-next-all:hover .arrow {
+  transform: translateX(3px);
+}
+
+.read-next-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
 }
 
-/* Card Container */
-.recent-card {
-  background: var(--card-bg);
+.read-next-card {
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 20px;
-
+  border-radius: 8px;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 12px;
-
-  height: 100%;
+  gap: 6px;
   text-decoration: none;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.2s ease;
 }
 
-.recent-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+.read-next-card:hover {
+  border-color: rgba(79, 209, 197, 0.35);
+  background: rgba(79, 209, 197, 0.03);
+  transform: translateY(-2px);
 }
 
-/* Title */
-.recent-card-title {
-  color: var(--text);
-  font-weight: 700;
-  font-size: 1.1rem;
-  line-height: 1.4;
-  margin: 0;
-  transition: color 0.2s;
-}
-
-.recent-card:hover .recent-card-title {
-  color: #fff;
-}
-
-/* Date Section */
-.recent-card-meta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.85rem;
+.read-next-date {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--text-muted);
-  font-family: 'Courier New', monospace;
-  margin-top: 0;
+  transition: color 0.2s ease;
 }
 
-.recent-card-meta i {
+.read-next-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.35;
+  margin: 0;
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+}
+
+.read-next-card:hover .read-next-card-title {
   color: var(--accent);
-  font-size: 0.9rem;
+}
+
+.read-next-card:hover .read-next-date {
+  color: #e5e7eb;
+}
+
+@media (max-width: 768px) {
+  .read-next-section {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+  }
+
+  .read-next-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .read-next-card {
+    padding: 12px 14px;
+    gap: 4px;
+  }
+
+  .read-next-title {
+    font-size: 1.1rem;
+  }
+
+  .read-next-card-title {
+    font-size: 0.9rem;
+    line-height: 1.50rem;
+  }
 }
 
 /* --- Testimonials Section --- */
@@ -2686,6 +2736,7 @@ pre {
 
   .posts-list-title {
     font-size: 1.05rem;
+    line-height: 1.45;
   }
 
   .posts-list-desc {
@@ -2724,6 +2775,7 @@ pre {
 
   .posts-list-title {
     font-size: 0.98rem;
+    line-height: 1.45;
   }
 
   .posts-list-desc {

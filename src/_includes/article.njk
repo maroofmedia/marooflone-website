@@ -54,95 +54,94 @@ layout: 'base.njk'
     {% endif %}
 
     <div class="share-container">
-        <span class="share-label">Found this useful? Pass it on.</span>
-        
-        <div class="share-btn-group">
-            <button id="confetti-like-btn" class="share-btn like-btn" aria-label="Like this post">
-    <i class="far fa-heart heart-icon"></i>
-    <span>Like</span>
-</button>
-
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<script>
-  const likeBtn = document.getElementById('confetti-like-btn');
-  const heartIcon = likeBtn.querySelector('.heart-icon');
-
-  likeBtn.addEventListener('click', function(e) {
-    likeBtn.blur();
-
-    // Fire Confetti
-    fireConfetti(e);
-
-    heartIcon.classList.remove('pop-active');
-    void heartIcon.offsetWidth;
-    heartIcon.classList.add('pop-active');
-    
-    // Auto-remove class after animation
-    setTimeout(() => {
-        heartIcon.classList.remove('pop-active');
-    }, 400);
-  });
-
-  function fireConfetti(e) {
-    const rect = likeBtn.getBoundingClientRect();
-    const x = (rect.left + rect.width / 2) / window.innerWidth;
-    const y = (rect.top + rect.height / 2) / window.innerHeight;
-
-    confetti({
-      particleCount: 60,
-      spread: 70,
-      origin: { x: x, y: y },
-      colors: ['#FF5F56', '#4FD1C5', '#FFD700'],
-      disableForReducedMotion: true,
-      scalar: 0.8
-    });
-  }
-</script>
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url | url }}" target="_blank" rel="noopener noreferrer" class="share-btn fb" aria-label="Share on Facebook">
-                <i class="fa-brands fa-facebook-f"></i>
-                <span>Facebook</span>
-            </a>
-
-            <a href="https://twitter.com/intent/tweet?url={{ site.url }}{{ page.url | url }}&text={{ title | urlencode }}" target="_blank" rel="noopener noreferrer" class="share-btn tw" aria-label="Share on Twitter">
-                <i class="fa-brands fa-x-twitter"></i>
-                <span>Post</span>
-            </a>
-
-            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.url }}{{ page.url | url }}" target="_blank" rel="noopener noreferrer" class="share-btn in" aria-label="Share on LinkedIn">
-                <i class="fa-brands fa-linkedin-in"></i>
-                <span>LinkedIn</span>
-            </a>
-
-            <a href="https://api.whatsapp.com/send?text={{ title | urlencode }}%20{{ site.url }}{{ page.url | url }}" target="_blank" rel="noopener noreferrer" class="share-btn wa" aria-label="Share on WhatsApp">
-                <i class="fa-brands fa-whatsapp"></i>
-                <span>WhatsApp</span>
-            </a>
-        </div>
-    </div>
-</div>
-
-  </div> <div class="container">
-    <div class="recent-posts-section">
-      <h3 class="recent-heading">Read Next</h3>
+      <span class="share-label">Found this useful? Pass it on.</span>
       
-      <div class="recent-grid">
+      <div class="share-btn-group">
+        <button id="confetti-like-btn" class="share-btn like-btn" aria-label="Like this post">
+          <i class="far fa-heart heart-icon"></i>
+          <span>Like</span>
+        </button>
+
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+        <script>
+          const likeBtn = document.getElementById('confetti-like-btn');
+          const heartIcon = likeBtn.querySelector('.heart-icon');
+
+          likeBtn.addEventListener('click', function(e) {
+            likeBtn.blur();
+            fireConfetti(e);
+
+            heartIcon.classList.remove('pop-active');
+            void heartIcon.offsetWidth;
+            heartIcon.classList.add('pop-active');
+            
+            setTimeout(() => {
+              heartIcon.classList.remove('pop-active');
+            }, 400);
+          });
+
+          function fireConfetti(e) {
+            const rect = likeBtn.getBoundingClientRect();
+            const x = (rect.left + rect.width / 2) / window.innerWidth;
+            const y = (rect.top + rect.height / 2) / window.innerHeight;
+
+            confetti({
+              particleCount: 60,
+              spread: 70,
+              origin: { x: x, y: y },
+              colors: ['#FF5F56', '#4FD1C5', '#FFD700'],
+              disableForReducedMotion: true,
+              scalar: 0.8
+            });
+          }
+        </script>
+
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url | url }}" target="_blank" rel="noopener noreferrer" class="share-btn fb" aria-label="Share on Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+          <span>Facebook</span>
+        </a>
+
+        <a href="https://twitter.com/intent/tweet?url={{ site.url }}{{ page.url | url }}&text={{ title | urlencode }}" target="_blank" rel="noopener noreferrer" class="share-btn tw" aria-label="Share on Twitter">
+          <i class="fa-brands fa-x-twitter"></i>
+          <span>Post</span>
+        </a>
+
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.url }}{{ page.url | url }}" target="_blank" rel="noopener noreferrer" class="share-btn in" aria-label="Share on LinkedIn">
+          <i class="fa-brands fa-linkedin-in"></i>
+          <span>LinkedIn</span>
+        </a>
+
+        <a href="https://api.whatsapp.com/send?text={{ title | urlencode }}%20{{ site.url }}{{ page.url | url }}" target="_blank" rel="noopener noreferrer" class="share-btn wa" aria-label="Share on WhatsApp">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="read-next-section">
+      <div class="read-next-header">
+        <h3 class="read-next-title">Read Next</h3>
+        <a href="/blog" class="read-next-all">
+          <span>All Posts</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+      
+      <div class="read-next-grid">
         {% set recentPosts = collections.post | reverse %}
         {% set count = 0 %}
         
         {% for post in recentPosts %}
           {% if post.url != page.url and count < 3 %}
-            
-            <a href="{{ post.url }}" class="recent-card">
-              <span class="recent-card-title">{{ post.data.title }}</span>
-              <div class="recent-card-meta">
-                 <i class="fas fa-calendar-alt"></i>
-                 <time datetime="{{ post.date | date('yyyy-MM-dd') }}">{{ post.date | postDate }}</time>
-              </div>
+            <a href="{{ post.url }}" class="read-next-card">
+              <div class="read-next-date">{{ post.date | postDateShort }}</div>
+              <h4 class="read-next-card-title">{{ post.data.title }}</h4>
             </a>
-
             {% set count = count + 1 %}
           {% endif %}
         {% endfor %}
       </div>
     </div>
-  </div> </article>
+
+  </div>
+</article>
