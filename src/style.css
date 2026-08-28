@@ -1317,59 +1317,6 @@ code.code-block-1 {
   }
 }
 
-/* --- View All Button --- */
-.view-all-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 24px;
-
-  /* Outline Style */
-  background: transparent;
-  color: #f0f0f0;
-  border: 2px solid #222;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-size: 0.7rem;
-  overflow: hidden;
-  transition: color 0.3s ease;
-  z-index: 1;
-}
-
-/* The Sliding Background */
-.view-all-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  background: #222;
-  transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-  z-index: -1;
-}
-
-.view-all-btn:hover {
-  color: #fff;
-}
-
-.view-all-btn:hover::before {
-  width: 100%;
-}
-
-.view-all-btn i {
-  transition: transform 0.3s ease;
-  font-size: 0.9em;
-}
-
-.view-all-btn:hover i {
-  transform: translateX(4px);
-}
 
 
 /* Skip-to-content link (accessibility) */
