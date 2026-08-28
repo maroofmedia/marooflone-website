@@ -2629,7 +2629,7 @@ pre {
 .posts-section-title {
   font-size: 1.85rem;
   font-weight: 800;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   color: #ffffff;
   margin: 0;
   line-height: 1.2;
@@ -2639,8 +2639,9 @@ pre {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 500;
+  letter-spacing: -0.01em;
   color: var(--text-muted);
   text-decoration: none;
   transition: color 0.2s ease;
@@ -2672,7 +2673,6 @@ pre {
   align-items: flex-start;
   gap: 28px;
   padding: 22px 0;
-  line-height: 1.4;
   border-bottom: 1px solid var(--border-color);
   text-decoration: none;
   transition: transform 0.2s ease, background-color 0.2s ease;
@@ -2691,12 +2691,13 @@ pre {
   min-width: 72px;
   flex-shrink: 0;
   font-size: 0.82rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   padding-top: 2px;
   font-family: var(--font-main);
+  line-height: 1.4;
   transition: color 0.2s ease;
 }
 
@@ -2706,20 +2707,20 @@ pre {
 }
 
 .posts-list-title {
-  font-size: 1.08rem;
+  font-size: 1.125rem;
   font-weight: 700;
   color: #ffffff;
-  margin: 0 0 5px 0;
+  margin: 0 0 6px 0;
   line-height: 1.35;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.015em;
   transition: color 0.2s ease;
 }
 
 .posts-list-desc {
-  font-size: 0.92rem;
+  font-size: 0.925rem;
   color: var(--text-muted);
-  line-height: 1.55;
-  word-spacing: -0.1em;
+  line-height: 1.6;
+  letter-spacing: -0.005em;
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -2734,15 +2735,15 @@ pre {
   }
 
   .posts-section-title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 
   .posts-all-link {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
   }
 
   .posts-list-item {
-    gap: 18px;
+    gap: 20px;
     padding: 18px 0;
   }
 
@@ -2753,14 +2754,12 @@ pre {
   }
 
   .posts-list-title {
-    font-size: 1.7rem;
+    font-size: 1.05rem;
   }
 
   .posts-list-desc {
-    font-size: 0.85rem;
-    line-height: 1.5;
-    word-spacing: -0.1em;
-
+    font-size: 0.88rem;
+    line-height: 1.55;
   }
 }
 
@@ -2770,30 +2769,31 @@ pre {
   }
 
   .posts-section-title {
-    font-size: 1.35rem;
+    font-size: 1.4rem;
   }
 
   .posts-all-link {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
   }
 
   .posts-list-item {
-    gap: 14px;
-    padding: 15px 0;
+    gap: 16px;
+    padding: 16px 0;
   }
 
   .posts-list-date {
-    width: 52px;
-    min-width: 52px;
-    font-size: 0.72rem;
+    width: 54px;
+    min-width: 54px;
+    font-size: 0.74rem;
   }
 
   .posts-list-title {
-    font-size: 0.95rem;
+    font-size: 0.98rem;
   }
 
   .posts-list-desc {
-    font-size: 0.82rem;
+    font-size: 0.84rem;
+    line-height: 1.5;
   }
 }
 
