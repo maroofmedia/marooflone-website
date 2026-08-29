@@ -503,10 +503,8 @@
   /* 2. Side Padding (inside the container): */
   --container-padding-x: 20px;
 
-  /* 3. Vertical Gap / Padding Between Sections:
-        - Lower value (e.g., 20px, 16px) -> COMPACT spacing between sections.
-        - Higher value (e.g., 40px, 60px) -> SPATIOUS spacing between sections. */
-  --section-padding-y: 26px;
+  /* 3. Vertical Gap / Padding Between Sections: */
+  --section-padding-y: 32px;
 
   /* Colors & Theme */
   --primary: #08090A;
@@ -533,8 +531,11 @@ body {
   font-family: var(--font-main);
   background-color: var(--primary);
   color: var(--text);
-  line-height: 1.6;
+  line-height: 1.68;
   font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* --- Sticky Footer Layout --- */
@@ -800,11 +801,11 @@ main {
 }
 
 .hero-title {
-  font-family: 'Jost', var(--font-main);
-  font-size: 2.35rem;
+  font-family: var(--font-main);
+  font-size: 2.4rem;
   font-weight: 800;
   color: #ffffff;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.02em;
   margin: 0 0 6px 0;
   line-height: 1.15;
 }
@@ -859,19 +860,20 @@ main {
 }
 
 .hero-identity-label {
-  font-family: 'Jost', var(--font-main);
-  font-size: 0.95rem;
+  font-family: var(--font-main);
+  font-size: 0.94rem;
   font-weight: 700;
-  color: #e5e7eb;
-  letter-spacing: 0.04em;
+  color: #ffffff;
+  letter-spacing: 0.03em;
   line-height: 1.2;
 }
 
 .hero-identity-sub {
+  font-family: var(--font-main);
   font-size: 0.76rem;
   font-style: italic;
   color: var(--text-muted);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   margin-top: 2px;
   line-height: 1.2;
 }
@@ -882,14 +884,15 @@ main {
 }
 
 .hero-bio-text {
-  font-size: 0.96rem;
-  color: #9ca3af;
-  line-height: 1.7;
+  font-size: 0.975rem;
+  color: #a1a1aa;
+  line-height: 1.74;
+  letter-spacing: -0.005em;
   width: 100%;
 }
 
 .hero-bio-text p {
-  margin: 0 0 12px 0;
+  margin: 0 0 14px 0;
 }
 
 .hero-bio-text p:last-child {
@@ -901,7 +904,7 @@ main {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 22px;
 }
 
 .hero-btn {
@@ -945,29 +948,97 @@ main {
 /* Mobile Responsiveness */
 @media (max-width: 640px) {
   .hero-section {
-    padding: 30px 0 20px;
+    padding: 24px 0 16px;
   }
 
   .hero-top-row {
-    gap: 16px;
+    gap: 14px;
     margin-bottom: 16px;
+    align-items: center;
   }
 
   .hero-avatar-circle-wrapper {
-    width: 80px;
-    height: 80px;
+    width: 82px;
+    height: 82px;
+    border-radius: 18px;
+    flex-shrink: 0;
+  }
+
+  .hero-avatar-circle {
+    transform: scale(1.08);
+  }
+
+  .hero-intro-right {
+    min-width: 0;
   }
 
   .hero-title {
-    font-size: 1.75rem;
+    font-size: 1.55rem;
+    white-space: nowrap;
+    margin: 0 0 5px 0;
+    line-height: 1.2;
   }
 
   .hero-identities {
-    gap: 6px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .hero-identity-item {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 5px;
+  }
+
+  .hero-identity-label {
+    font-size: 0.86rem;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-identity-sub {
+    font-size: 0.74rem;
+    margin-top: 0;
   }
 
   .hero-bio-text {
     font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  .hero-actions {
+    margin-top: 16px;
+    gap: 10px;
+  }
+
+  .hero-btn {
+    padding: 8px 18px;
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-top-row {
+    gap: 12px;
+  }
+
+  .hero-avatar-circle-wrapper {
+    width: 74px;
+    height: 74px;
+    border-radius: 16px;
+  }
+
+  .hero-title {
+    font-size: 1.38rem;
+  }
+
+  .hero-identity-label {
+    font-size: 0.82rem;
+  }
+
+  .hero-identity-sub {
+    font-size: 0.70rem;
   }
 }
 
@@ -980,43 +1051,44 @@ main {
 }
 
 .skills-section-header {
-  margin-bottom: 2.25rem;
+  margin-bottom: 2rem;
   text-align: left;
 }
 
 .skills-eyebrow {
   display: inline-block;
-  font-family: monospace;
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
   color: var(--accent);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
+  line-height: 1;
 }
 
 .skills-title {
-  font-family: 'Jost', var(--font-main);
-  font-size: 2.2rem;
+  font-family: var(--font-main);
+  font-size: 1.85rem;
   font-weight: 800;
   color: #ffffff;
   letter-spacing: -0.03em;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.4rem 0;
   line-height: 1.2;
 }
 
 .skills-intro {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.65;
   margin: 0;
-  max-width: 640px;
+  max-width: 620px;
 }
 
 .pillars-editorial-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  gap: 24px;
   width: 100%;
 }
 
@@ -1038,15 +1110,15 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .pillar-index {
-  font-family: monospace;
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
   color: #52525b;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   transition: color 0.2s ease;
 }
 
@@ -1056,7 +1128,7 @@ main {
 
 .pillar-icon {
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
@@ -1066,19 +1138,19 @@ main {
 }
 
 .pillar-title {
-  font-family: 'Jost', var(--font-main);
-  font-size: 1.35rem;
+  font-family: var(--font-main);
+  font-size: 1.22rem;
   font-weight: 700;
   color: #ffffff;
   margin: 0 0 8px 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
   line-height: 1.25;
 }
 
 .pillar-desc {
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.65;
   margin: 0 0 16px 0;
   flex-grow: 1;
 }
@@ -1095,26 +1167,27 @@ main {
    =================================== */
 
 .experience-section {
-  padding: 55px 0;
+  padding: var(--section-padding-y) 0;
 }
 
 .experience-header-block {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .section-eyebrow {
   display: inline-block;
-  font-family: monospace;
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
   color: var(--accent);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: 0.4rem;
+  line-height: 1;
 }
 
 .section-title-modern {
-  font-family: 'Jost', var(--font-main);
+  font-family: var(--font-main);
   font-size: 1.85rem;
   font-weight: 800;
   color: #ffffff;
@@ -1130,9 +1203,9 @@ main {
 
 .editorial-work-row {
   display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 28px;
-  padding: 24px 0;
+  grid-template-columns: 140px 1fr;
+  gap: 24px;
+  padding: 22px 0;
   border-bottom: 1px solid var(--border-color);
   align-items: flex-start;
   transition: background-color 0.2s ease;
@@ -1146,13 +1219,14 @@ main {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: monospace;
-  font-size: 0.74rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   font-weight: 600;
   color: var(--accent);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.05em;
   padding-top: 3px;
   white-space: nowrap;
+  text-transform: uppercase;
 }
 
 .work-status-indicator {
@@ -2341,7 +2415,7 @@ pre {
    =================================== */
 
 .testimonials-section {
-  padding: 55px 0;
+  padding: var(--section-padding-y) 0;
 }
 
 .testimonials-header-block {
@@ -2355,11 +2429,11 @@ pre {
 
 .testimonial-row {
   margin: 0;
-  padding: 22px 0;
+  padding: 20px 0;
   border-bottom: 1px solid var(--border-color);
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 28px;
+  gap: 24px;
   align-items: baseline;
 }
 
@@ -2368,9 +2442,10 @@ pre {
 }
 
 .testimonial-text {
-  font-size: 0.94rem;
+  font-size: 0.95rem;
   color: #d1d5db;
-  line-height: 1.68;
+  line-height: 1.7;
+  letter-spacing: -0.005em;
   margin: 0;
   font-style: normal;
 }
@@ -2381,22 +2456,23 @@ pre {
   align-items: flex-end;
   text-align: right;
   flex-shrink: 0;
-  min-width: 170px;
+  min-width: 160px;
 }
 
 .testimonial-author {
-  font-family: 'Jost', var(--font-main);
+  font-family: var(--font-main);
   font-size: 0.95rem;
   font-weight: 700;
   color: #ffffff;
   font-style: normal;
   line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 .testimonial-role {
   font-size: 0.76rem;
-  color: var(--text-muted);
-  margin-top: 3px;
+  color: #71717a;
+  margin-top: 2px;
   line-height: 1.2;
 }
 
@@ -2443,7 +2519,7 @@ pre {
 }
 
 .posts-section-title {
-  font-family: 'Jost', var(--font-main);
+  font-family: var(--font-main);
   font-size: 1.85rem;
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -2456,8 +2532,8 @@ pre {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: 'Jost', var(--font-main);
-  font-size: 0.95rem;
+  font-family: var(--font-main);
+  font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--text-muted);
@@ -2489,8 +2565,8 @@ pre {
 .posts-list-item {
   display: flex;
   align-items: flex-start;
-  gap: 28px;
-  padding: 22px 0;
+  gap: 24px;
+  padding: 20px 0;
   border-bottom: 1px solid var(--border-color);
   position: relative;
   transition: transform 0.2s ease, background-color 0.2s ease;
@@ -2522,16 +2598,16 @@ pre {
 }
 
 .posts-list-date {
-  width: 72px;
-  min-width: 72px;
+  width: 76px;
+  min-width: 76px;
   flex-shrink: 0;
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: #71717a;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding-top: 2px;
-  font-family: var(--font-main);
+  padding-top: 3px;
+  font-family: var(--font-mono);
   line-height: 1.4;
   transition: color 0.2s ease;
 }
@@ -2542,8 +2618,8 @@ pre {
 }
 
 .posts-list-title {
-  font-family: 'Jost', var(--font-main);
-  font-size: 1.18rem;
+  font-family: var(--font-main);
+  font-size: 1.16rem;
   font-weight: 700;
   color: #ffffff;
   margin: 0 0 6px 0;
@@ -2553,9 +2629,9 @@ pre {
 }
 
 .posts-list-desc {
-  font-size: 0.925rem;
-  color: var(--text-muted);
-  line-height: 1.6;
+  font-size: 0.90rem;
+  color: #9ca3af;
+  line-height: 1.65;
   letter-spacing: -0.005em;
   margin: 0;
   display: -webkit-box;
