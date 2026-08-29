@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme');
+        var theme = savedTheme || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
   <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
   <meta charset="UTF-8">
@@ -282,6 +291,53 @@
         }
       });
     });
+
+    // Theme Management (System-Aware + Manual Override)
+    (function() {
+      function getPreferredTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light' || savedTheme === 'dark') {
+          return savedTheme;
+        }
+        return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+      }
+
+      function updateThemeUI(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        const icon = document.getElementById('themeIcon');
+        const btn = document.getElementById('themeToggleBtn');
+        if (icon) {
+          if (theme === 'light') {
+            icon.className = 'fa-regular fa-sun';
+          } else {
+            icon.className = 'fa-regular fa-moon';
+          }
+        }
+        if (btn) {
+          btn.setAttribute('title', theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode');
+          btn.setAttribute('aria-label', theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode');
+        }
+      }
+
+      window.toggleTheme = function() {
+        const current = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
+        const next = current === 'light' ? 'dark' : 'light';
+        localStorage.setItem('theme', next);
+        updateThemeUI(next);
+      };
+
+      // Listen for OS system theme changes if user hasn't set explicit preference
+      if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function(e) {
+          if (!localStorage.getItem('theme')) {
+            updateThemeUI(e.matches ? 'light' : 'dark');
+          }
+        });
+      }
+
+      // Initial icon sync on page load
+      updateThemeUI(document.documentElement.getAttribute('data-theme') || getPreferredTheme());
+    })();
 
     // Scroll Animations
     const observerOptions = {
