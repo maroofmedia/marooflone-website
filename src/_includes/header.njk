@@ -1,25 +1,32 @@
 <header class="site-header" id="mainHeader">
   <div class="container header-inner">
-    <!-- Mobile Hamburger -->
-    <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
-
     <!-- Logo -->
-    <a href="/" class="logo">Maroof <span>Lone</span></a>
+    <a href="/" class="site-logo-serif">MAROOF LONE</a>
 
-    <!-- Navigation -->
-    <nav class="nav-menu" id="navMenu">
-      <a href="/" class="nav-link">Home</a>
-      <a href="/#skills" class="nav-link">Skills</a>
-      <a href="/#work" class="nav-link">Work</a>
-      <a href="/#testimonials" class="nav-link">Testimonials</a>
-      <a href="/#projects" class="nav-link">Projects</a>
-      <a href="/blog" class="nav-link">Blog</a>
+    <!-- Navigation & Controls -->
+    <div class="header-right-group">
+      <nav class="nav-menu" id="navMenu">
+        <a href="/" class="nav-link{% if page.url == '/' %} active{% endif %}">HOME</a>
+        <a href="/#skills" class="nav-link">SKILLS</a>
+        <a href="/#work" class="nav-link">WORK</a>
+        <a href="/#testimonials" class="nav-link">FEEDBACK</a>
+        <a href="/#projects" class="nav-link">PROJECTS</a>
+        <a href="/blog" class="nav-link{% if page.url and '/blog' in page.url %} active{% endif %}">WRITINGS</a>
+        <a href="/contact-me"
+          class="nav-link{% if page.url and '/contact-me' in page.url %} active{% endif %}">CONTACT</a>
+      </nav>
 
-      <a href="/contact-me" class="nav-link contact-btn">Contact</a>
-    </nav>
+      <!-- Theme Badge Icon -->
+      <div class="header-theme-icon" aria-hidden="true" title="Dark Mode Active">
+        <i class="fa-regular fa-moon"></i>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
   </div>
 </header>

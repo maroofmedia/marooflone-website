@@ -6,36 +6,37 @@ layout: 'base.njk'
 ---
 <section class="section hero-section animate-on-scroll">
   <div class="container hero-container">
-    <div class="hero-layout-centered">
 
-      <!-- Circular Avatar -->
-      <div class="hero-avatar-circle-wrapper">
-        <img src="assets/images/main-images/hero-image-reduced.webp" alt="Maroof Lone" class="hero-avatar-circle"
-          fetchpriority="high" width="160" height="160">
+    <!-- Top Row: Avatar (Left) & Name/Identities (Right) Side-by-Side -->
+    <div class="hero-top-row">
+      <div class="hero-avatar-wrapper">
+        <div class="hero-avatar-circle-wrapper">
+          <img src="assets/images/main-images/hero-image-reduced.webp" alt="Maroof Lone" class="hero-avatar-circle"
+            fetchpriority="high" width="160" height="160">
+        </div>
       </div>
 
-      <!-- Centered Header Block -->
-      <div class="hero-header-block">
-        <h1 class="hero-title-editorial">Maroof Lone</h1>
+      <div class="hero-intro-right">
+        <h1 class="hero-title">Hi, I'm Maroof <span class="wave">👋</span></h1>
         <div class="hero-identities">
           <div class="hero-identity-item">
             <span class="hero-identity-label">Engineer</span>
             <span class="hero-identity-sub">in the making.</span>
           </div>
-          <span class="hero-identity-dot">&bull;</span>
           <div class="hero-identity-item">
             <span class="hero-identity-label">Writer</span>
             <span class="hero-identity-sub">occasionally.</span>
           </div>
-          <span class="hero-identity-dot">&bull;</span>
           <div class="hero-identity-item">
             <span class="hero-identity-label">Researcher</span>
             <span class="hero-identity-sub">where curiosity leads.</span>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Bio Text -->
+    <!-- Below: Full Width Bio Text & Action Buttons -->
+    <div class="hero-bottom-content">
       <div class="hero-bio-text">
         <p>
           I build things for the web, follow my curiosity wherever it leads, and write about what I find along the way.
@@ -45,13 +46,12 @@ layout: 'base.njk'
         </p>
       </div>
 
-      <!-- Action Row -->
       <div class="hero-action-row">
         <a href="/blog" class="hero-btn hero-btn--primary">Blog</a>
         <a href="/contact-me" class="hero-btn hero-btn--secondary">Let's Talk</a>
       </div>
-
     </div>
+
   </div>
 </section>
 
