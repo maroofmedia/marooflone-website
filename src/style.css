@@ -491,6 +491,24 @@
 
 /* Root Variables */
 :root {
+  /* ==========================================================================
+     GLOBAL PAGE LAYOUT & MARGIN CONTROLS (EDIT HERE TO CHANGE THE WHOLE SITE)
+     ========================================================================== */
+
+  /* 1. Page Width & Left/Right Side Margins:
+        - Higher value (e.g., 840px, 900px, 960px) -> WIDER content, LESS empty margin on sides.
+        - Lower value (e.g., 760px, 700px) -> NARROWER content, MORE margin on sides. */
+  --content-max-width: 900px;
+
+  /* 2. Side Padding (inside the container): */
+  --container-padding-x: 20px;
+
+  /* 3. Vertical Gap / Padding Between Sections:
+        - Lower value (e.g., 20px, 16px) -> COMPACT spacing between sections.
+        - Higher value (e.g., 40px, 60px) -> SPATIOUS spacing between sections. */
+  --section-padding-y: 26px;
+
+  /* Colors & Theme */
   --primary: #08090A;
   --card-bg: #111418;
   --text: #e5e7eb;
@@ -500,7 +518,6 @@
   --font-main: 'Inter', system-ui, -apple-system, sans-serif;
   --header-height: 70px;
 }
-
 
 * {
   box-sizing: border-box;
@@ -517,8 +534,6 @@ body {
   color: var(--text);
   line-height: 1.6;
   font-size: 16px;
-
-
 }
 
 /* --- Sticky Footer Layout --- */
@@ -532,19 +547,18 @@ main {
   flex: 1;
 }
 
-/* --- Container --- */
+/* --- Container (Controls page width and side margins globally) --- */
 .container {
-  max-width: 780px;
+  max-width: var(--content-max-width);
   margin-left: auto;
   margin-right: auto;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: var(--container-padding-x);
+  padding-right: var(--container-padding-x);
   width: 100%;
 }
 
-
 .section {
-  padding: 30px 0;
+  padding: var(--section-padding-y) 0;
 }
 
 .section-title {
@@ -556,7 +570,7 @@ main {
 }
 
 .section-title--spaced {
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 /* --- Header --- */
@@ -733,7 +747,7 @@ main {
    =================================== */
 
 .hero-section {
-  padding: 42px 0 28px;
+  padding: calc(var(--section-padding-y) * 1.2) 0 var(--section-padding-y);
 }
 
 /* Top Row: Avatar & Identities Side-by-Side */
@@ -788,7 +802,7 @@ main {
   font-size: 2.35rem;
   font-weight: 800;
   color: #ffffff;
-  letter-spacing: -0.035em;
+  letter-spacing: 0.01em;
   margin: 0 0 6px 0;
   line-height: 1.15;
 }
@@ -843,20 +857,20 @@ main {
 }
 
 .hero-identity-label {
-  font-family: var(--font-main);
-  font-size: 0.92rem;
-  font-weight: 600;
+  font-family: 'Jost', var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 700;
   color: #e5e7eb;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.04em;
   line-height: 1.2;
 }
 
 .hero-identity-sub {
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   font-style: italic;
   color: var(--text-muted);
-  letter-spacing: -0.005em;
-  margin-top: 1px;
+  letter-spacing: 0.02em;
+  margin-top: 2px;
   line-height: 1.2;
 }
 
@@ -960,7 +974,7 @@ main {
    =================================== */
 
 .what-i-do-section {
-  padding: 70px 0 60px;
+  padding: var(--section-padding-y) 0;
 }
 
 .skills-section-header {
@@ -1195,20 +1209,22 @@ main {
 
 /* --- Universal Editorial Tag Chip --- */
 .editorial-tag {
-  font-size: 0.68rem;
-  font-weight: 600;
-  color: #a1a1aa;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 4px;
-  padding: 1px 7px;
-  letter-spacing: 0.02em;
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: #9ca3af;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  padding: 1px 6px;
+  letter-spacing: 0.01em;
+  line-height: 1.35;
   transition: all 0.2s ease;
 }
 
 .editorial-tag:hover {
   color: #e5e7eb;
   border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 @media (max-width: 768px) {
@@ -2445,6 +2461,11 @@ pre {
   border-bottom: 1px solid var(--border-color);
   position: relative;
   transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#latest-posts .posts-list-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .posts-list-date-link {
