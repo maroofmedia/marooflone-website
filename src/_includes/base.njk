@@ -3,8 +3,6 @@
 <head>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
   <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
-  <link rel="preload" href="/assets/fonts/UcCM3FwrK3iLTcvneQg7Ca725JhhKnNqk4j1ebLhAm8SrXTc2dtRh5WFo-4.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2" as="font" type="font/woff2" crossorigin>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> {{ title | default("Maroof Lone | Code, Context & Curiosity") }} </title>
@@ -254,18 +252,6 @@
       lastScroll = currentScroll;
     });
 
-    // Mobile Menu — close on outside click
-    document.addEventListener('click', (e) => {
-      const nav = document.getElementById('navMenu');
-      const hamburger = document.querySelector('.hamburger');
-      if (nav && nav.classList.contains('active') &&
-          !nav.contains(e.target) && !hamburger.contains(e.target)) {
-        nav.classList.remove('active');
-        hamburger.classList.remove('active');
-        document.body.classList.remove('no-scroll');
-      }
-    });
-
     // Mobile Menu Toggle
     function toggleMobileMenu() {
       const header = document.getElementById('mainHeader');
@@ -277,6 +263,15 @@
     window.toggleMobileMenu = toggleMobileMenu;
     window.toggleMenu = toggleMobileMenu;
 
+    // Close menu when clicking outside header
+    document.addEventListener('click', (e) => {
+      const header = document.getElementById('mainHeader');
+      if (header && header.classList.contains('menu-open') && !header.contains(e.target)) {
+        header.classList.remove('menu-open');
+        document.body.classList.remove('no-scroll');
+      }
+    });
+
     // Close menu when clicking any navigation link
     document.querySelectorAll('.mobile-nav-link, .nav-link').forEach(link => {
       link.addEventListener('click', () => {
@@ -287,6 +282,7 @@
         }
       });
     });
+
     // Scroll Animations
     const observerOptions = {
       root: null,
@@ -308,15 +304,12 @@
     });
   </script>
 
-
-
   <script>
   // Find all code blocks
   document.querySelectorAll('pre').forEach((pre) => {
     // 1. Create the button
     const button = document.createElement('button');
     button.className = 'copy-button';
-    // Use the FontAwesome Copy Icon
     button.innerHTML = '<i class="far fa-copy"></i>';
     button.ariaLabel = 'Copy code';
 
@@ -325,11 +318,9 @@
       const code = pre.querySelector('code').innerText;
       
       navigator.clipboard.writeText(code).then(() => {
-        // Change icon to Checkmark on success
         button.innerHTML = '<i class="fas fa-check"></i>';
         button.classList.add('copied');
         
-        // Reset back to Copy icon after 2 seconds
         setTimeout(() => {
           button.innerHTML = '<i class="far fa-copy"></i>';
           button.classList.remove('copied');
@@ -341,139 +332,21 @@
 
     pre.appendChild(button);
   });
-</script>
+  </script>
 
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const slider = document.querySelector('.testimonials-grid');
-    if (!slider) return;
-
-    let cardWidth, clientWidth, scrollWidth;
-    let isInitialized = false;
-    const gap = 15;
-
-    function initGeometry() {
-      const card = slider.querySelector('.testimonial-card');
-      if (!card) return false;
-      cardWidth = card.offsetWidth;
-      clientWidth = slider.clientWidth;
-      scrollWidth = slider.scrollWidth;
-      isInitialized = true;
-      return true;
-    }
-
-    // Cache values on resize to avoid layout thrashing
-    window.addEventListener('resize', () => {
-      if (isInitialized) {
-        initGeometry();
-      }
-    }, { passive: true });
-    
-    // Function to scroll to the next card
-    function scrollNext() {
-      if (!isInitialized) {
-        if (!initGeometry()) return;
-      }
-
-      // Only scroll if container is actually scrollable (e.g. mobile)
-      if (scrollWidth <= clientWidth) return;
-      if (slider.matches(':hover')) return;
-
-      const currentScroll = slider.scrollLeft;
-      
-      // Check if we are near the end
-      if (currentScroll + clientWidth >= scrollWidth - 10) {
-         // Go back to start
-         slider.scrollTo({ left: 0, behavior: 'smooth' });
-      } else {
-         // Scroll right
-         slider.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
-      }
-    }
-
-    // Run every 4 seconds
-    setInterval(scrollNext, 4000);
-  });
-</script>
-
-<script>
-  // Projects Showcase — Peek Hint + Auto-scroll
-  document.addEventListener("DOMContentLoaded", () => {
-    const showcase = document.querySelector('.projects-showcase');
-    if (!showcase) return;
-
-    const cards = showcase.querySelectorAll('.showcase-card');
-    if (cards.length <= 1) return; // No navigation for single card
-
-    let cardWidth, clientWidth, scrollWidth;
-    let isInitialized = false;
-    const gap = 15;
-
-    function initGeometry() {
-      cardWidth = cards[0].offsetWidth;
-      clientWidth = showcase.clientWidth;
-      scrollWidth = showcase.scrollWidth;
-      isInitialized = true;
-    }
-
-    // Cache values on resize to avoid layout thrashing
-    window.addEventListener('resize', () => {
-      if (isInitialized) {
-        initGeometry();
-      }
-    }, { passive: true });
-
-    // --- Peek hint animation (one-time on load) ---
-    function peekHint() {
-      if (!isInitialized) initGeometry();
-
-      // Only run on mobile where carousel is active
-      if (scrollWidth <= clientWidth) return;
-
-      setTimeout(() => {
-        showcase.scrollTo({ left: 60, behavior: 'smooth' });
-        setTimeout(() => {
-          showcase.scrollTo({ left: 0, behavior: 'smooth' });
-        }, 400);
-      }, 1200);
-    }
-    
-    // Delay peekHint to keep geometric queries out of the initial page load pipeline
-    setTimeout(peekHint, 1000);
-
-    // --- Auto-swipe ---
-    function scrollNext() {
-      if (!isInitialized) initGeometry();
-      if (scrollWidth <= clientWidth) return;
-      if (showcase.matches(':hover')) return;
-
-      const currentScroll = showcase.scrollLeft;
-
-      if (currentScroll + clientWidth >= scrollWidth - 10) {
-        showcase.scrollTo({ left: 0, behavior: 'smooth' });
-      } else {
-        showcase.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
-      }
-    }
-
-    setInterval(scrollNext, 4000);
-  });
-</script>
-
-<script>
+  <script>
     // Only run on pages with /blog/ in the URL
     if (window.location.pathname.includes('/blog/')) {
       const progressBar = document.getElementById('progress-bar');
       
       window.addEventListener('scroll', () => {
-        // Calculate scroll percentage
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (scrollTop / scrollHeight) * 100;
         
-        // Update width
-        progressBar.style.width = scrolled + "%";
+        if (progressBar) {
+          progressBar.style.width = scrolled + "%";
+        }
       });
     }
   </script>
