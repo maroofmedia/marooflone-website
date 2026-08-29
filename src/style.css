@@ -515,7 +515,8 @@
   --text-muted: #9ca3af;
   --accent: #4FD1C5;
   --border-color: rgba(255, 255, 255, 0.08);
-  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-main: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Source Code Pro', monospace, sans-serif;
   --header-height: 70px;
 }
 
@@ -1376,20 +1377,23 @@ main {
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  font-size: 0.88rem;
-  color: var(--text-muted);
+  font-family: 'Source Code Pro', monospace, sans-serif;
+  font-size: 0.8rem;
   font-weight: 500;
-  margin-bottom: 1.75rem;
+  letter-spacing: 0.01em;
+  color: var(--text-muted);
+  margin-bottom: 1.85rem;
 }
 
 .article-author {
-  color: #e5e7eb;
+  color: #ffffff;
   font-weight: 600;
 }
 
 .article-meta-sep {
-  color: rgba(255, 255, 255, 0.25);
+  color: var(--accent);
   font-size: 0.75rem;
+  opacity: 0.8;
 }
 
 .article-date {
@@ -1511,14 +1515,32 @@ a {
 }
 
 .article-content blockquote,
+.main-article blockquote,
+[itemprop="articleBody"] blockquote,
 .prose blockquote {
-  padding: 1rem 1.25rem;
-  margin: 1.5rem 0;
-  background-color: rgba(255, 255, 255, 0.03);
+  padding: 1.1rem 1.4rem;
+  margin: 1.75rem 0;
+  background-color: rgba(79, 209, 197, 0.04);
   border-left: 3px solid var(--accent);
   font-style: italic;
-  color: #e0e0e0;
+  color: #e5e7eb;
+  font-size: 1.02rem;
+  line-height: 1.7;
   border-radius: 0 6px 6px 0;
+}
+
+.article-content blockquote p,
+.main-article blockquote p,
+[itemprop="articleBody"] blockquote p,
+.prose blockquote p {
+  margin: 0;
+}
+
+.article-content blockquote p + p,
+.main-article blockquote p + p,
+[itemprop="articleBody"] blockquote p + p,
+.prose blockquote p + p {
+  margin-top: 0.75rem;
 }
 
 /* Headings inside posts — offset for sticky header + breathing room */
@@ -3213,11 +3235,19 @@ pre {
 }
 
 .error-page-subtitle {
-  font-size: 0.94rem;
+  font-size: 0.96rem;
   color: var(--text-muted);
-  line-height: 1.6;
-  max-width: 480px;
+  line-height: 1.65;
+  max-width: 500px;
   margin: 0 auto;
+}
+
+.poetic-highlight {
+  color: #ffffff;
+  font-style: italic;
+  opacity: 0.92;
+  display: inline-block;
+  margin-top: 3px;
 }
 
 .error-poetry-card {
