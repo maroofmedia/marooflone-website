@@ -6,38 +6,49 @@ layout: 'base.njk'
 ---
 <section class="section hero-section animate-on-scroll">
   <div class="container hero-container">
-    <div class="hero-layout">
+    <div class="hero-layout-centered">
 
-      <!-- Portrait Frame -->
-      <div class="hero-avatar-wrapper">
-        <div class="hero-avatar-frame">
-          <img src="assets/images/main-images/maroof-hero-new-booth-edited.webp" alt="Maroof Lone"
-            class="hero-avatar-img" fetchpriority="high" width="750" height="667">
+      <!-- Circular Avatar -->
+      <div class="hero-avatar-circle-wrapper">
+        <img src="assets/images/main-images/hero-image-reduced.webp" alt="Maroof Lone" class="hero-avatar-circle"
+          fetchpriority="high" width="160" height="160">
+      </div>
+
+      <!-- Centered Header Block -->
+      <div class="hero-header-block">
+        <h1 class="hero-title-editorial">Maroof Lone</h1>
+        <div class="hero-identities">
+          <div class="hero-identity-item">
+            <span class="hero-identity-label">Engineer</span>
+            <span class="hero-identity-sub">in the making.</span>
+          </div>
+          <span class="hero-identity-dot">&bull;</span>
+          <div class="hero-identity-item">
+            <span class="hero-identity-label">Writer</span>
+            <span class="hero-identity-sub">occasionally.</span>
+          </div>
+          <span class="hero-identity-dot">&bull;</span>
+          <div class="hero-identity-item">
+            <span class="hero-identity-label">Researcher</span>
+            <span class="hero-identity-sub">where curiosity leads.</span>
+          </div>
         </div>
       </div>
 
-      <!-- Content & Bio -->
-      <div class="hero-content">
-        <div class="hero-header-block">
-          <h1 class="hero-title">Hi, I'm Maroof <span class="wave">👋</span></h1>
-          <p class="hero-role">Computer Science Engineer, Web Developer &amp; Researcher</p>
-        </div>
+      <!-- Bio Text -->
+      <div class="hero-bio-text">
+        <p>
+          I build things for the web, follow my curiosity wherever it leads, and write about what I find along the way.
+        </p>
+        <p>
+          Somewhere between technology, the internet, media, and endless rabbit holes, I'm always learning, building, and looking for the next interesting question.
+        </p>
+      </div>
 
-        <div class="hero-bio-text">
-          <p>
-            I build fast, accessible web applications and investigate the digital landscape through open-source
-            intelligence (OSINT). Deeply curious about the intersection of code, cybersecurity, and media.
-          </p>
-          <p>
-            My focus is creating software and research that makes the internet more reliable, safe, and transparent.
-            When I'm away from the terminal, I write essays on technology, society, and ideas worth sharing.
-          </p>
-        </div>
-
-        <div class="hero-action-row">
-          <a href="/blog" class="hero-btn hero-btn--primary">Blog</a>
-          <a href="/contact-me" class="hero-btn hero-btn--secondary">Let's Talk</a>
-        </div>
+      <!-- Action Row -->
+      <div class="hero-action-row">
+        <a href="/blog" class="hero-btn hero-btn--primary">Blog</a>
+        <a href="/contact-me" class="hero-btn hero-btn--secondary">Let's Talk</a>
       </div>
 
     </div>
@@ -61,7 +72,8 @@ layout: 'base.njk'
         </div>
         <h3 class="pillar-title">Build</h3>
         <p class="pillar-desc">
-          Engineering fast, accessible static websites, bespoke web applications, and resilient digital infrastructure with modern web standards.
+          Engineering fast, accessible static websites, bespoke web applications, and resilient digital infrastructure
+          with modern web standards.
         </p>
         <div class="pillar-tags">
           <span class="editorial-tag">Web Architecture</span>
@@ -78,7 +90,8 @@ layout: 'base.njk'
         </div>
         <h3 class="pillar-title">Research</h3>
         <p class="pillar-desc">
-          Investigating online misinformation, analyzing digital media shifts, and exploring Kashmiri history, heritage, and socio-technical dynamics.
+          Investigating online misinformation, analyzing digital media shifts, and exploring Kashmiri history, heritage,
+          and socio-technical dynamics.
         </p>
         <div class="pillar-tags">
           <span class="editorial-tag">OSINT Forensics</span>
@@ -95,7 +108,8 @@ layout: 'base.njk'
         </div>
         <h3 class="pillar-title">Write</h3>
         <p class="pillar-desc">
-          Translating complex technical concepts, cultural nuances, investigative findings, and personal reflections into clear, compelling prose.
+          Translating complex technical concepts, cultural nuances, investigative findings, and personal reflections
+          into clear, compelling prose.
         </p>
         <div class="pillar-tags">
           <span class="editorial-tag">Essays &amp; Critique</span>
@@ -128,7 +142,9 @@ layout: 'base.njk'
             <span class="editorial-work-org">Independent &bull; Remote</span>
           </div>
           <p class="editorial-work-desc">
-            Architecting performance-first static websites, bespoke web applications, and managing high-traffic publishing platforms. Partnered with regional news portals, educational consultancies, and digital initiatives to modernize their web presence, streamline publishing workflows, and improve core web vitals.
+            Architecting performance-first static websites, bespoke web applications, and managing high-traffic
+            publishing platforms. Partnered with regional news portals, educational consultancies, and digital
+            initiatives to modernize their web presence, streamline publishing workflows, and improve core web vitals.
           </p>
           <div class="editorial-work-tags">
             <span class="editorial-tag">Web Architecture</span>
@@ -151,7 +167,8 @@ layout: 'base.njk'
             <span class="editorial-work-org">BOOMLive &bull; TFCN India</span>
           </div>
           <p class="editorial-work-desc">
-            Investigated digital misinformation networks, performed open-source intelligence (OSINT) forensics, and authored in-depth investigative reports on media manipulation and digital culture.
+            Investigated digital misinformation networks, performed open-source intelligence (OSINT) forensics, and
+            authored in-depth investigative reports on media manipulation and digital culture.
           </p>
           <div class="editorial-work-tags">
             <span class="editorial-tag">OSINT Verification</span>
@@ -174,65 +191,38 @@ layout: 'base.njk'
       <h2 class="section-title-modern">What People Say</h2>
     </div>
 
-    <div class="testimonials-distinct-grid">
+    <div class="testimonials-list">
 
       <!-- Testimonial 1 -->
-      <div class="testi-distinct-item">
-        <div class="testi-distinct-header">
-          <div class="testi-avatar-chip">IN</div>
-          <div class="testi-author-info">
-            <h3 class="testi-distinct-name">Imran Nazir</h3>
-            <span class="testi-distinct-role">News Portal Owner</span>
-          </div>
-          <div class="testi-stars-row" aria-label="5 stars">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-        </div>
-        <p class="testi-distinct-quote">
+      <div class="testimonial-row">
+        <p class="testimonial-text">
           &ldquo;Maroof built our news website from scratch. He understands the specific needs of media portals in Kashmir—fast loading, easy CMS, and great layout.&rdquo;
         </p>
-        <div class="testi-distinct-footer">
-          <span class="testi-pill">Media &amp; Publishing</span>
+        <div class="testimonial-meta">
+          <span class="testimonial-author">Imran Nazir</span>
+          <span class="testimonial-role">News Portal Owner</span>
         </div>
       </div>
 
       <!-- Testimonial 2 -->
-      <div class="testi-distinct-item">
-        <div class="testi-distinct-header">
-          <div class="testi-avatar-chip">SA</div>
-          <div class="testi-author-info">
-            <h3 class="testi-distinct-name">Showkat Ahmad</h3>
-            <span class="testi-distinct-role">E-commerce Manager</span>
-          </div>
-          <div class="testi-stars-row" aria-label="4.5 stars">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-          </div>
-        </div>
-        <p class="testi-distinct-quote">
+      <div class="testimonial-row">
+        <p class="testimonial-text">
           &ldquo;Our rankings were stuck until Maroof stepped in. His technical SEO audit was an eye-opener. He fixed indexing issues we didn't even know existed.&rdquo;
         </p>
-        <div class="testi-distinct-footer">
-          <span class="testi-pill">Technical SEO</span>
+        <div class="testimonial-meta">
+          <span class="testimonial-author">Showkat Ahmad</span>
+          <span class="testimonial-role">E-commerce Manager</span>
         </div>
       </div>
 
       <!-- Testimonial 3 -->
-      <div class="testi-distinct-item">
-        <div class="testi-distinct-header">
-          <div class="testi-avatar-chip">BW</div>
-          <div class="testi-author-info">
-            <h3 class="testi-distinct-name">Dr. Bilal Wani</h3>
-            <span class="testi-distinct-role">Educational Consultant</span>
-          </div>
-          <div class="testi-stars-row" aria-label="5 stars">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-        </div>
-        <p class="testi-distinct-quote">
+      <div class="testimonial-row">
+        <p class="testimonial-text">
           &ldquo;The website audit report was detailed and easy to understand. He optimized our site speed significantly. Highly professional approach.&rdquo;
         </p>
-        <div class="testi-distinct-footer">
-          <span class="testi-pill">Speed Optimization</span>
+        <div class="testimonial-meta">
+          <span class="testimonial-author">Dr. Bilal Wani</span>
+          <span class="testimonial-role">Educational Consultant</span>
         </div>
       </div>
 
@@ -252,18 +242,21 @@ layout: 'base.njk'
       <!-- Project 1: SaveTube -->
       <article class="proj-editorial-row">
         <div class="proj-editorial-header">
-          <a href="https://savetube.marooflone.com" target="_blank" rel="noopener noreferrer" class="proj-editorial-title">
+          <a href="https://savetube.marooflone.com" target="_blank" rel="noopener noreferrer"
+            class="proj-editorial-title">
             SaveTube <span class="proj-arrow">&nearr;</span>
           </a>
           <div class="proj-editorial-meta">
             <span class="proj-badge">Web App</span>
-            <a href="https://github.com/maroofmedia/savetube" target="_blank" rel="noopener noreferrer" class="proj-icon-link" aria-label="SaveTube Source Code" title="Source Code">
+            <a href="https://github.com/maroofmedia/savetube" target="_blank" rel="noopener noreferrer"
+              class="proj-icon-link" aria-label="SaveTube Source Code" title="Source Code">
               <i class="fa-brands fa-github"></i>
             </a>
           </div>
         </div>
         <p class="proj-editorial-desc">
-          A lightning-fast, ad-free web app to download media. Features a custom anti-bot engine with proxy tunneling to bypass CDN restrictions.
+          A lightning-fast, ad-free web app to download media. Features a custom anti-bot engine with proxy tunneling to
+          bypass CDN restrictions.
         </p>
         <div class="proj-editorial-tech">
           <span class="editorial-tag">Node.js</span>
@@ -282,13 +275,15 @@ layout: 'base.njk'
           </a>
           <div class="proj-editorial-meta">
             <span class="proj-badge">AI &amp; Spiritual</span>
-            <a href="#" target="_blank" rel="noopener noreferrer" class="proj-icon-link" aria-label="Heal Your Heart Source Code" title="Source Code">
+            <a href="#" target="_blank" rel="noopener noreferrer" class="proj-icon-link"
+              aria-label="Heal Your Heart Source Code" title="Source Code">
               <i class="fa-brands fa-github"></i>
             </a>
           </div>
         </div>
         <p class="proj-editorial-desc">
-          A spiritual web app mapping human emotions to comforting Quranic verses and reflections with AI integration and distraction-free UI.
+          A spiritual web app mapping human emotions to comforting Quranic verses and reflections with AI integration
+          and distraction-free UI.
         </p>
         <div class="proj-editorial-tech">
           <span class="editorial-tag">HTML5</span>
