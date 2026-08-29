@@ -45,39 +45,39 @@
 
 @media (max-width: 768px) {
   :root {
-    --container-padding-x: 22px;
+    --container-padding-x: 26px;
     --section-padding-y: 36px;
   }
 }
 
 @media (max-width: 480px) {
   :root {
-    --container-padding-x: 20px;
+    --container-padding-x: 24px;
     --section-padding-y: 32px;
   }
 }
 
 /* ==========================================================================
-   LIGHT THEME TOKENS (SKIPPEDNOTE AESTHETIC)
+   LIGHT THEME TOKENS (EDITORIAL STUDIO AESTHETIC)
    ========================================================================== */
 [data-theme="light"] {
-  --primary: #fafbfc;
-  --header-bg: #ffffff;
+  --primary: #ffffff;
+  --header-bg: rgba(255, 255, 255, 0.95);
   --footer-bg: #f8fafc;
   --card-bg: #ffffff;
-  --card-hover-bg: #f1f5f9;
+  --card-hover-bg: #f8fafc;
   --text: #334155;
   --text-heading: #0f172a;
   --text-muted: #64748b;
   --text-faint: #94a3b8;
   --accent: #0d9488;
   --accent-hover: #0f766e;
-  --border-color: rgba(0, 0, 0, 0.09);
-  --border-color-hover: rgba(0, 0, 0, 0.22);
-  --glass-bg: #ffffff;
-  --glass-bg-hover: #f1f5f9;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-color-hover: rgba(0, 0, 0, 0.18);
+  --glass-bg: rgba(0, 0, 0, 0.02);
+  --glass-bg-hover: rgba(0, 0, 0, 0.04);
   --input-bg: #ffffff;
-  --tag-pill-bg: #f1f5f9;
+  --tag-pill-bg: rgba(0, 0, 0, 0.04);
   --avatar-shadow: rgba(0, 0, 0, 0.08);
   --article-text: #334155;
   --code-bg: #f1f5f9;
@@ -297,12 +297,38 @@ main {
   flex-shrink: 0;
   background: transparent;
   cursor: pointer;
+  padding: 0;
 }
 
 .theme-toggle-btn:hover {
-  border-color: var(--accent);
   color: var(--accent);
   background: var(--glass-bg-hover);
+}
+
+.theme-icon {
+  display: block;
+  pointer-events: none;
+  transition: transform 0.25s ease;
+}
+
+.theme-icon--sun {
+  display: none;
+}
+
+.theme-icon--moon {
+  display: block;
+}
+
+[data-theme="light"] .theme-icon--sun {
+  display: block;
+}
+
+[data-theme="light"] .theme-icon--moon {
+  display: none;
+}
+
+.theme-toggle-btn:hover .theme-icon {
+  transform: rotate(15deg);
 }
 
 /* Mobile Nav Drawer (Hidden by default on desktop) */
@@ -544,13 +570,13 @@ main {
 .hero-bio-text {
   font-size: 0.975rem;
   color: var(--text);
-  line-height: 1.74;
+  line-height: 1.58;
   letter-spacing: -0.005em;
   width: 100%;
 }
 
 .hero-bio-text p {
-  margin: 0 0 14px 0;
+  margin: 0 0 10px 0;
 }
 
 .hero-bio-text p:last-child {
@@ -668,16 +694,16 @@ main {
 
   .hero-bio-text {
     font-size: 0.94rem;
-    line-height: 1.72;
-    margin-top: 18px;
+    line-height: 1.56;
+    margin-top: 14px;
   }
 
   .hero-bio-text p {
-    margin-bottom: 14px;
+    margin-bottom: 10px;
   }
 
   .hero-action-row {
-    margin-top: 22px;
+    margin-top: 20px;
     gap: 12px;
   }
 
@@ -713,8 +739,8 @@ main {
 
   .hero-bio-text {
     font-size: 0.91rem;
-    line-height: 1.68;
-    margin-top: 16px;
+    line-height: 1.54;
+    margin-top: 12px;
   }
 }
 

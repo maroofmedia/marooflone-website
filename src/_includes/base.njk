@@ -5,7 +5,7 @@
     (function() {
       try {
         var savedTheme = localStorage.getItem('theme');
-        var theme = savedTheme || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        var theme = savedTheme === 'light' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', theme);
       } catch (e) {}
     })();
@@ -27,35 +27,7 @@
     {{ "src/style.css" | inlineAndMinifyCss | safe }}
   </style>
 
-  <script>
-    (function() {
-      let fontAwesomeLoaded = false;
-
-      function loadFontAwesome() {
-        if (fontAwesomeLoaded) return;
-        fontAwesomeLoaded = true;
-
-        // Remove interaction event listeners
-        ['mouseover', 'keydown', 'touchmove', 'touchstart', 'scroll'].forEach(function(event) {
-          window.removeEventListener(event, loadFontAwesome);
-        });
-
-        // Dynamically load FontAwesome stylesheet
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css';
-        document.head.appendChild(link);
-      }
-
-      // Set up listeners for the first user interaction
-      ['mouseover', 'keydown', 'touchmove', 'touchstart', 'scroll'].forEach(function(event) {
-        window.addEventListener(event, loadFontAwesome, { passive: true });
-      });
-
-      // Fallback: load after 8 seconds of inactivity if no interaction has occurred
-      setTimeout(loadFontAwesome, 8000);
-    })();
-  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
   <noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   </noscript>
@@ -292,27 +264,16 @@
       });
     });
 
-    // Theme Management (System-Aware + Manual Override)
+    // Theme Management (Dark Mode Default + Manual Toggle)
     (function() {
       function getPreferredTheme() {
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light' || savedTheme === 'dark') {
-          return savedTheme;
-        }
-        return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+        return savedTheme === 'light' ? 'light' : 'dark';
       }
 
       function updateThemeUI(theme) {
         document.documentElement.setAttribute('data-theme', theme);
-        const icon = document.getElementById('themeIcon');
         const btn = document.getElementById('themeToggleBtn');
-        if (icon) {
-          if (theme === 'light') {
-            icon.className = 'fa-regular fa-sun';
-          } else {
-            icon.className = 'fa-regular fa-moon';
-          }
-        }
         if (btn) {
           btn.setAttribute('title', theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode');
           btn.setAttribute('aria-label', theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode');
@@ -326,16 +287,7 @@
         updateThemeUI(next);
       };
 
-      // Listen for OS system theme changes if user hasn't set explicit preference
-      if (window.matchMedia) {
-        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function(e) {
-          if (!localStorage.getItem('theme')) {
-            updateThemeUI(e.matches ? 'light' : 'dark');
-          }
-        });
-      }
-
-      // Initial icon sync on page load
+      // Initial sync on page load
       updateThemeUI(document.documentElement.getAttribute('data-theme') || getPreferredTheme());
     })();
 
