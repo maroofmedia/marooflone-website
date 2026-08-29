@@ -3094,3 +3094,219 @@ pre {
     padding: 16px 14px;
   }
 }
+
+/* ===================================
+   SUCCESS PAGE (COMPACT & EDITORIAL)
+   =================================== */
+
+.success-page-section {
+  padding: 60px 0 80px;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-page-card {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 40px 32px;
+}
+
+.success-icon-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(79, 209, 197, 0.1);
+  border: 1px solid rgba(79, 209, 197, 0.35);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  margin: 0 auto 16px;
+}
+
+.success-page-title {
+  font-family: 'Jost', var(--font-main);
+  font-size: 2.15rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin: 8px 0 12px 0;
+  line-height: 1.2;
+}
+
+.success-page-desc {
+  font-size: 0.94rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0 0 28px 0;
+}
+
+.success-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .success-page-section {
+    padding: 35px 0 50px;
+  }
+
+  .success-page-card {
+    padding: 28px 20px;
+  }
+
+  .success-page-title {
+    font-size: 1.85rem;
+  }
+
+  .success-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .success-actions .hero-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ===================================
+   404 ERROR PAGE (COMPACT & EDITORIAL)
+   =================================== */
+
+.error-page-section {
+  padding: 45px 0 65px;
+  min-height: 65vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-page-card {
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.error-header-block {
+  margin-bottom: 24px;
+}
+
+.error-page-title {
+  font-family: 'Jost', var(--font-main);
+  font-size: 2.35rem;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  margin: 8px 0 10px 0;
+  line-height: 1.15;
+}
+
+.error-page-subtitle {
+  font-size: 0.94rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.error-poetry-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 24px 22px;
+  margin-bottom: 24px;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.error-verse-box {
+  width: 100%;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.verse-loading {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.urdu-line {
+  font-family: 'Noto Nastaliq Urdu', serif;
+  font-size: 1.45rem;
+  line-height: 2.3;
+  color: #ffffff;
+  direction: rtl;
+  margin: 0 0 10px 0;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
+}
+
+.trans-line {
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  font-style: italic;
+  color: #a1a1aa;
+  line-height: 1.55;
+  max-width: 92%;
+  margin: 0 auto 10px auto;
+}
+
+.poet-name {
+  display: inline-block;
+  font-family: monospace;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.error-actions-deck {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.error-verse-btn {
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .error-page-section {
+    padding: 30px 0 45px;
+  }
+
+  .error-page-title {
+    font-size: 1.95rem;
+  }
+
+  .urdu-line {
+    font-size: 1.25rem;
+    line-height: 2.1;
+  }
+
+  .error-actions-deck {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .error-actions-deck .hero-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

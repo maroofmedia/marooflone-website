@@ -1,78 +1,32 @@
 ---
-title: Message Sent
+title: Message Received
 layout: base.njk
 description: "Thank you for getting in touch. I will get back to you shortly."
 noindex: true
 ---
 
-<style>
-  .success-section {
-    padding: 3rem 1rem;
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-  
-  .success-card {
-    background: #1a202c;
-    padding: 3rem 2rem;
-    border-radius: 20px;
-    border: 1px solid #2d3748;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    max-width: 500px;
-    width: 100%;
-  }
-
-  .success-icon {
-    font-size: 4rem;
-    color: #4FD1C5;
-    margin-bottom: 1.5rem;
-  }
-
-  .success-card h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #fff;
-    line-height: 1.2;
-  }
-
-  .success-card p {
-    color: #a0aec0;
-    font-size: 1.05rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-  }
-
-  .back-home-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 12px 24px;
-    background: #4FD1C5;
-    color: #111;
-    text-decoration: none;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: transform 0.2s, background 0.2s;
-  }
-
-  .back-home-btn:hover {
-    background: #3dbcb2;
-    transform: translateY(-2px);
-  }
-</style>
-
-<section class="success-section">
-  <div class="success-card">
-    <i class="fa-solid fa-circle-check success-icon"></i>
-    <h1>Message Sent!</h1>
-    <p>Thank you for reaching out. I've received your message and will get back to you as soon as possible.</p>
-    <a href="/" class="back-home-btn">
-      <i class="fa-solid fa-arrow-left"></i> Back to Home
-    </a>
+<section class="section success-page-section">
+  <div class="container">
+    <div class="success-page-card">
+      <div class="success-icon-badge">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <span class="section-eyebrow">MESSAGE SENT</span>
+      <h1 class="success-page-title">Thank You!</h1>
+      <p class="success-page-desc">
+        Your note has been received. I appreciate you taking the time to reach out and will get back to you as soon as possible (usually within 24–48 hours).
+      </p>
+      
+      <div class="success-actions">
+        <a href="/" class="hero-btn hero-btn--primary">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Back to Home</span>
+        </a>
+        <a href="/blog/" class="hero-btn hero-btn--secondary">
+          <span>Read Writings</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
