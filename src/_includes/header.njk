@@ -1,32 +1,84 @@
 <header class="site-header" id="mainHeader">
-  <div class="container header-inner">
-    <!-- Logo -->
-    <a href="/" class="site-logo-serif">MAROOF LONE</a>
+  <div class="container header-top-bar">
+    <!-- Brand Logo -->
+    <a href="/" class="site-logo">MAROOF LONE</a>
 
-    <!-- Navigation & Controls -->
-    <div class="header-right-group">
-      <nav class="nav-menu" id="navMenu">
-        <a href="/" class="nav-link{% if page.url == '/' %} active{% endif %}">HOME</a>
-        <a href="/#skills" class="nav-link">SKILLS</a>
-        <a href="/#work" class="nav-link">WORK</a>
-        <a href="/#testimonials" class="nav-link">FEEDBACK</a>
-        <a href="/#projects" class="nav-link">PROJECTS</a>
-        <a href="/blog" class="nav-link{% if page.url and '/blog' in page.url %} active{% endif %}">WRITINGS</a>
-        <a href="/contact-me"
-          class="nav-link{% if page.url and '/contact-me' in page.url %} active{% endif %}">CONTACT</a>
-      </nav>
+    <!-- Desktop Navigation Links (Hidden on Mobile) -->
+    <nav class="desktop-nav-menu" id="desktopNavMenu" aria-label="Main Navigation">
+      <a href="/" class="nav-link{% if page.url == '/' %} active{% endif %}">HOME</a>
+      <a href="/#skills" class="nav-link">SKILLS</a>
+      <a href="/#work" class="nav-link">WORK</a>
+      <a href="/#testimonials" class="nav-link">FEEDBACK</a>
+      <a href="/#projects" class="nav-link">PROJECTS</a>
+      <a href="/blog" class="nav-link{% if page.url and '/blog' in page.url %} active{% endif %}">WRITINGS</a>
+      <a href="/contact-me"
+        class="nav-link{% if page.url and '/contact-me' in page.url %} active{% endif %}">CONTACT</a>
+    </nav>
 
-      <!-- Theme Badge Icon -->
-      <div class="header-theme-icon" aria-hidden="true" title="Dark Mode Active">
+    <!-- Header Action Controls -->
+    <div class="header-controls">
+      <!-- Mobile Menu Toggle Button (Round Circle) -->
+      <button class="menu-btn" id="menuToggleBtn" aria-label="Toggle navigation menu" onclick="toggleMobileMenu()">
+        <span class="menu-btn-icon">
+          <span class="menu-btn-bar"></span>
+          <span class="menu-btn-bar"></span>
+          <span class="menu-btn-bar"></span>
+        </span>
+      </button>
+
+      <!-- Light / Dark Mode Toggle Switch -->
+      <div class="theme-toggle-btn" aria-hidden="true" title="Dark Mode Active">
         <i class="fa-regular fa-moon"></i>
       </div>
-
-      <!-- Mobile Hamburger -->
-      <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
     </div>
   </div>
+
+  <!-- Mobile 2-Column Navigation Drawer (Hidden on Desktop) -->
+  <nav class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+    <div class="container mobile-nav-grid">
+      <!-- Left Column -->
+      <div class="mobile-nav-col">
+        <a href="/" class="mobile-nav-link{% if page.url == '/' %} active{% endif %}">
+          <span class="mobile-nav-text">HOME</span>
+          <span class="mobile-nav-ind" aria-hidden="true">{% if page.url == '/' %}&bull;{% else %}&rarr;{% endif
+            %}</span>
+        </a>
+        <a href="/#skills" class="mobile-nav-link">
+          <span class="mobile-nav-text">SKILLS</span>
+          <span class="mobile-nav-ind" aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="/#work" class="mobile-nav-link">
+          <span class="mobile-nav-text">WORK</span>
+          <span class="mobile-nav-ind" aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="/#testimonials" class="mobile-nav-link">
+          <span class="mobile-nav-text">FEEDBACK</span>
+          <span class="mobile-nav-ind" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+
+      <!-- Right Column -->
+      <div class="mobile-nav-col">
+        <a href="/#projects" class="mobile-nav-link">
+          <span class="mobile-nav-text">PROJECTS</span>
+          <span class="mobile-nav-ind" aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="/blog" class="mobile-nav-link{% if page.url and '/blog' in page.url %} active{% endif %}">
+          <span class="mobile-nav-text">WRITINGS</span>
+          <span class="mobile-nav-ind" aria-hidden="true">{% if page.url and '/blog' in page.url %}&bull;{% else
+            %}&rarr;{% endif %}</span>
+        </a>
+        <a href="/contact-me" class="mobile-nav-link{% if page.url and '/contact-me' in page.url %} active{% endif %}">
+          <span class="mobile-nav-text">CONTACT</span>
+          <span class="mobile-nav-ind" aria-hidden="true">{% if page.url and '/contact-me' in page.url %}&bull;{% else
+            %}&rarr;{% endif %}</span>
+        </a>
+        <a href="/links" class="mobile-nav-link{% if page.url and '/links' in page.url %} active{% endif %}">
+          <span class="mobile-nav-text">LINKS</span>
+          <span class="mobile-nav-ind" aria-hidden="true">{% if page.url and '/links' in page.url %}&bull;{% else
+            %}&rarr;{% endif %}</span>
+        </a>
+      </div>
+    </div>
+  </nav>
 </header>
