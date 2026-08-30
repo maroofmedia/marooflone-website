@@ -36,15 +36,15 @@
 
 @media (max-width: 768px) {
   :root {
-    --container-padding-x: 18px;
-    --section-padding-y: 32px;
+    --container-padding-x: 28px;
+    --section-padding-y: 34px;
   }
 }
 
 @media (max-width: 480px) {
   :root {
-    --container-padding-x: 16px;
-    --section-padding-y: 28px;
+    --container-padding-x: 24px;
+    --section-padding-y: 30px;
   }
 }
 
