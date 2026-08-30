@@ -75,6 +75,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "./src/_headers": "./_headers" });
   eleventyConfig.addPassthroughCopy({ "./src/.htaccess": "./.htaccess" });
   eleventyConfig.addPassthroughCopy({ "./src/assets/images/favicon/favicon.ico": "favicon.ico" });
+  eleventyConfig.addPassthroughCopy({ "./src/maroof-lone-profile.pdf": "maroof-lone-profile.pdf" });
 
   // Date Filter using Luxon
   eleventyConfig.addFilter("postDate", (dateObj) => {
