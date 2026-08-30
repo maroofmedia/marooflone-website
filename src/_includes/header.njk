@@ -1,9 +1,9 @@
 <header class="site-header" id="mainHeader">
   <div class="container header-top-bar">
-    <!-- Brand Logo -->
+    
     <a href="/" class="site-logo">MAROOF LONE</a>
 
-    <!-- Desktop Navigation Links (Hidden on Mobile) -->
+    
     <nav class="desktop-nav-menu" id="desktopNavMenu" aria-label="Main Navigation">
       <a href="/" class="nav-link{% if page.url == '/' %} active{% endif %}">HOME</a>
       <a href="/#skills" class="nav-link">SKILLS</a>
@@ -15,9 +15,9 @@
         class="nav-link{% if page.url and '/contact-me' in page.url %} active{% endif %}">CONTACT</a>
     </nav>
 
-    <!-- Header Action Controls -->
+    
     <div class="header-controls">
-      <!-- Mobile Menu Toggle Button (Round Circle) -->
+      
       <button class="menu-btn" id="menuToggleBtn" aria-label="Toggle navigation menu" onclick="toggleMobileMenu()">
         <span class="menu-btn-icon">
           <span class="menu-btn-bar"></span>
@@ -26,7 +26,7 @@
         </span>
       </button>
 
-      <!-- Light / Dark Mode Toggle Switch -->
+      
       <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle light or dark theme" onclick="toggleTheme()" title="Toggle Theme">
         <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="5"></circle>
@@ -46,10 +46,10 @@
     </div>
   </div>
 
-  <!-- Mobile 2-Column Navigation Drawer (Hidden on Desktop) -->
+  
   <nav class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
     <div class="container mobile-nav-grid">
-      <!-- Left Column -->
+      
       <div class="mobile-nav-col">
         <a href="/" class="mobile-nav-link{% if page.url == '/' %} active{% endif %}">
           <span class="mobile-nav-text">HOME</span>
@@ -70,7 +70,7 @@
         </a>
       </div>
 
-      <!-- Right Column -->
+      
       <div class="mobile-nav-col">
         <a href="/#projects" class="mobile-nav-link">
           <span class="mobile-nav-text">PROJECTS</span>
