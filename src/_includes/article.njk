@@ -42,14 +42,14 @@ layout: 'base.njk'
 
     {% if tags.length > 0 %}
       <div class="post-tags">
-        <p>Tags:</p>
-        <p>
+        <span class="post-tags-label">Tags:</span>
+        <div class="post-tags-list">
           {% for tag in tags %}
             {% if tag != "post" %}
-              <a href="/tags/{{ tag | slugify }}/" class="tag-link">#{{ tag }}</a>{% if not loop.last %}, {% endif %}
+              <a href="/tags/{{ tag | slugify }}/" class="tag-link">#{{ tag }}</a>
             {% endif %}
           {% endfor %}
-        </p>
+        </div>
       </div>
     {% endif %}
 

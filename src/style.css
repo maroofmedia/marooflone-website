@@ -1658,47 +1658,59 @@ pre {
   }
 }
 
-/* --- Single Post Tags Section --- */
 .post-tags {
-  max-width: 1100px;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
-  padding: 0;
+  margin-top: 2.25rem;
+  margin-bottom: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-color);
   display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
 }
 
-.post-tags p:first-child {
-  color: var(--text-heading);
+.post-tags-label {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
   font-weight: 700;
-  margin: 0;
+  color: var(--text-heading);
   text-transform: uppercase;
-  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
 }
 
-.post-tags p:last-child {
-  margin: 0;
-  color: var(--text-muted);
+.post-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
 }
 
 .tag-link,
 .tag-link:visited {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   color: var(--accent);
-  font-family: 'Courier New', monospace;
-  font-size: 0.9rem;
+  background: var(--tag-pill-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 3px 9px;
+  line-height: 1.35;
   text-decoration: none;
   transition: all 0.2s ease;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
 }
 
 .tag-link:hover {
-  color: var(--text-heading);
-  text-shadow: 0 0 8px rgba(79, 209, 197, 0.4);
-  transform: translateY(-2px);
+  color: var(--accent-hover);
+  border-color: var(--accent);
+  background: rgba(79, 209, 197, 0.08);
+  transform: translateY(-1px);
 }
 
-/* --- Mobile Responsive --- */
 @media (max-width: 768px) {
   .nav-link.contact-btn {
     padding: 0;
@@ -1714,10 +1726,10 @@ pre {
   }
 
   .post-tags {
-    flex-direction: column;
-    gap: 4px;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
+    margin-top: 1.75rem;
+    margin-bottom: 1.25rem;
+    padding-top: 1rem;
+    gap: 8px;
   }
 }
 
