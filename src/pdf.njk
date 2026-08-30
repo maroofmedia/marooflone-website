@@ -54,10 +54,35 @@ layout: false
       -moz-osx-font-smoothing: grayscale;
     }
 
+    /* Top Navigation Bar */
+    .pdf-top-nav {
+      max-width: 210mm;
+      margin: 16px auto 0;
+      padding: 0 4px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--pdf-muted);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pdf-top-nav a {
+      color: var(--pdf-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .pdf-top-nav a:hover {
+      color: var(--pdf-accent);
+      text-decoration: underline;
+    }
+
     /* A4 Sheet */
     .pdf-sheet {
       max-width: 210mm;
-      margin: 20px auto 40px;
+      margin: 10px auto 40px;
       background: var(--pdf-bg);
       padding: 10mm 12mm;
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
@@ -462,41 +487,19 @@ layout: false
       text-decoration: underline;
     }
 
-    /* Footer */
-    .pdf-footer {
-      margin-top: 10px;
-      padding-top: 8px;
-      border-top: 1px solid var(--pdf-border);
-      text-align: center;
-    }
-
-    .pdf-footer-links {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      color: var(--pdf-muted);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .pdf-footer-links a {
-      color: var(--pdf-muted);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .pdf-footer-links a:hover {
-      color: var(--pdf-accent);
-      text-decoration: underline;
-    }
-
     /* Mobile Screen Responsiveness */
     @media screen and (max-width: 768px) {
       body {
         font-size: 13px;
         line-height: 1.5;
         background-color: #ffffff;
+      }
+
+      .pdf-top-nav {
+        margin: 12px 18px 0;
+        justify-content: center;
+        font-size: 0.76rem;
+        gap: 12px;
       }
 
       .pdf-sheet {
@@ -658,12 +661,6 @@ layout: false
         padding: 6px 12px;
         box-sizing: border-box;
       }
-
-      .pdf-footer-links {
-        font-size: 0.76rem;
-        gap: 12px;
-        padding: 8px 0;
-      }
     }
 
     /* Print Specific Rules */
@@ -674,6 +671,10 @@ layout: false
         margin: 0 !important;
       }
 
+      .pdf-top-nav {
+        display: none !important;
+      }
+
       .pdf-sheet {
         box-shadow: none !important;
         border-radius: 0 !important;
@@ -682,10 +683,6 @@ layout: false
         width: 100% !important;
         max-width: none !important;
         min-height: auto !important;
-      }
-
-      .pdf-footer {
-        display: none !important;
       }
 
       a {
@@ -705,6 +702,12 @@ layout: false
 </head>
 
 <body>
+
+  <nav class="pdf-top-nav">
+    <a href="/">Back to website</a> &bull;
+    <a href="javascript:window.print()">Print</a> &bull;
+    <a href="/maroof-lone-profile.pdf" download="Maroof-Lone-Profile.pdf">PDF</a>
+  </nav>
 
   <main class="pdf-sheet">
 
@@ -978,14 +981,6 @@ layout: false
       <a href="https://www.marooflone.com/blog" target="_blank" rel="noopener noreferrer"
         class="pdf-blog-url">marooflone.com/blog &rarr;</a>
     </div>
-
-    <footer class="pdf-footer">
-      <div class="pdf-footer-links">
-        <a href="/">Back to website</a> &bull;
-        <a href="javascript:window.print()">Print</a> &bull;
-        <a href="/maroof-lone-profile.pdf" download="Maroof-Lone-Profile.pdf">PDF</a>
-      </div>
-    </footer>
 
   </main>
 
