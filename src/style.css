@@ -1941,6 +1941,7 @@ pre {
   align-items: center;
   gap: 10px;
   letter-spacing: -0.015em;
+  line-height: 1.2;
   transition: color 0.2s ease;
 }
 
@@ -2028,6 +2029,27 @@ pre {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+}
+
+@media (max-width: 768px) {
+  .proj-editorial-header {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .proj-editorial-title {
+    font-size: 1.08rem;
+    line-height: 1.15;
+    gap: 8px;
+  }
+
+  .proj-editorial-title span:first-of-type {
+    line-height: 1.15;
+  }
+
+  .proj-editorial-meta {
+    padding-top: 2px;
+  }
 }
 
 /* ===================================
