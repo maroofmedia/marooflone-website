@@ -488,38 +488,189 @@ main {
 
 .wave {
   display: inline-block;
-  animation: wave-animation 2.5s infinite;
-  transform-origin: 70% 70%;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+  transform-origin: 75% 75%;
+  animation: wave-idle 4s ease-in-out infinite;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+  outline: none;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-@keyframes wave-animation {
-  0% {
-    transform: rotate(0deg);
-  }
+.wave:hover {
+  transform: scale(1.16) rotate(8deg);
+  filter: drop-shadow(0 4px 10px rgba(79, 209, 197, 0.5));
+}
 
-  10% {
-    transform: rotate(14deg);
-  }
+.wave:focus-visible {
+  outline: 2px dashed var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
 
-  20% {
-    transform: rotate(-8deg);
-  }
+/* waving gesture when clicked */
+.wave.is-waving {
+  animation: wave-hi 0.82s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
 
-  30% {
-    transform: rotate(14deg);
-  }
+@keyframes wave-idle {
 
-  40% {
-    transform: rotate(-4deg);
-  }
-
-  50% {
-    transform: rotate(10deg);
-  }
-
+  0%,
   100% {
     transform: rotate(0deg);
   }
+
+  8% {
+    transform: rotate(13deg);
+  }
+
+  18% {
+    transform: rotate(-5deg);
+  }
+
+  28% {
+    transform: rotate(11deg);
+  }
+
+  38% {
+    transform: rotate(-2deg);
+  }
+
+  48% {
+    transform: rotate(6deg);
+  }
+
+  58%,
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes wave-hi {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  14% {
+    transform: scale(1.26) rotate(-18deg);
+  }
+
+  28% {
+    transform: scale(1.22) rotate(20deg);
+  }
+
+  42% {
+    transform: scale(1.16) rotate(-12deg);
+  }
+
+  56% {
+    transform: scale(1.10) rotate(14deg);
+  }
+
+  70% {
+    transform: scale(1.05) rotate(-5deg);
+  }
+
+  84% {
+    transform: scale(1.02) rotate(3deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Floating Phrase  */
+.wave-floating-phrase {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  font-family: var(--font-mono), 'Noto Nastaliq Urdu', system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: var(--text-heading);
+  background: rgba(17, 20, 24, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(79, 209, 197, 0.4);
+  padding: 4px 12px;
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 10px rgba(79, 209, 197, 0.2);
+  animation: phraseFloat 1.35s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  will-change: transform, opacity;
+}
+
+[data-theme="light"] .wave-floating-phrase {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-heading);
+  border-color: rgba(13, 148, 136, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+@keyframes phraseFloat {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -100%) translateY(6px) scale(0.88);
+  }
+
+  14% {
+    opacity: 1;
+    transform: translate(-50%, -100%) translateY(-10px) scale(1.02);
+  }
+
+  28% {
+    transform: translate(-50%, -100%) translateY(-18px) scale(1);
+  }
+
+  75% {
+    opacity: 1;
+    transform: translate(-50%, -100%) translateY(-40px) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -100%) translateY(-56px) scale(0.94);
+  }
+}
+
+/* Micro Spark Particles */
+.wave-particle-spark {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  border-radius: 50%;
+  animation: sparkFly 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes sparkFly {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(0, 0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(0.2);
+  }
+}
+
+/* Fullscreen Canvas Overlay for Confetti */
+#easterEggCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9990;
 }
 
 /* Identities Row */
