@@ -8,6 +8,23 @@
         var theme = savedTheme === 'light' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', theme);
       } catch (e) {}
+
+      try {
+        var savedAmbient = sessionStorage.getItem('kashmir_ambient_override');
+        if (savedAmbient && ['dawn', 'day', 'sunset', 'dusk', 'night'].indexOf(savedAmbient) !== -1) {
+          document.documentElement.setAttribute('data-ambient', savedAmbient);
+        } else {
+          var now = new Date();
+          var utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+          var kDate = new Date(utc + (5.5 * 3600000));
+          var dec = kDate.getHours() + (kDate.getMinutes() / 60);
+          var phase = (dec >= 5 && dec < 8) ? 'dawn' :
+                      (dec >= 8 && dec < 16.5) ? 'day' :
+                      (dec >= 16.5 && dec < 19.5) ? 'sunset' :
+                      (dec >= 19.5 && dec < 22) ? 'dusk' : 'night';
+          document.documentElement.setAttribute('data-ambient', phase);
+        }
+      } catch (e) {}
     })();
   </script>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
@@ -190,8 +207,131 @@
 
 </head>
 <body>
-<a href="#main-content" class="skip-link">Skip to main content</a>
-<div id="progress-bar"></div>
+  <!-- Dynamic Time-of-Day Ambient Sky -->
+  <div class="ambient-sky" aria-hidden="true">
+    <div class="ambient-aura"></div>
+
+    <!-- 1. NIGHT ELEMENTS: Twinkling Multi-layer Starfield, Crescent Moon & Shooting Meteors -->
+    <div class="ambient-night-elements">
+      <div class="ambient-starfield">
+        <div class="ambient-stars-layer-1"></div>
+        <div class="ambient-stars-layer-2"></div>
+      </div>
+      <div class="ambient-moon">
+        <svg viewBox="0 0 100 100" fill="none">
+          <defs>
+            <mask id="moonCut">
+              <rect width="100" height="100" fill="#fff"/>
+              <circle cx="58" cy="42" r="22" fill="#000"/>
+            </mask>
+            <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="35%" stop-color="#93c5fd" stop-opacity="0.35"/>
+              <stop offset="68%" stop-color="#60a5fa" stop-opacity="0.10"/>
+              <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="48" cy="50" r="46" fill="url(#moonGlow)"/>
+          <circle cx="48" cy="50" r="24" fill="#e0f2fe" mask="url(#moonCut)"/>
+        </svg>
+      </div>
+      <div class="ambient-meteors">
+        <i class="ambient-meteor"><span></span></i>
+        <i class="ambient-meteor"><span></span></i>
+        <i class="ambient-meteor"><span></span></i>
+        <i class="ambient-meteor"><span></span></i>
+      </div>
+    </div>
+
+    <!-- 2. DAY & SUNSET ELEMENTS: Radiant Sun with Dynamic Halos -->
+    <div class="ambient-sun">
+      <svg viewBox="0 0 100 100">
+        <defs>
+          <radialGradient id="sunGlowGrad" cx="50%" cy="50%" r="50%">
+            <stop class="sun-halo-g1" offset="28%"/>
+            <stop class="sun-halo-g2" offset="65%"/>
+            <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle class="sun-halo" cx="50" cy="50" r="48" fill="url(#sunGlowGrad)"/>
+        <circle class="sun-core" cx="50" cy="50" r="20"/>
+      </svg>
+    </div>
+
+    <!-- 3. DAWN ELEMENTS: Birds on a Wire & Soaring Flocks -->
+    <div class="ambient-dawn-elements">
+      <div class="ambient-birds-wire">
+        <svg viewBox="0 0 320 80" class="birds-wire-svg">
+          <path d="M0 25 Q160 50 320 28" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.4"/>
+          <!-- Perched bird 1 -->
+          <g class="perched-bird b1" transform="translate(68, 33)">
+            <ellipse cx="6" cy="5" rx="5" ry="3.5" transform="rotate(-15 6 5)" fill="currentColor"/>
+            <circle cx="10" cy="2" r="2.8" fill="currentColor"/>
+            <path d="M12 2 L14 1.5 L12 3 Z" fill="currentColor"/>
+            <path d="M2 7 L-2 10" stroke="currentColor" stroke-width="1.2"/>
+          </g>
+          <!-- Perched bird 2 -->
+          <g class="perched-bird b2" transform="translate(86, 35)">
+            <ellipse cx="6" cy="5" rx="4.8" ry="3.2" transform="rotate(-10 6 5)" fill="currentColor"/>
+            <circle cx="10" cy="2.5" r="2.6" fill="currentColor"/>
+            <path d="M12 2.5 L14 2 L12 3.5 Z" fill="currentColor"/>
+            <path d="M2 7 L-1 9.5" stroke="currentColor" stroke-width="1.2"/>
+          </g>
+          <!-- Perched bird 3 -->
+          <g class="perched-bird b3" transform="translate(195, 39)">
+            <ellipse cx="6" cy="5" rx="5" ry="3.4" transform="rotate(-20 6 5)" fill="currentColor"/>
+            <circle cx="10" cy="2" r="2.7" fill="currentColor"/>
+            <path d="M12 2 L14.5 1.8 L12 3 Z" fill="currentColor"/>
+            <path d="M2 7 L-2 10.5" stroke="currentColor" stroke-width="1.2"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="ambient-birds">
+        <svg class="flock f1" viewBox="0 0 100 40"><path class="bird" d="M10 20q6-7 12 0q6-7 12 0"/><path class="bird" d="M38 11q5-6 10 0q5-6 10 0"/><path class="bird" d="M42 28q5-6 10 0q5-6 10 0"/><path class="bird" d="M66 17q4-5 8 0q4-5 8 0"/><path class="bird" d="M82 8q3.5-4 7 0q3.5-4 7 0"/></svg>
+        <svg class="flock f2" viewBox="0 0 100 40"><path class="bird" d="M12 18q6-7 12 0q6-7 12 0"/><path class="bird" d="M44 26q5-6 10 0q5-6 10 0"/><path class="bird" d="M70 12q4-5 8 0q4-5 8 0"/></svg>
+      </div>
+    </div>
+
+    <!-- 4. DUSK & SUNSET ELEMENTS: High-Altitude Aircraft with Vapor Contrails -->
+    <div class="ambient-aircraft">
+      <div class="plane-run">
+        <span class="trail t1"></span>
+        <span class="trail t2"></span>
+        <svg class="plane" viewBox="0 0 24 10">
+          <path d="M22.5 5C22.5 4.3 21.6 4.2 20.5 4.2L16.5 4.2L10.6.4L9.2.4L12.4 4.2L5.4 4.2L3.2 1.8L2.2 1.8L3.4 4.3C2.2 4.5 2.2 5.5 3.4 5.7L2.2 8.2L3.2 8.2L5.4 5.8L12.4 5.8L9.2 9.6L10.6 9.6L16.5 5.8L20.5 5.8C21.6 5.8 22.5 5.7 22.5 5Z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 5. CLOUDS: Ethereal Atmospheric Drifting Clouds -->
+    <div class="ambient-clouds">
+      <svg class="sky-cloud-defs" style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+        <defs>
+          <filter id="cBlur1" x="-30%" y="-80%" width="160%" height="280%"><feGaussianBlur stdDeviation="9"/></filter>
+          <g id="cloudShape1" fill="currentColor">
+            <ellipse cx="78" cy="60" rx="58" ry="24"/>
+            <ellipse cx="124" cy="46" rx="44" ry="30"/>
+            <ellipse cx="168" cy="62" rx="48" ry="22"/>
+          </g>
+          <filter id="cBlur2" x="-30%" y="-80%" width="160%" height="280%"><feGaussianBlur stdDeviation="12"/></filter>
+          <g id="cloudShape2" fill="currentColor">
+            <ellipse cx="96" cy="78" rx="72" ry="28"/>
+            <ellipse cx="160" cy="56" rx="60" ry="38"/>
+            <ellipse cx="236" cy="76" rx="66" ry="28"/>
+          </g>
+        </defs>
+      </svg>
+      <div class="ambient-cloud c1" style="--t:6%;--w:260px;--o:0.35;--dur:85s;--delay:-12s;--bob:8px;--bobdur:12s;">
+        <svg viewBox="0 0 240 96"><use href="#cloudShape1" filter="url(#cBlur1)"/></svg>
+      </div>
+      <div class="ambient-cloud c2" style="--t:16%;--w:340px;--o:0.25;--dur:115s;--delay:-50s;--bob:12px;--bobdur:16s;">
+        <svg viewBox="0 0 340 120"><use href="#cloudShape2" filter="url(#cBlur2)"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="progress-bar"></div>
   <div class="page-wrapper">
     {% include 'header.njk' %}
     <main id="main-content">
@@ -360,5 +500,105 @@
   </script>
 
 
+  <!-- Dynamic Kashmir Time-of-Day Ambient Glow Controller -->
+  <script>
+    (function() {
+      const PHASES = [
+        { id: 'dawn', name: 'Dawn', urdu: 'طلوع', label: 'Dawn' },
+        { id: 'day', name: 'Day', urdu: 'آفتاب', label: 'Day' },
+        { id: 'sunset', name: 'Sunset', urdu: 'شام', label: 'Sunset' },
+        { id: 'dusk', name: 'Dusk', urdu: 'شفق', label: 'Dusk' },
+        { id: 'night', name: 'Night', urdu: 'شب', label: 'Night' }
+      ];
+
+      function getKashmirTime() {
+        const now = new Date();
+        const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+        return new Date(utc + (5.5 * 3600000));
+      }
+
+      function getLivePhase(kDate) {
+        const dec = kDate.getHours() + (kDate.getMinutes() / 60);
+        if (dec >= 5 && dec < 8) return 'dawn';
+        if (dec >= 8 && dec < 16.5) return 'day';
+        if (dec >= 16.5 && dec < 19.5) return 'sunset';
+        if (dec >= 19.5 && dec < 22) return 'dusk';
+        return 'night';
+      }
+
+      function formatTime(kDate) {
+        let h = kDate.getHours();
+        const m = String(kDate.getMinutes()).padStart(2, '0');
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        h = h % 12 || 12;
+        return h + ':' + m + ' ' + ampm;
+      }
+
+      let manualOverride = null;
+      try {
+        manualOverride = sessionStorage.getItem('kashmir_ambient_override') || null;
+      } catch (e) {}
+
+      function updateAmbientUI() {
+        const kDate = getKashmirTime();
+        const livePhase = getLivePhase(kDate);
+        const activePhase = manualOverride || livePhase;
+
+        document.documentElement.setAttribute('data-ambient', activePhase);
+
+        const timeEl = document.getElementById('ambientLiveTime');
+        const phaseEl = document.getElementById('ambientPhaseName');
+        const btn = document.getElementById('ambientTimeBtn');
+
+        if (timeEl) {
+          timeEl.textContent = formatTime(kDate);
+        }
+
+        const info = PHASES.find(p => p.id === activePhase);
+        const phaseName = info ? info.name : activePhase;
+
+        if (phaseEl) {
+          if (manualOverride) {
+            phaseEl.textContent = phaseName + ' (Preview)';
+          } else {
+            phaseEl.textContent = phaseName;
+          }
+        }
+
+        if (btn) {
+          const statusMode = manualOverride ? 'Preview Atmosphere' : 'Live Kashmir Atmosphere';
+          btn.setAttribute('title', 'Kashmir: ' + formatTime(kDate) + ' (' + phaseName + ')\n' + statusMode + ' — Click to cycle atmospheric moods');
+        }
+      }
+
+      const cycleOrder = ['auto', 'dawn', 'day', 'sunset', 'dusk', 'night'];
+
+      window.cycleAmbientPhase = function() {
+        let currentIdx = 0;
+        if (manualOverride) {
+          currentIdx = cycleOrder.indexOf(manualOverride);
+          if (currentIdx === -1) currentIdx = 0;
+        }
+        const nextIdx = (currentIdx + 1) % cycleOrder.length;
+        const nextPhase = cycleOrder[nextIdx];
+
+        if (nextPhase === 'auto') {
+          manualOverride = null;
+          try { sessionStorage.removeItem('kashmir_ambient_override'); } catch (e) {}
+        } else {
+          manualOverride = nextPhase;
+          try { sessionStorage.setItem('kashmir_ambient_override', nextPhase); } catch (e) {}
+        }
+
+        updateAmbientUI();
+      };
+
+      // Initial UI update
+      updateAmbientUI();
+
+      // Sync every 20 seconds
+      setInterval(updateAmbientUI, 20000);
+    })();
+  </script>
 </body>
 </html>

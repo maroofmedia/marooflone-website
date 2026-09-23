@@ -37,9 +37,13 @@
           BY-NC-ND 4.0 License</a>. Third-party content, public domain works, and stock images retain their respective
         licenses. Personal details are strictly private.
       </p>
-      <div class="footer-location">
-        <span class="status-dot"></span> Srinagar, IN
-      </div>
+      <button type="button" class="footer-ambient-pill" id="ambientTimeBtn" onclick="cycleAmbientPhase()" aria-label="Toggle atmosphere mood / Kashmir Real-time indicator" title="Current Kashmir Atmosphere (Click to cycle preview)">
+        <span class="status-dot status-dot--ambient" id="ambientStatusDot"></span>
+        <span class="ambient-pill-loc">Srinagar, IN</span>
+        <span class="ambient-pill-sep">·</span>
+        <span class="ambient-pill-time" id="ambientLiveTime">--:--</span>
+        <span class="ambient-pill-phase" id="ambientPhaseName">Live</span>
+      </button>
     </div>
 
     <div class="footer-pdf-row">
