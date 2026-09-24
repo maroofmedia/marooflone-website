@@ -2849,17 +2849,23 @@ pre {
 .share-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   background-color: var(--glass-bg);
   border: 1px solid var(--border-color);
   color: var(--text-muted);
   padding: 8px 16px;
+  font-family: inherit;
   font-size: 0.8rem;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 500;
+  line-height: 1.3;
   transition: all 0.2s ease;
   cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
 }
 
 /* --- Hover Effects --- */
@@ -2870,21 +2876,35 @@ pre {
   border-color: var(--border-color-hover);
 }
 
+.share-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
 /* Brand Colors on Hover */
+.share-btn.like-btn:hover {
+  border-color: #FF5F56;
+  color: #FF5F56;
+  background-color: rgba(255, 95, 86, 0.08);
+}
+
 .share-btn.fb:hover {
   border-color: #1877F2;
+  color: #1877F2;
 }
 
 .share-btn.tw:hover {
   border-color: var(--text-heading);
+  color: var(--text-heading);
 }
 
 .share-btn.in:hover {
   border-color: #0077B5;
+  color: #0077B5;
 }
 
 .share-btn.wa:hover {
   border-color: #25D366;
+  color: #25D366;
 }
 
 /* --- Mobile Adjustments --- */
@@ -2899,45 +2919,13 @@ pre {
   }
 }
 
-/* Like Button */
-.share-btn.like-btn {
-  background-color: var(--card-bg);
-  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* 2. PC Hover */
-@media (hover: hover) {
-  .share-btn.like-btn:hover {
-    border-color: #FF5F56;
-    color: #FF5F56;
-    background: rgba(255, 95, 86, 0.05);
-    transform: translateY(-2px);
-  }
-}
-
-/* 3. Mobile Logic */
-@media (hover: none) {
-  .share-btn.like-btn:hover {
-    color: var(--text-muted) !important;
-    background-color: var(--card-bg) !important;
-    border-color: var(--border-color) !important;
-    transform: none !important;
-  }
-
-  /* Tactile Press Effect */
-  .share-btn.like-btn:active {
-    transform: scale(0.95) !important;
-  }
-}
-
-/* 4. The Pop Animation Class */
+/* Pop Animation for Heart */
 .share-btn.like-btn .heart-icon.pop-active {
   animation: heartPop 0.4s ease-out;
   color: #FF5F56;
   font-weight: 900;
 }
 
-/* Smooth Transition for the icon */
 .share-btn.like-btn .heart-icon {
   transition: transform 0.2s ease, color 0.2s ease;
 }
