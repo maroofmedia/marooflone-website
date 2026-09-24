@@ -10,20 +10,15 @@
       } catch (e) {}
 
       try {
-        var savedAmbient = sessionStorage.getItem('kashmir_ambient_override');
-        if (savedAmbient && ['dawn', 'day', 'sunset', 'dusk', 'night'].indexOf(savedAmbient) !== -1) {
-          document.documentElement.setAttribute('data-ambient', savedAmbient);
-        } else {
-          var now = new Date();
-          var utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-          var kDate = new Date(utc + (5.5 * 3600000));
-          var dec = kDate.getHours() + (kDate.getMinutes() / 60);
-          var phase = (dec >= 5 && dec < 8) ? 'dawn' :
-                      (dec >= 8 && dec < 16.5) ? 'day' :
-                      (dec >= 16.5 && dec < 19.5) ? 'sunset' :
-                      (dec >= 19.5 && dec < 22) ? 'dusk' : 'night';
-          document.documentElement.setAttribute('data-ambient', phase);
-        }
+        var now = new Date();
+        var utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+        var kDate = new Date(utc + (5.5 * 3600000));
+        var dec = kDate.getHours() + (kDate.getMinutes() / 60);
+        var phase = (dec >= 5 && dec < 8) ? 'dawn' :
+                    (dec >= 8 && dec < 16.5) ? 'day' :
+                    (dec >= 16.5 && dec < 19.5) ? 'sunset' :
+                    (dec >= 19.5 && dec < 22) ? 'dusk' : 'night';
+        document.documentElement.setAttribute('data-ambient', phase);
       } catch (e) {}
     })();
   </script>
@@ -257,38 +252,39 @@
       </svg>
     </div>
 
-    <!-- 3. DAWN ELEMENTS: Birds on a Wire & Soaring Flocks -->
+    <!-- 3. DAWN & SUNSET ELEMENTS: Realistic Soaring Bird Flocks -->
     <div class="ambient-dawn-elements">
-      <div class="ambient-birds-wire">
-        <svg viewBox="0 0 320 80" class="birds-wire-svg">
-          <path d="M0 25 Q160 50 320 28" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.4"/>
-          <!-- Perched bird 1 -->
-          <g class="perched-bird b1" transform="translate(68, 33)">
-            <ellipse cx="6" cy="5" rx="5" ry="3.5" transform="rotate(-15 6 5)" fill="currentColor"/>
-            <circle cx="10" cy="2" r="2.8" fill="currentColor"/>
-            <path d="M12 2 L14 1.5 L12 3 Z" fill="currentColor"/>
-            <path d="M2 7 L-2 10" stroke="currentColor" stroke-width="1.2"/>
+      <div class="ambient-birds">
+        <!-- Main Flock -->
+        <svg class="flock-group f1" viewBox="0 0 320 120">
+          <g class="soar-bird sb-1" transform="translate(40, 50)">
+            <path class="bird-shape" d="M0,8 C8,1 18,-2 32,2 C24,7 18,10 14,15 C12,12 10,10 8,11 C4,13 2,12 0,8 Z"/>
           </g>
-          <!-- Perched bird 2 -->
-          <g class="perched-bird b2" transform="translate(86, 35)">
-            <ellipse cx="6" cy="5" rx="4.8" ry="3.2" transform="rotate(-10 6 5)" fill="currentColor"/>
-            <circle cx="10" cy="2.5" r="2.6" fill="currentColor"/>
-            <path d="M12 2.5 L14 2 L12 3.5 Z" fill="currentColor"/>
-            <path d="M2 7 L-1 9.5" stroke="currentColor" stroke-width="1.2"/>
+          <g class="soar-bird sb-2" transform="translate(100, 25) scale(0.8)">
+            <path class="bird-shape" d="M0,8 C8,1 18,-2 32,2 C24,7 18,10 14,15 C12,12 10,10 8,11 C4,13 2,12 0,8 Z"/>
           </g>
-          <!-- Perched bird 3 -->
-          <g class="perched-bird b3" transform="translate(195, 39)">
-            <ellipse cx="6" cy="5" rx="5" ry="3.4" transform="rotate(-20 6 5)" fill="currentColor"/>
-            <circle cx="10" cy="2" r="2.7" fill="currentColor"/>
-            <path d="M12 2 L14.5 1.8 L12 3 Z" fill="currentColor"/>
-            <path d="M2 7 L-2 10.5" stroke="currentColor" stroke-width="1.2"/>
+          <g class="soar-bird sb-3" transform="translate(150, 65) scale(0.7)">
+            <path class="bird-shape" d="M0,8 C8,1 18,-2 32,2 C24,7 18,10 14,15 C12,12 10,10 8,11 C4,13 2,12 0,8 Z"/>
+          </g>
+          <g class="soar-bird sb-4" transform="translate(200, 40) scale(0.55)">
+            <path class="bird-shape" d="M0,8 C8,1 18,-2 32,2 C24,7 18,10 14,15 C12,12 10,10 8,11 C4,13 2,12 0,8 Z"/>
+          </g>
+          <g class="soar-bird sb-5" transform="translate(245, 75) scale(0.48)">
+            <path class="bird-shape" d="M0,8 C8,1 18,-2 32,2 C24,7 18,10 14,15 C12,12 10,10 8,11 C4,13 2,12 0,8 Z"/>
           </g>
         </svg>
-      </div>
-
-      <div class="ambient-birds">
-        <svg class="flock f1" viewBox="0 0 100 40"><path class="bird" d="M10 20q6-7 12 0q6-7 12 0"/><path class="bird" d="M38 11q5-6 10 0q5-6 10 0"/><path class="bird" d="M42 28q5-6 10 0q5-6 10 0"/><path class="bird" d="M66 17q4-5 8 0q4-5 8 0"/><path class="bird" d="M82 8q3.5-4 7 0q3.5-4 7 0"/></svg>
-        <svg class="flock f2" viewBox="0 0 100 40"><path class="bird" d="M12 18q6-7 12 0q6-7 12 0"/><path class="bird" d="M44 26q5-6 10 0q5-6 10 0"/><path class="bird" d="M70 12q4-5 8 0q4-5 8 0"/></svg>
+        <!-- High-Altitude Flock -->
+        <svg class="flock-group f2" viewBox="0 0 240 90">
+          <g class="soar-bird sb-1" transform="translate(30, 35) scale(0.65)">
+            <path class="bird-shape" d="M0,8 C8,1 18,-2 32,2 C24,7 18,10 14,15 C12,12 10,10 8,11 C4,13 2,12 0,8 Z"/>
+          </g>
+          <g class="soar-bird sb-2" transform="translate(85, 18) scale(0.52)">
+            <path class="bird-shape" d="M0,8 C8,1 18,-2 32,2 C24,7 18,10 14,15 C12,12 10,10 8,11 C4,13 2,12 0,8 Z"/>
+          </g>
+          <g class="soar-bird sb-3" transform="translate(130, 45) scale(0.45)">
+            <path class="bird-shape" d="M0,8 C8,1 18,-2 32,2 C24,7 18,10 14,15 C12,12 10,10 8,11 C4,13 2,12 0,8 Z"/>
+          </g>
+        </svg>
       </div>
     </div>
 
@@ -297,8 +293,9 @@
       <div class="plane-run">
         <span class="trail t1"></span>
         <span class="trail t2"></span>
-        <svg class="plane" viewBox="0 0 24 10">
-          <path d="M22.5 5C22.5 4.3 21.6 4.2 20.5 4.2L16.5 4.2L10.6.4L9.2.4L12.4 4.2L5.4 4.2L3.2 1.8L2.2 1.8L3.4 4.3C2.2 4.5 2.2 5.5 3.4 5.7L2.2 8.2L3.2 8.2L5.4 5.8L12.4 5.8L9.2 9.6L10.6 9.6L16.5 5.8L20.5 5.8C21.6 5.8 22.5 5.7 22.5 5Z"/>
+        <svg class="plane" viewBox="0 0 28 12">
+          <path d="M26.5 6C26.5 5.2 25.4 5 24 5L19.2 5L12 .5L10.5 .5L14.2 5L6.2 5L3.8 2.2L2.6 2.2L4 5.2C2.6 5.4 2.6 6.6 4 6.8L2.6 9.8L3.8 9.8L6.2 7L14.2 7L10.5 11.5L12 11.5L19.2 7L24 7C25.4 7 26.5 6.8 26.5 6Z"/>
+          <circle cx="15" cy="6" r="1.1" fill="#ef4444" class="plane-beacon"/>
         </svg>
       </div>
     </div>
@@ -500,25 +497,25 @@
   </script>
 
 
-  <!-- Dynamic Kashmir Time-of-Day Ambient Glow Controller -->
+  <!-- Dynamic New Delhi Time-of-Day Ambient Glow Controller -->
   <script>
     (function() {
       const PHASES = [
-        { id: 'dawn', name: 'Dawn', urdu: 'طلوع', label: 'Dawn' },
-        { id: 'day', name: 'Day', urdu: 'آفتاب', label: 'Day' },
-        { id: 'sunset', name: 'Sunset', urdu: 'شام', label: 'Sunset' },
-        { id: 'dusk', name: 'Dusk', urdu: 'شفق', label: 'Dusk' },
-        { id: 'night', name: 'Night', urdu: 'شب', label: 'Night' }
+        { id: 'dawn', name: 'Dawn' },
+        { id: 'day', name: 'Day' },
+        { id: 'sunset', name: 'Sunset' },
+        { id: 'dusk', name: 'Dusk' },
+        { id: 'night', name: 'Night' }
       ];
 
-      function getKashmirTime() {
+      function getNewDelhiTime() {
         const now = new Date();
         const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
         return new Date(utc + (5.5 * 3600000));
       }
 
-      function getLivePhase(kDate) {
-        const dec = kDate.getHours() + (kDate.getMinutes() / 60);
+      function getLivePhase(d) {
+        const dec = d.getHours() + (d.getMinutes() / 60);
         if (dec >= 5 && dec < 8) return 'dawn';
         if (dec >= 8 && dec < 16.5) return 'day';
         if (dec >= 16.5 && dec < 19.5) return 'sunset';
@@ -526,78 +523,40 @@
         return 'night';
       }
 
-      function formatTime(kDate) {
-        let h = kDate.getHours();
-        const m = String(kDate.getMinutes()).padStart(2, '0');
+      function formatTime(d) {
+        let h = d.getHours();
+        const m = String(d.getMinutes()).padStart(2, '0');
         const ampm = h >= 12 ? 'PM' : 'AM';
         h = h % 12 || 12;
         return h + ':' + m + ' ' + ampm;
       }
 
-      let manualOverride = null;
-      try {
-        manualOverride = sessionStorage.getItem('kashmir_ambient_override') || null;
-      } catch (e) {}
-
       function updateAmbientUI() {
-        const kDate = getKashmirTime();
-        const livePhase = getLivePhase(kDate);
-        const activePhase = manualOverride || livePhase;
+        const d = getNewDelhiTime();
+        const phase = getLivePhase(d);
 
-        document.documentElement.setAttribute('data-ambient', activePhase);
+        document.documentElement.setAttribute('data-ambient', phase);
 
         const timeEl = document.getElementById('ambientLiveTime');
-        const phaseEl = document.getElementById('ambientPhaseName');
-        const btn = document.getElementById('ambientTimeBtn');
+        const pill = document.getElementById('ambientTimePill');
 
         if (timeEl) {
-          timeEl.textContent = formatTime(kDate);
+          timeEl.textContent = formatTime(d);
         }
 
-        const info = PHASES.find(p => p.id === activePhase);
-        const phaseName = info ? info.name : activePhase;
+        const info = PHASES.find(p => p.id === phase);
+        const phaseName = info ? info.name : phase;
 
-        if (phaseEl) {
-          if (manualOverride) {
-            phaseEl.textContent = phaseName + ' (Preview)';
-          } else {
-            phaseEl.textContent = phaseName;
-          }
-        }
-
-        if (btn) {
-          const statusMode = manualOverride ? 'Preview Atmosphere' : 'Live Kashmir Atmosphere';
-          btn.setAttribute('title', 'Kashmir: ' + formatTime(kDate) + ' (' + phaseName + ')\n' + statusMode + ' — Click to cycle atmospheric moods');
+        if (pill) {
+          pill.setAttribute('title', 'New Delhi: ' + formatTime(d) + ' (' + phaseName + ')\nLive Real-time Atmosphere');
         }
       }
-
-      const cycleOrder = ['auto', 'dawn', 'day', 'sunset', 'dusk', 'night'];
-
-      window.cycleAmbientPhase = function() {
-        let currentIdx = 0;
-        if (manualOverride) {
-          currentIdx = cycleOrder.indexOf(manualOverride);
-          if (currentIdx === -1) currentIdx = 0;
-        }
-        const nextIdx = (currentIdx + 1) % cycleOrder.length;
-        const nextPhase = cycleOrder[nextIdx];
-
-        if (nextPhase === 'auto') {
-          manualOverride = null;
-          try { sessionStorage.removeItem('kashmir_ambient_override'); } catch (e) {}
-        } else {
-          manualOverride = nextPhase;
-          try { sessionStorage.setItem('kashmir_ambient_override', nextPhase); } catch (e) {}
-        }
-
-        updateAmbientUI();
-      };
 
       // Initial UI update
       updateAmbientUI();
 
-      // Sync every 20 seconds
-      setInterval(updateAmbientUI, 20000);
+      // Sync every 15 seconds
+      setInterval(updateAmbientUI, 15000);
     })();
   </script>
 </body>
