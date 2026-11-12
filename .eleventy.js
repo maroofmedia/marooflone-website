@@ -73,6 +73,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("./src/assets");
   eleventyConfig.addPassthroughCopy("./src/admin");
   eleventyConfig.addPassthroughCopy({ "./src/_headers": "./_headers" });
+  eleventyConfig.addPassthroughCopy({ "./src/_redirects": "./_redirects" });
   eleventyConfig.addPassthroughCopy({ "./src/.htaccess": "./.htaccess" });
   eleventyConfig.addPassthroughCopy({ "./src/assets/images/favicon/favicon.ico": "favicon.ico" });
   eleventyConfig.addPassthroughCopy({ "./src/maroof-lone-profile.pdf": "maroof-lone-profile.pdf" });

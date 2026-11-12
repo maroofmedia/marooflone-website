@@ -1,0 +1,14 @@
+# Long-term cache for hashed/versioned assets
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Long-term cache for stylesheet
+/style.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# Default security headers
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+
