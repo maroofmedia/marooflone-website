@@ -1,0 +1,368 @@
+---
+title: Photography Gallery - Maroof Lone
+description: A curated visual archive of landscapes, architecture, culture, and quiet everyday moments across Kashmir and beyond. Captured by Maroof Lone.
+layout: 'base.njk'
+permalink: /gallery/
+---
+
+<div class="section gallery-page-section">
+  <div class="container container--gallery">
+    
+    <div class="gallery-header">
+      <span class="section-eyebrow">VISUAL ARCHIVE &bull; MOMENTS &bull; KASHMIR</span>
+      <h1 class="gallery-section-title">Photography Gallery</h1>
+      <p class="gallery-description">
+        A personal collection of captured frames, mountain horizons, and quiet everyday textures across Kashmir and beyond. Click or tap any photograph to view in fullscreen.
+      </p>
+    </div>
+
+    <!-- Photography Gallery grouped by year -->
+    {% set yearGroups = collections.gallery | reverse | groupByYear %}
+    {% for group in yearGroups %}
+      <div class="gallery-year-group">
+        <h2 class="gallery-year-heading">{{ group.year }}</h2>
+        <div class="gallery-masonry" role="region" aria-label="Photos from {{ group.year }}">
+          {% for item in group.posts %}
+            <figure class="gallery-card" data-gallery-item
+                    data-src="{{ item.data.image }}"
+                    data-caption="{{ item.data.caption | escape }}"
+                    data-alt="{{ item.data.alt | escape }}"
+                    data-date="{{ item.data.date | galleryDate }}"
+                    data-location="{{ (item.data.location or '') | escape }}"
+                    data-desc="{{ (item.data.description or '') | escape }}">
+              <button type="button" class="gallery-card__btn" aria-label="View photograph: {{ item.data.caption | escape }}" aria-haspopup="dialog">
+                <div class="gallery-card__img-wrap">
+                  <img src="{{ item.data.image }}" alt="{{ item.data.alt | escape }}" loading="lazy" class="gallery-card__img">
+                </div>
+                <div class="gallery-card__overlay">
+                  <div class="gallery-card__meta">
+                    {% if item.data.location %}
+                      <span class="gallery-card__location">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                          <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        {{ item.data.location }}
+                      </span>
+                    {% endif %}
+                    <p class="gallery-card__caption">{{ item.data.caption }}</p>
+                    <span class="gallery-card__date">{{ item.data.date | galleryDate }}</span>
+                  </div>
+                  <div class="gallery-card__zoom-indicator" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <polyline points="9 21 3 21 3 15"></polyline>
+                      <line x1="21" y1="3" x2="14" y2="10"></line>
+                      <line x1="3" y1="21" x2="10" y2="14"></line>
+                    </svg>
+                  </div>
+                </div>
+              </button>
+            </figure>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+<!-- Fullscreen Responsive Lightbox -->
+<div id="galleryLightbox" class="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Photo Viewer" hidden>
+  <div class="gallery-lightbox__backdrop" data-action="close" aria-hidden="true"></div>
+  
+  <div class="gallery-lightbox__container">
+    
+    <!-- Top Bar: Counter & Close -->
+    <header class="gallery-lightbox__topbar">
+      <div class="gallery-lightbox__counter" id="lightboxCounter" aria-live="polite">1 of 1</div>
+      <button type="button" class="gallery-lightbox__btn gallery-lightbox__close" id="lightboxCloseBtn" aria-label="Close photo viewer (Press Escape)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Center Stage: Prev Button, Image, Next Button -->
+    <div class="gallery-lightbox__stage" id="lightboxStage">
+      <button type="button" class="gallery-lightbox__btn gallery-lightbox__nav gallery-lightbox__nav--prev" id="lightboxPrevBtn" aria-label="Previous photograph (Press Left arrow)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="gallery-lightbox__figure" id="lightboxFigure">
+        <img id="lightboxImg" class="gallery-lightbox__img" src="" alt="" draggable="false">
+      </div>
+
+      <button type="button" class="gallery-lightbox__btn gallery-lightbox__nav gallery-lightbox__nav--next" id="lightboxNextBtn" aria-label="Next photograph (Press Right arrow)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Bottom Bar: Metadata & Description -->
+    <footer class="gallery-lightbox__bottombar" id="lightboxBottomBar">
+      <h2 id="lightboxCaption" class="gallery-lightbox__caption"></h2>
+      
+      <div class="gallery-lightbox__badges">
+        <span id="lightboxLocationBadge" class="gallery-lightbox__badge gallery-lightbox__badge--location">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <span id="lightboxLocation"></span>
+        </span>
+        <span id="lightboxDateBadge" class="gallery-lightbox__badge gallery-lightbox__badge--date">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span id="lightboxDate"></span>
+        </span>
+      </div>
+
+      <p id="lightboxDescription" class="gallery-lightbox__desc"></p>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+  (function() {
+    'use strict';
+
+    const items = Array.from(document.querySelectorAll('[data-gallery-item]'));
+    if (!items.length) return;
+
+    const lightbox = document.getElementById('galleryLightbox');
+    const imgEl = document.getElementById('lightboxImg');
+    const counterEl = document.getElementById('lightboxCounter');
+    const captionEl = document.getElementById('lightboxCaption');
+    const locationBadge = document.getElementById('lightboxLocationBadge');
+    const locationEl = document.getElementById('lightboxLocation');
+    const dateBadge = document.getElementById('lightboxDateBadge');
+    const dateEl = document.getElementById('lightboxDate');
+    const descEl = document.getElementById('lightboxDescription');
+    const prevBtn = document.getElementById('lightboxPrevBtn');
+    const nextBtn = document.getElementById('lightboxNextBtn');
+    const closeBtn = document.getElementById('lightboxCloseBtn');
+    const figureEl = document.getElementById('lightboxFigure');
+    const bottomBar = document.getElementById('lightboxBottomBar');
+
+    let currentIndex = 0;
+    let isOpen = false;
+    let lastActiveElement = null;
+
+    // Sync bottombar width to match the rendered image width
+    function syncMetaWidth() {
+      if (!bottomBar || !imgEl.naturalWidth) return;
+      const rect = imgEl.getBoundingClientRect();
+      if (rect.width > 0) {
+        bottomBar.style.width = rect.width + 'px';
+        bottomBar.style.maxWidth = '100%';
+      }
+    }
+
+    window.addEventListener('resize', function() {
+      if (isOpen) syncMetaWidth();
+    });
+
+    // Preload helper
+    function preloadImage(src) {
+      if (!src) return;
+      const img = new Image();
+      img.src = src;
+    }
+
+    function renderPhoto(index) {
+      if (index < 0 || index >= items.length) return;
+      currentIndex = index;
+      const item = items[currentIndex];
+
+      const src = item.getAttribute('data-src') || '';
+      const caption = item.getAttribute('data-caption') || '';
+      const alt = item.getAttribute('data-alt') || caption;
+      const date = item.getAttribute('data-date') || '';
+      const location = item.getAttribute('data-location') || '';
+      const desc = item.getAttribute('data-desc') || '';
+
+      // Fade transition for image
+      imgEl.style.opacity = '0.3';
+      imgEl.src = src;
+      imgEl.alt = alt;
+      imgEl.onload = function() {
+        imgEl.style.opacity = '1';
+        syncMetaWidth();
+      };
+
+      counterEl.textContent = (currentIndex + 1) + ' of ' + items.length;
+      captionEl.textContent = caption;
+
+      // Location badge
+      if (location) {
+        locationEl.textContent = location;
+        locationBadge.style.display = 'inline-flex';
+      } else {
+        locationBadge.style.display = 'none';
+      }
+
+      // Date badge
+      if (date) {
+        dateEl.textContent = date;
+        dateBadge.style.display = 'inline-flex';
+      } else {
+        dateBadge.style.display = 'none';
+      }
+
+      // Description
+      if (desc) {
+        descEl.textContent = desc;
+        descEl.style.display = 'block';
+      } else {
+        descEl.style.display = 'none';
+      }
+
+      // Preload neighbours
+      const nextIdx = (currentIndex + 1) % items.length;
+      const prevIdx = (currentIndex - 1 + items.length) % items.length;
+      preloadImage(items[nextIdx].getAttribute('data-src'));
+      preloadImage(items[prevIdx].getAttribute('data-src'));
+    }
+
+    function openLightbox(index) {
+      lastActiveElement = document.activeElement;
+      isOpen = true;
+      lightbox.removeAttribute('hidden');
+      
+      // Force reflow for CSS transition
+      void lightbox.offsetWidth;
+      lightbox.classList.add('is-active');
+      document.body.classList.add('gallery-lightbox-open');
+
+      renderPhoto(index);
+      requestAnimationFrame(syncMetaWidth);
+      closeBtn.focus();
+    }
+
+    function closeLightbox() {
+      if (!isOpen) return;
+      isOpen = false;
+      lightbox.classList.remove('is-active');
+      document.body.classList.remove('gallery-lightbox-open');
+
+      setTimeout(function() {
+        if (!isOpen) {
+          lightbox.setAttribute('hidden', '');
+          imgEl.src = '';
+          if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
+            lastActiveElement.focus();
+          }
+        }
+      }, 220);
+    }
+
+    function showNext() {
+      renderPhoto((currentIndex + 1) % items.length);
+    }
+
+    function showPrev() {
+      renderPhoto((currentIndex - 1 + items.length) % items.length);
+    }
+
+    // Attach click listeners to cards
+    items.forEach(function(item, idx) {
+      const btn = item.querySelector('.gallery-card__btn');
+      if (btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          openLightbox(idx);
+        });
+      }
+    });
+
+    // Control buttons
+    closeBtn.addEventListener('click', closeLightbox);
+    nextBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      showNext();
+    });
+    prevBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      showPrev();
+    });
+
+    // Backdrop click
+    lightbox.addEventListener('click', function(e) {
+      if (e.target.hasAttribute('data-action') && e.target.getAttribute('data-action') === 'close') {
+        closeLightbox();
+      }
+    });
+
+    // Click on stage background to close (if not clicking image or buttons)
+    const stage = document.getElementById('lightboxStage');
+    if (stage) {
+      stage.addEventListener('click', function(e) {
+        if (e.target === stage || e.target === figureEl) {
+          closeLightbox();
+        }
+      });
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (!isOpen) return;
+
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeLightbox();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        showNext();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        showPrev();
+      }
+    });
+
+    // Touch & Swipe navigation for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+
+    lightbox.addEventListener('touchstart', function(e) {
+      if (!isOpen || e.touches.length > 1) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', function(e) {
+      if (!isOpen || e.changedTouches.length === 0) return;
+      touchEndX = e.changedTouches[0].clientX;
+      touchEndY = e.changedTouches[0].clientY;
+
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+
+      // Horizontal swipe
+      if (Math.abs(diffX) > 45 && Math.abs(diffX) > Math.abs(diffY)) {
+        if (diffX < 0) {
+          showNext();
+        } else {
+          showPrev();
+        }
+      }
+      // Swipe down to dismiss
+      else if (diffY > 90 && Math.abs(diffY) > Math.abs(diffX) * 1.5) {
+        closeLightbox();
+      }
+    }, { passive: true });
+
+  })();
+</script>
+

@@ -11,6 +11,7 @@
       <a href="/#testimonials" class="nav-link">FEEDBACK</a>
       <a href="/#projects" class="nav-link">PROJECTS</a>
       <a href="/blog" class="nav-link{% if page.url and '/blog' in page.url %} active{% endif %}">WRITINGS</a>
+      <a href="/gallery" class="nav-link{% if page.url and '/gallery' in page.url %} active{% endif %}">GALLERY</a>
       <a href="/contact-me"
         class="nav-link{% if page.url and '/contact-me' in page.url %} active{% endif %}">CONTACT</a>
     </nav>
@@ -79,6 +80,11 @@
         <a href="/blog" class="mobile-nav-link{% if page.url and '/blog' in page.url %} active{% endif %}">
           <span class="mobile-nav-text">WRITINGS</span>
           <span class="mobile-nav-ind" aria-hidden="true">{% if page.url and '/blog' in page.url %}&bull;{% else
+            %}&rarr;{% endif %}</span>
+        </a>
+        <a href="/gallery" class="mobile-nav-link{% if page.url and '/gallery' in page.url %} active{% endif %}">
+          <span class="mobile-nav-text">GALLERY</span>
+          <span class="mobile-nav-ind" aria-hidden="true">{% if page.url and '/gallery' in page.url %}&bull;{% else
             %}&rarr;{% endif %}</span>
         </a>
         <a href="/contact-me" class="mobile-nav-link{% if page.url and '/contact-me' in page.url %} active{% endif %}">

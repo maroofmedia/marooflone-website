@@ -96,6 +96,21 @@ module.exports = function (eleventyConfig) {
     return dt.isValid ? dt.toFormat("LLL d").toUpperCase() : "";
   });
 
+  // Gallery Date Filter (e.g., 'Nov 10, 2026') for lightbox display
+  eleventyConfig.addFilter("galleryDate", (dateObj) => {
+    if (!dateObj) return "";
+    let dt;
+    if (dateObj instanceof Date) {
+      dt = DateTime.fromJSDate(dateObj, { zone: "utc" });
+    } else if (typeof dateObj === "string") {
+      dt = DateTime.fromISO(dateObj, { zone: "utc" });
+      if (!dt.isValid) dt = DateTime.fromFormat(dateObj, "yyyy-MM-dd", { zone: "utc" });
+    } else {
+      dt = DateTime.fromJSDate(new Date(dateObj), { zone: "utc" });
+    }
+    return dt.isValid ? dt.toFormat("MMM d, yyyy") : "";
+  });
+
   // Group collection by year
   eleventyConfig.addFilter("groupByYear", (collection) => {
     if (!collection) return [];

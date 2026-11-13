@@ -10,6 +10,7 @@ pagination:
     - posts
     - nav
     - tagList
+    - gallery
   addAllPagesToCollections: true
 permalink: /tags/{{ tag | slugify }}/
 eleventyComputed:
@@ -39,7 +40,9 @@ eleventyComputed:
       <div class="posts-list">
         {% set showTags = false %}
         {% for post in collections[tag] | reverse %}
-          {% include 'article-snippet.njk' %}
+          {% if post.url and post.data.title %}
+            {% include 'article-snippet.njk' %}
+          {% endif %}
         {% endfor %}
       </div>
     </div>
