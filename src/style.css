@@ -4565,7 +4565,7 @@ pre {
 
 
 /* ==========================================================================
-   DEDICATED PHOTOGRAPHY GALLERY & LIGHTBOX (Google Photos Inspired)
+   DEDICATED PHOTOGRAPHY GALLERY & LIGHTBOX
    ========================================================================== */
 
 .gallery-page-section {
@@ -4642,8 +4642,8 @@ pre {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
-              border-color 0.25s ease,
-              box-shadow 0.28s ease;
+    border-color 0.25s ease,
+    box-shadow 0.28s ease;
   vertical-align: top;
 }
 
@@ -4954,7 +4954,7 @@ body.gallery-lightbox-open {
 }
 
 /* Dot separator between location and date (only when location badge is visible) */
-.gallery-lightbox__badge--location:not([hidden]) + .gallery-lightbox__badge--date:not([hidden])::before {
+.gallery-lightbox__badge--location:not([hidden])+.gallery-lightbox__badge--date:not([hidden])::before {
   content: '·';
   margin: 0 8px;
   color: rgba(255, 255, 255, 0.2);
@@ -5086,7 +5086,8 @@ body.gallery-lightbox-open {
   }
 
   .gallery-lightbox__nav {
-    display: none; /* Mobile relies on natural touch/swipe gestures */
+    display: none;
+    /* Mobile relies on natural touch/swipe gestures */
   }
 
   .gallery-lightbox__img {

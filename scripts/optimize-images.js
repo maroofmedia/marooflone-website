@@ -4,7 +4,7 @@ const sharp = require('sharp');
 
 const GALLERY_DIR = path.join(__dirname, '..', 'src', 'gallery', 'gallery-images');
 const SUPPORTED_EXTS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.tiff']);
-const MAX_DIMENSION = 2000; // Optimal for 4K web displays & fullscreen lightboxes
+const MAX_DIMENSION = 2000;
 
 async function optimizeImages() {
   if (!fs.existsSync(GALLERY_DIR)) {
