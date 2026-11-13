@@ -5084,7 +5084,7 @@ body.gallery-lightbox-open {
   .gallery-masonry {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
   }
 
   .gallery-masonry::after {
@@ -5093,8 +5093,8 @@ body.gallery-lightbox-open {
   }
 
   .gallery-card {
-    height: 125px;
-    border-radius: 4px;
+    height: 155px;
+    border-radius: 5px;
     margin: 0;
   }
 
@@ -5133,7 +5133,7 @@ body.gallery-lightbox-open {
 
 @media (max-width: 340px) {
   .gallery-card {
-    height: 150px;
+    height: 140px;
   }
 
   .gallery-section-title {

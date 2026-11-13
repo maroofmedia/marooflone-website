@@ -51,6 +51,7 @@
   <nav class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
     <div class="container mobile-nav-grid">
       
+      <!-- Left Column -->
       <div class="mobile-nav-col">
         <a href="/" class="mobile-nav-link{% if page.url == '/' %} active{% endif %}">
           <span class="mobile-nav-text">HOME</span>
@@ -69,9 +70,14 @@
           <span class="mobile-nav-text">FEEDBACK</span>
           <span class="mobile-nav-ind" aria-hidden="true">&rarr;</span>
         </a>
+        <a href="/links" class="mobile-nav-link{% if page.url and '/links' in page.url %} active{% endif %}">
+          <span class="mobile-nav-text">LINKS</span>
+          <span class="mobile-nav-ind" aria-hidden="true">{% if page.url and '/links' in page.url %}&bull;{% else
+            %}&rarr;{% endif %}</span>
+        </a>
       </div>
 
-      
+      <!-- Right Column -->
       <div class="mobile-nav-col">
         <a href="/#projects" class="mobile-nav-link">
           <span class="mobile-nav-text">PROJECTS</span>
@@ -90,11 +96,6 @@
         <a href="/contact-me" class="mobile-nav-link{% if page.url and '/contact-me' in page.url %} active{% endif %}">
           <span class="mobile-nav-text">CONTACT</span>
           <span class="mobile-nav-ind" aria-hidden="true">{% if page.url and '/contact-me' in page.url %}&bull;{% else
-            %}&rarr;{% endif %}</span>
-        </a>
-        <a href="/links" class="mobile-nav-link{% if page.url and '/links' in page.url %} active{% endif %}">
-          <span class="mobile-nav-text">LINKS</span>
-          <span class="mobile-nav-ind" aria-hidden="true">{% if page.url and '/links' in page.url %}&bull;{% else
             %}&rarr;{% endif %}</span>
         </a>
       </div>
