@@ -365,5 +365,18 @@ permalink: /gallery/
       }
     }, { passive: true });
 
+    // Protect images against right-click save and drag-to-download on desktop & mobile
+    document.addEventListener('contextmenu', function (e) {
+      if (e.target.closest('.gallery-card') || e.target.closest('.gallery-lightbox')) {
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener('dragstart', function (e) {
+      if (e.target.matches('.gallery-card__img, .gallery-lightbox__img')) {
+        e.preventDefault();
+      }
+    });
+
   })();
 </script>

@@ -4679,6 +4679,10 @@ pre {
   display: block;
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   will-change: transform;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 /* Subtle Desktop Hover Overlay */
@@ -4897,6 +4901,10 @@ body.gallery-lightbox-open {
   border-radius: 6px;
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.7);
   transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: auto;
 }
 
 .gallery-lightbox__nav {
