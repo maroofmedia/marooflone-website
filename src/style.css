@@ -4624,9 +4624,9 @@ pre {
   opacity: 0.85;
 }
 
-/* Gallery Year Groups */
+/* Gallery Month/Year Groups */
 .gallery-year-group {
-  margin-bottom: 3.5rem;
+  margin-bottom: 2.75rem;
 }
 
 .gallery-year-group:last-child {
@@ -4635,40 +4635,44 @@ pre {
 
 .gallery-year-heading {
   font-family: 'Jost', var(--font-main);
-  font-size: 3.25rem;
+  font-size: 2.5rem;
   font-weight: 800;
   color: var(--text-heading);
-  letter-spacing: -0.04em;
+  letter-spacing: -0.03em;
   margin: 0 0 1.25rem 0;
   line-height: 1.1;
 }
 
-/* Responsive Masonry Grid (CSS Columns) */
+/* Google Photos Justified Masonry */
 .gallery-masonry {
-  column-count: 3;
-  column-gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
   width: 100%;
 }
 
+.gallery-masonry::after {
+  content: '';
+  flex-grow: 999999999;
+}
+
 .gallery-card {
-  break-inside: avoid;
-  margin: 0 0 16px 0;
-  display: inline-block;
-  width: 100%;
+  margin: 0;
+  height: 280px;
   position: relative;
-  border-radius: 8px;
+  border-radius: 6px;
   overflow: hidden;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
     border-color 0.25s ease,
     box-shadow 0.28s ease;
-  vertical-align: top;
 }
 
 .gallery-card__btn {
   display: block;
   width: 100%;
+  height: 100%;
   padding: 0;
   border: none;
   background: transparent;
@@ -4687,6 +4691,7 @@ pre {
 
 .gallery-card__img-wrap {
   width: 100%;
+  height: 100%;
   overflow: hidden;
   background: var(--glass-bg);
   line-height: 0;
@@ -4694,7 +4699,8 @@ pre {
 
 .gallery-card__img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   will-change: transform;
@@ -5016,13 +5022,8 @@ body.gallery-lightbox-open {
    ========================================================================== */
 
 @media (max-width: 880px) {
-  .gallery-masonry {
-    column-count: 2;
-    column-gap: 14px;
-  }
-
   .gallery-card {
-    margin-bottom: 14px;
+    height: 220px;
   }
 }
 
@@ -5052,7 +5053,7 @@ body.gallery-lightbox-open {
   }
 
   .gallery-year-heading {
-    font-size: 2.25rem;
+    font-size: 1.85rem;
     margin-bottom: 0.85rem;
   }
 
@@ -5081,13 +5082,20 @@ body.gallery-lightbox-open {
 
 @media (max-width: 540px) {
   .gallery-masonry {
-    column-count: 2;
-    column-gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .gallery-masonry::after {
+    content: '';
+    flex-grow: 999999999;
   }
 
   .gallery-card {
-    margin-bottom: 10px;
-    border-radius: 6px;
+    height: 125px;
+    border-radius: 4px;
+    margin: 0;
   }
 
   .gallery-card__overlay {
@@ -5124,9 +5132,8 @@ body.gallery-lightbox-open {
 }
 
 @media (max-width: 340px) {
-  .gallery-masonry {
-    column-count: 1;
-    column-gap: 10px;
+  .gallery-card {
+    height: 150px;
   }
 
   .gallery-section-title {

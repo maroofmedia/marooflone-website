@@ -112,6 +112,35 @@ module.exports = function (eleventyConfig) {
     return dt.isValid ? dt.toFormat("MMM d, yyyy") : "";
   });
 
+  // Group collection by month (for gallery view like Google Photos)
+  eleventyConfig.addFilter("groupByMonth", (collection) => {
+    if (!collection) return [];
+    const groups = {};
+    for (const item of collection) {
+      let dt;
+      if (item.date instanceof Date) {
+        dt = DateTime.fromJSDate(item.date, { zone: "utc" });
+      } else if (typeof item.date === "string") {
+        dt = DateTime.fromISO(item.date, { zone: "utc" });
+      } else {
+        dt = DateTime.fromJSDate(new Date(item.date), { zone: "utc" });
+      }
+      const monthKey = dt.isValid ? dt.toFormat("yyyy-MM") : "Other";
+      const displayLabel = dt.isValid ? dt.toFormat("MMMM yyyy") : "Other";
+      if (!groups[monthKey]) {
+        groups[monthKey] = {
+          monthKey,
+          label: displayLabel,
+          posts: []
+        };
+      }
+      groups[monthKey].posts.push(item);
+    }
+    return Object.keys(groups)
+      .sort((a, b) => b.localeCompare(a))
+      .map((key) => groups[key]);
+  });
+
   // Group collection by year
   eleventyConfig.addFilter("groupByYear", (collection) => {
     if (!collection) return [];
