@@ -10,7 +10,7 @@ permalink: /gallery/
   <div class="container container--gallery">
 
     <div class="gallery-header">
-      <span class="section-eyebrow">PLACES • PEOPLE • MOMENTS</span>
+      <span class="section-eyebrow">PLACES • PEOPLE • PERSPECTIVES</span>
       <h1 class="gallery-section-title">Life in Frames</h1>
       <p class="gallery-description">
         Time moves, places change, and moments quietly become memories. This collection brings together photographs from
@@ -76,9 +76,8 @@ permalink: /gallery/
 
   <div class="gallery-lightbox__container">
 
-    <!-- Top Bar: Counter & Close -->
+    <!-- Top Bar: Close -->
     <header class="gallery-lightbox__topbar">
-      <div class="gallery-lightbox__counter" id="lightboxCounter" aria-live="polite">1 of 1</div>
       <button type="button" class="gallery-lightbox__btn gallery-lightbox__close" id="lightboxCloseBtn"
         aria-label="Close photo viewer (Press Escape)">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -150,7 +149,6 @@ permalink: /gallery/
 
     const lightbox = document.getElementById('galleryLightbox');
     const imgEl = document.getElementById('lightboxImg');
-    const counterEl = document.getElementById('lightboxCounter');
     const locationBadge = document.getElementById('lightboxLocationBadge');
     const locationEl = document.getElementById('lightboxLocation');
     const dateBadge = document.getElementById('lightboxDateBadge');
@@ -207,22 +205,20 @@ permalink: /gallery/
         syncMetaWidth();
       };
 
-      counterEl.textContent = (currentIndex + 1) + ' of ' + items.length;
-
       // Location badge
       if (location) {
         locationEl.textContent = location;
-        locationBadge.style.display = 'inline-flex';
+        locationBadge.hidden = false;
       } else {
-        locationBadge.style.display = 'none';
+        locationBadge.hidden = true;
       }
 
       // Date badge
       if (date) {
         dateEl.textContent = date;
-        dateBadge.style.display = 'inline-flex';
+        dateBadge.hidden = false;
       } else {
-        dateBadge.style.display = 'none';
+        dateBadge.hidden = true;
       }
 
       // Description

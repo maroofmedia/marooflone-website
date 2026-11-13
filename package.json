@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "eleventy --serve",
-    "build": "eleventy && node scripts/generate-pdf.js",
+    "build": "node scripts/optimize-images.js && eleventy && node scripts/generate-pdf.js",
+    "optimize-images": "node scripts/optimize-images.js",
     "generate-pdf": "node scripts/generate-pdf.js"
   },
   "repository": {
@@ -23,7 +24,8 @@
     "@11ty/eleventy": "^3.0.0",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
-    "puppeteer-core": "^25.9.0"
+    "puppeteer-core": "^25.9.0",
+    "sharp": "^0.35.5"
   },
   "dependencies": {
     "markdown-it": "^14.1.0",

@@ -6,6 +6,10 @@
 /style.css
   Cache-Control: public, max-age=31536000, immutable
 
+# Prevent search engine indexing of gallery original photos
+/gallery/gallery-images/*
+  X-Robots-Tag: noindex, noimageindex
+
 # Default security headers
 /*
   X-Frame-Options: DENY

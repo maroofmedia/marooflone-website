@@ -1,1 +1,9 @@
 ErrorDocument 404 /404.html
+
+# Prevent search engine indexing of gallery images
+<IfModule mod_headers.c>
+  <FilesMatch "\.(jpe?g|png|gif|webp|JPG|JPEG)$">
+    SetEnvIf Request_URI "^/gallery/gallery-images/" NOINDEX
+    Header set X-Robots-Tag "noindex, noimageindex" env=NOINDEX
+  </FilesMatch>
+</IfModule>

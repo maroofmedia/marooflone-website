@@ -4825,20 +4825,11 @@ body.gallery-lightbox-open {
 /* Topbar */
 .gallery-lightbox__topbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 16px 24px;
   min-height: 56px;
   flex-shrink: 0;
-}
-
-.gallery-lightbox__counter {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .gallery-lightbox__btn {
@@ -4958,8 +4949,12 @@ body.gallery-lightbox-open {
   text-transform: uppercase;
 }
 
-/* Dot separator between location and date */
-.gallery-lightbox__badge + .gallery-lightbox__badge::before {
+.gallery-lightbox__badge[hidden] {
+  display: none !important;
+}
+
+/* Dot separator between location and date (only when location badge is visible) */
+.gallery-lightbox__badge--location:not([hidden]) + .gallery-lightbox__badge--date:not([hidden])::before {
   content: '·';
   margin: 0 8px;
   color: rgba(255, 255, 255, 0.2);
