@@ -253,134 +253,151 @@ permalink: /gallery/
       renderPhoto(index);
       requestAnimationFrame(syncMetaWidth);
       closeBtn.focus();
+
+      // Push history state so hardware/browser Back button closes lightbox instead of leaving page
+      if (!window.location.hash || window.location.hash !== '#photo-view') {
+        history.pushState({ galleryLightbox: true }, '', '#photo-view');
+      }
     }
 
-    function closeLightbox() {
-      if (!isOpen) return;
-      isOpen = false;
-      lightbox.classList.remove('is-active');
-      document.body.classList.remove('gallery-lightbox-open');
+      function closeLightbox(fromHistory) {
+        if (!isOpen) return;
+        isOpen = false;
+        lightbox.classList.remove('is-active');
+        document.body.classList.remove('gallery-lightbox-open');
 
-      setTimeout(function () {
-        if (!isOpen) {
-          lightbox.setAttribute('hidden', '');
-          imgEl.src = '';
-          if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
-            lastActiveElement.focus();
-          }
+        // If closed via UI (close button, backdrop, Escape, swipe), revert the history hash
+        if (!fromHistory && window.location.hash === '#photo-view') {
+          history.back();
         }
-      }, 220);
-    }
 
-    function showNext() {
-      renderPhoto((currentIndex + 1) % items.length);
-    }
-
-    function showPrev() {
-      renderPhoto((currentIndex - 1 + items.length) % items.length);
-    }
-
-    // Attach click listeners to cards
-    items.forEach(function (item, idx) {
-      const btn = item.querySelector('.gallery-card__btn');
-      if (btn) {
-        btn.addEventListener('click', function (e) {
-          e.preventDefault();
-          openLightbox(idx);
-        });
+        setTimeout(function () {
+          if (!isOpen) {
+            lightbox.setAttribute('hidden', '');
+            imgEl.src = '';
+            if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
+              lastActiveElement.focus();
+            }
+          }
+        }, 220);
       }
-    });
 
-    // Control buttons
-    closeBtn.addEventListener('click', closeLightbox);
-    nextBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      showNext();
-    });
-    prevBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      showPrev();
-    });
+      // Handle mobile/browser Back button to close lightbox
+      window.addEventListener('popstate', function () {
+        if (isOpen) {
+          closeLightbox(true);
+        }
+      });
 
-    // Backdrop click
-    lightbox.addEventListener('click', function (e) {
-      if (e.target.hasAttribute('data-action') && e.target.getAttribute('data-action') === 'close') {
-        closeLightbox();
+      function showNext() {
+        renderPhoto((currentIndex + 1) % items.length);
       }
-    });
 
-    // Click on stage background to close (if not clicking image or buttons)
-    const stage = document.getElementById('lightboxStage');
-    if (stage) {
-      stage.addEventListener('click', function (e) {
-        if (e.target === stage || e.target === figureEl) {
+      function showPrev() {
+        renderPhoto((currentIndex - 1 + items.length) % items.length);
+      }
+
+      // Attach click listeners to cards
+      items.forEach(function (item, idx) {
+        const btn = item.querySelector('.gallery-card__btn');
+        if (btn) {
+          btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            openLightbox(idx);
+          });
+        }
+      });
+
+      // Control buttons
+      closeBtn.addEventListener('click', closeLightbox);
+      nextBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        showNext();
+      });
+      prevBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        showPrev();
+      });
+
+      // Backdrop click
+      lightbox.addEventListener('click', function (e) {
+        if (e.target.hasAttribute('data-action') && e.target.getAttribute('data-action') === 'close') {
           closeLightbox();
         }
       });
-    }
 
-    // Keyboard navigation
-    document.addEventListener('keydown', function (e) {
-      if (!isOpen) return;
-
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        closeLightbox();
-      } else if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        showNext();
-      } else if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        showPrev();
+      // Click on stage background to close (if not clicking image or buttons)
+      const stage = document.getElementById('lightboxStage');
+      if (stage) {
+        stage.addEventListener('click', function (e) {
+          if (e.target === stage || e.target === figureEl) {
+            closeLightbox();
+          }
+        });
       }
-    });
 
-    // Touch & Swipe navigation for mobile
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchEndX = 0;
-    let touchEndY = 0;
+      // Keyboard navigation
+      document.addEventListener('keydown', function (e) {
+        if (!isOpen) return;
 
-    lightbox.addEventListener('touchstart', function (e) {
-      if (!isOpen || e.touches.length > 1) return;
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-
-    lightbox.addEventListener('touchend', function (e) {
-      if (!isOpen || e.changedTouches.length === 0) return;
-      touchEndX = e.changedTouches[0].clientX;
-      touchEndY = e.changedTouches[0].clientY;
-
-      const diffX = touchEndX - touchStartX;
-      const diffY = touchEndY - touchStartY;
-
-      // Horizontal swipe
-      if (Math.abs(diffX) > 45 && Math.abs(diffX) > Math.abs(diffY)) {
-        if (diffX < 0) {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          closeLightbox();
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
           showNext();
-        } else {
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
           showPrev();
         }
-      }
-      // Swipe down to dismiss
-      else if (diffY > 90 && Math.abs(diffY) > Math.abs(diffX) * 1.5) {
-        closeLightbox();
-      }
-    }, { passive: true });
+      });
 
-    // Protect images against right-click save and drag-to-download on desktop & mobile
-    document.addEventListener('contextmenu', function (e) {
-      if (e.target.closest('.gallery-card') || e.target.closest('.gallery-lightbox')) {
-        e.preventDefault();
-      }
-    });
+      // Touch & Swipe navigation for mobile
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchEndX = 0;
+      let touchEndY = 0;
 
-    document.addEventListener('dragstart', function (e) {
-      if (e.target.matches('.gallery-card__img, .gallery-lightbox__img')) {
-        e.preventDefault();
-      }
-    });
+      lightbox.addEventListener('touchstart', function (e) {
+        if (!isOpen || e.touches.length > 1) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
 
-  })();
+      lightbox.addEventListener('touchend', function (e) {
+        if (!isOpen || e.changedTouches.length === 0) return;
+        touchEndX = e.changedTouches[0].clientX;
+        touchEndY = e.changedTouches[0].clientY;
+
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+
+        // Horizontal swipe
+        if (Math.abs(diffX) > 45 && Math.abs(diffX) > Math.abs(diffY)) {
+          if (diffX < 0) {
+            showNext();
+          } else {
+            showPrev();
+          }
+        }
+        // Swipe down to dismiss
+        else if (diffY > 90 && Math.abs(diffY) > Math.abs(diffX) * 1.5) {
+          closeLightbox();
+        }
+      }, { passive: true });
+
+      // Protect images against right-click save and drag-to-download on desktop & mobile
+      document.addEventListener('contextmenu', function (e) {
+        if (e.target.closest('.gallery-card') || e.target.closest('.gallery-lightbox')) {
+          e.preventDefault();
+        }
+      });
+
+      document.addEventListener('dragstart', function (e) {
+        if (e.target.matches('.gallery-card__img, .gallery-lightbox__img')) {
+          e.preventDefault();
+        }
+      });
+
+    }) ();
 </script>
