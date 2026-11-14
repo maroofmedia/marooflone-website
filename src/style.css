@@ -4670,7 +4670,6 @@ pre {
   overflow: hidden;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
-  contain: paint;
   flex-grow: var(--aspect, 1);
   flex-shrink: 1;
   flex-basis: calc(var(--gallery-row-height, 260px) * var(--aspect, 1));
@@ -4714,7 +4713,6 @@ pre {
   object-fit: cover;
   display: block;
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  will-change: transform;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;

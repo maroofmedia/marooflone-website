@@ -210,6 +210,10 @@ permalink: /gallery/
       if (index < 0 || index >= items.length) return;
       currentIndex = index;
       const item = items[currentIndex];
+      const cardImg = item.querySelector('.gallery-card__img');
+      if (cardImg && cardImg.getAttribute('loading') === 'lazy') {
+        cardImg.setAttribute('loading', 'eager');
+      }
 
       const src = item.getAttribute('data-src') || '';
       const alt = item.getAttribute('data-alt') || '';
@@ -402,6 +406,32 @@ permalink: /gallery/
           closeLightbox();
         }
       }, { passive: true });
+
+      // Proactive viewport loader: ensures lazy gallery images reliably start loading well before entering viewport
+      if ('IntersectionObserver' in window) {
+        const lazyObserver = new IntersectionObserver(function (entries, observer) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              const card = entry.target;
+              const img = card.querySelector('.gallery-card__img');
+              if (img && img.getAttribute('loading') === 'lazy') {
+                img.loading = 'eager';
+                img.removeAttribute('loading');
+              }
+              observer.unobserve(card);
+            }
+          });
+        }, {
+          rootMargin: '500px 0px 500px 0px'
+        });
+
+        document.querySelectorAll('.gallery-card').forEach(function (card) {
+          const img = card.querySelector('.gallery-card__img');
+          if (img && img.complete && img.naturalWidth > 0) return;
+          lazyObserver.observe(card);
+        });
+      }
+
 
       // Protect images against right-click save and drag-to-download on desktop & mobile
       document.addEventListener('contextmenu', function (e) {
