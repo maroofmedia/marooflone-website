@@ -3,6 +3,35 @@ const path = require('path');
 const fs = require('fs');
 const { DateTime } = require('luxon');
 
+let imageSizeModule = null;
+try {
+  imageSizeModule = require('image-size');
+} catch (e) {}
+
+function probeDiskDimensions(src) {
+  if (!src) return null;
+  try {
+    const rel = src.replace(/^\/+/, '');
+    const diskPath = path.join(__dirname, '..', '..', rel);
+    if (!fs.existsSync(diskPath)) return null;
+
+    if (imageSizeModule && imageSizeModule.imageSize) {
+      const fd = fs.openSync(diskPath, 'r');
+      const buffer = Buffer.alloc(65536);
+      fs.readSync(fd, buffer, 0, 65536, 0);
+      fs.closeSync(fd);
+      const res = imageSizeModule.imageSize(buffer);
+      if (res && res.width && res.height) {
+        if (res.orientation && res.orientation >= 5 && res.orientation <= 8) {
+          return { width: res.height, height: res.width };
+        }
+        return { width: res.width, height: res.height };
+      }
+    }
+  } catch (err) {}
+  return null;
+}
+
 // Cache gallery metadata
 let cachedMeta = null;
 function getGalleryMeta() {
@@ -55,16 +84,25 @@ function justifiedGalleryShortcode(items, options = {}) {
 
   const metaMap = getGalleryMeta();
 
+  function resolveDimensions(src, directW, directH) {
+    if (directW && directH) return { width: directW, height: directH };
+    const meta = metaMap[src];
+    if (meta && meta.width && meta.height) return { width: meta.width, height: meta.height };
+    const disk = probeDiskDimensions(src);
+    if (disk) return disk;
+    return { width: 1200, height: 800 };
+  }
+
   // Normalize image objects from raw image objects or 11ty collection posts
   const normalized = items.map((item) => {
     // 11ty collection post format
     if (item.data) {
       const src = item.data.image || '';
-      const meta = metaMap[src] || {};
+      const dims = resolveDimensions(src, null, null);
       return {
         src,
-        width: meta.width || 1200,
-        height: meta.height || 800,
+        width: dims.width,
+        height: dims.height,
         alt: item.data.alt || '',
         date: formatDate(item.data.date),
         location: item.data.location || '',
@@ -74,11 +112,11 @@ function justifiedGalleryShortcode(items, options = {}) {
 
     // Direct object format { src, originalWidth, originalHeight, alt, date, location, desc }
     const src = item.src || '';
-    const meta = metaMap[src] || {};
+    const dims = resolveDimensions(src, item.originalWidth || item.width, item.originalHeight || item.height);
     return {
       src,
-      width: item.originalWidth || item.width || meta.width || 1200,
-      height: item.originalHeight || item.height || meta.height || 800,
+      width: dims.width,
+      height: dims.height,
       alt: item.alt || '',
       date: item.date ? formatDate(item.date) : '',
       location: item.location || '',

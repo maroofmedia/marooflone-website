@@ -9,6 +9,11 @@
     "height": 2000,
     "aspect": 0.75
   },
+  "/gallery/gallery-images/bandipora.jpg": {
+    "width": 1500,
+    "height": 2000,
+    "aspect": 0.75
+  },
   "/gallery/gallery-images/children-playing-cricket.jpeg": {
     "width": 2000,
     "height": 1125,
@@ -34,6 +39,11 @@
     "height": 2000,
     "aspect": 0.75
   },
+  "/gallery/gallery-images/gulmarg.jpg": {
+    "width": 2000,
+    "height": 1121,
+    "aspect": 1.784
+  },
   "/gallery/gallery-images/into-the-woods.jpg": {
     "width": 1500,
     "height": 2000,
@@ -55,6 +65,11 @@
     "aspect": 0.75
   },
   "/gallery/gallery-images/maroof-sonmarg.jpg": {
+    "width": 1500,
+    "height": 2000,
+    "aspect": 0.75
+  },
+  "/gallery/gallery-images/Montane-Eco-Park-Rajpora.jpg": {
     "width": 1500,
     "height": 2000,
     "aspect": 0.75
@@ -94,10 +109,25 @@
     "height": 1363,
     "aspect": 1.467
   },
+  "/gallery/gallery-images/walking-chinar-leaves.jpg": {
+    "width": 720,
+    "height": 1280,
+    "aspect": 0.563
+  },
   "/gallery/gallery-images/Winter-in-the-woods.jpg": {
     "width": 2000,
     "height": 903,
     "aspect": 2.215
+  },
+  "/gallery/gallery-images/woods.jpg": {
+    "width": 720,
+    "height": 1280,
+    "aspect": 0.563
+  },
+  "/gallery/gallery-images/wular-kinare.jpg": {
+    "width": 2000,
+    "height": 900,
+    "aspect": 2.222
   },
   "/gallery/gallery-images/wular-lake.jpg": {
     "width": 1128,
