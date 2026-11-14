@@ -28,6 +28,7 @@
     "sharp": "^0.35.5"
   },
   "dependencies": {
+    "justified-layout": "^4.1.0",
     "markdown-it": "^14.1.0",
     "markdown-it-anchor": "^9.2.0",
     "markdown-it-link-attributes": "^4.0.1"

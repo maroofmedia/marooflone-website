@@ -127,6 +127,9 @@ module.exports = function (eleventyConfig) {
     return { width: 1200, height: 800, aspect: 1.333 };
   });
 
+  // Google Photos Justified Layout Shortcode (Flickr justified-layout)
+  eleventyConfig.addShortcode("justifiedGallery", require("./src/_includes/shortcodes/justifiedGallery.js"));
+
   // Group collection by month (for gallery view like Google Photos)
   eleventyConfig.addFilter("groupByMonth", (collection) => {
     if (!collection) return [];

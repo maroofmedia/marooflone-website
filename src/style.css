@@ -4643,37 +4643,31 @@ pre {
   line-height: 1.1;
 }
 
-/* Google Photos Justified Masonry */
-:root {
-  --gallery-row-height: 260px;
-}
-
+/* Google Photos Justified Layout (Flickr justified-layout) */
 .gallery-masonry {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  position: relative;
   width: 100%;
+  aspect-ratio: var(--container-w) / var(--container-h);
 }
 
-.gallery-masonry::after {
-  content: '';
-  flex-grow: 999999999;
-  flex-basis: 0;
-  height: 0;
+@supports not (aspect-ratio: 1) {
+  .gallery-masonry {
+    height: 0;
+    padding-bottom: calc((var(--container-h) / var(--container-w)) * 100%);
+  }
 }
 
 .gallery-card {
+  position: absolute;
   margin: 0;
-  height: var(--gallery-row-height, 260px);
-  position: relative;
-  border-radius: 6px;
+  top: calc((var(--top) / var(--container-h)) * 100%);
+  left: calc((var(--left) / var(--container-w)) * 100%);
+  width: calc((var(--w) / var(--container-w)) * 100%);
+  height: calc((var(--h) / var(--container-h)) * 100%);
+  border-radius: 12px;
   overflow: hidden;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
-  flex-grow: var(--aspect, 1);
-  flex-shrink: 1;
-  flex-basis: calc(var(--gallery-row-height, 260px) * var(--aspect, 1));
-  max-width: 100%;
   transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
     border-color 0.25s ease,
     box-shadow 0.28s ease;
@@ -4712,6 +4706,7 @@ pre {
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 12px;
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -5030,76 +5025,23 @@ body.gallery-lightbox-open {
    RESPONSIVE BREAKPOINTS (Mobile-First)
    ========================================================================== */
 
-@media (max-width: 880px) {
-  :root {
-    --gallery-row-height: 210px;
-  }
-}
-
-@media (max-width: 768px) {
-  .gallery-page-section {
-    padding-top: 20px;
-    padding-bottom: 50px;
-  }
-
-  .gallery-header {
-    margin-bottom: 1.75rem;
-    padding-bottom: 1.25rem;
-  }
-
-  .gallery-section-title {
-    font-size: 2.15rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .gallery-description {
-    font-size: 0.92rem;
-    line-height: 1.6;
-  }
-
-  .gallery-year-group {
-    margin-bottom: 2.5rem;
-  }
-
-  .gallery-year-heading {
-    font-size: 1.85rem;
-    margin-bottom: 0.85rem;
-  }
-
-  .gallery-lightbox__topbar {
-    padding: 12px 16px;
-  }
-
-  .gallery-lightbox__stage {
-    padding: 0 8px;
-  }
-
-  .gallery-lightbox__nav {
-    width: 38px;
-    height: 38px;
-  }
-
-  .gallery-lightbox__bottombar {
-    padding: 14px 12px 20px;
-  }
-
-  .gallery-lightbox__desc {
-    font-size: 0.88rem;
-    line-height: 1.6;
-  }
-}
-
-@media (max-width: 540px) {
-  :root {
-    --gallery-row-height: 160px;
-  }
-
+@media (max-width: 640px) {
   .gallery-masonry {
-    gap: 6px;
+    aspect-ratio: var(--container-w-m) / var(--container-h-m);
+  }
+
+  @supports not (aspect-ratio: 1) {
+    .gallery-masonry {
+      padding-bottom: calc((var(--container-h-m) / var(--container-w-m)) * 100%);
+    }
   }
 
   .gallery-card {
-    border-radius: 5px;
+    top: calc((var(--top-m) / var(--container-h-m)) * 100%);
+    left: calc((var(--left-m) / var(--container-w-m)) * 100%);
+    width: calc((var(--w-m) / var(--container-w-m)) * 100%);
+    height: calc((var(--h-m) / var(--container-h-m)) * 100%);
+    border-radius: 12px;
   }
 
   .gallery-card__overlay {
@@ -5136,11 +5078,10 @@ body.gallery-lightbox-open {
 }
 
 @media (max-width: 360px) {
-  :root {
-    --gallery-row-height: 140px;
-  }
-
   .gallery-section-title {
+    font-size: 1.75rem;
+  }
+}
     font-size: 1.75rem;
   }
 }

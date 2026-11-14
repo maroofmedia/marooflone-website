@@ -19,7 +19,17 @@
     "height": 2000,
     "aspect": 0.75
   },
+  "/gallery/gallery-images/december-chinar.jpg": {
+    "width": 1311,
+    "height": 2000,
+    "aspect": 0.655
+  },
   "/gallery/gallery-images/eid-2026.jpg": {
+    "width": 1500,
+    "height": 2000,
+    "aspect": 0.75
+  },
+  "/gallery/gallery-images/general-coach.jpg": {
     "width": 1500,
     "height": 2000,
     "aspect": 0.75
@@ -54,6 +64,11 @@
     "height": 2000,
     "aspect": 0.75
   },
+  "/gallery/gallery-images/october-chinar.jpg": {
+    "width": 1500,
+    "height": 2000,
+    "aspect": 0.75
+  },
   "/gallery/gallery-images/old-style.jpg": {
     "width": 1500,
     "height": 2000,
@@ -68,6 +83,21 @@
     "width": 2000,
     "height": 900,
     "aspect": 2.222
+  },
+  "/gallery/gallery-images/sonmarg-snow.jpg": {
+    "width": 1500,
+    "height": 2000,
+    "aspect": 0.75
+  },
+  "/gallery/gallery-images/sonmarg.jpg": {
+    "width": 2000,
+    "height": 1363,
+    "aspect": 1.467
+  },
+  "/gallery/gallery-images/Winter-in-the-woods.jpg": {
+    "width": 2000,
+    "height": 903,
+    "aspect": 2.215
   },
   "/gallery/gallery-images/wular-lake.jpg": {
     "width": 1128,

@@ -25,67 +25,13 @@ permalink: /gallery/
 
     <!-- Photography Gallery grouped by year -->
     {% set yearGroups = collections.gallery | reverse | groupByYear %}
-    {% set globalPhotoIndex = 0 %}
+    {% set currentPhotoIndex = 0 %}
     {% for group in yearGroups %}
     <div class="gallery-year-group">
       <h2 class="gallery-year-heading">{{ group.year }}</h2>
-      <div class="gallery-masonry" role="region" aria-label="Photos from {{ group.year }}">
-        {% for item in group.posts %}
-        {% set isAboveTheFold = (globalPhotoIndex < 4) %}
-        {% set meta = item.data.image | galleryMeta %}
-        {% set aspect = meta.aspect if meta else 1.333 %}
-        {% set imgW = meta.width if meta else 1200 %}
-        {% set imgH = meta.height if meta else 800 %}
-        <figure class="gallery-card" data-gallery-item
-          data-aspect="{{ aspect }}"
-          style="--aspect: {{ aspect }}; flex-grow: {{ aspect }}; flex-basis: calc(var(--gallery-row-height, 260px) * {{ aspect }});"
-          data-src="{{ item.data.image }}"
-          data-alt="{{ item.data.alt | escape }}" data-date="{{ item.data.date | galleryDate }}"
-          data-location="{{ (item.data.location or '') | escape }}"
-          data-desc="{{ (item.data.description or '') | escape }}">
-          <button type="button" class="gallery-card__btn" aria-label="View photograph: {{ item.data.alt | escape }}"
-            aria-haspopup="dialog">
-            <div class="gallery-card__img-wrap">
-              <img src="{{ item.data.image }}" alt="{{ item.data.alt | escape }}"
-                width="{{ imgW }}" height="{{ imgH }}"
-                {% if isAboveTheFold %}
-                loading="eager" fetchpriority="high"
-                {% else %}
-                loading="lazy"
-                {% endif %}
-                decoding="async"
-                class="gallery-card__img">
-            </div>
-            <div class="gallery-card__overlay">
-              <div class="gallery-card__meta">
-                {% if item.data.location %}
-                <span class="gallery-card__location">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                  {{ item.data.location }}
-                </span>
-                {% endif %}
-                <span class="gallery-card__date">{{ item.data.date | galleryDate }}</span>
-              </div>
-              <div class="gallery-card__zoom-indicator" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <polyline points="9 21 3 21 3 15"></polyline>
-                  <line x1="21" y1="3" x2="14" y2="10"></line>
-                  <line x1="3" y1="21" x2="10" y2="14"></line>
-                </svg>
-              </div>
-            </div>
-          </button>
-        </figure>
-        {% set globalPhotoIndex = globalPhotoIndex + 1 %}
-        {% endfor %}
-      </div>
+      {% justifiedGallery group.posts, { globalPhotoIndex: currentPhotoIndex } %}
     </div>
+    {% set currentPhotoIndex = currentPhotoIndex + group.posts.length %}
     {% endfor %}
 
   </div>
