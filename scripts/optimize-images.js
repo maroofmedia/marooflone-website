@@ -13,6 +13,7 @@ async function optimizeImages() {
 
   const files = fs.readdirSync(GALLERY_DIR);
   let processedCount = 0;
+  const metaMap = {};
 
   for (const file of files) {
     const ext = path.extname(file).toLowerCase();
@@ -35,6 +36,11 @@ async function optimizeImages() {
       const isHeavy = originalSize > 800 * 1024;
 
       if (!hasExif && !isOversized && !isHeavy) {
+        metaMap['/gallery/gallery-images/' + file] = {
+          width: metadata.width,
+          height: metadata.height,
+          aspect: Number((metadata.width / metadata.height).toFixed(3))
+        };
         continue;
       }
 
@@ -77,10 +83,29 @@ async function optimizeImages() {
         processedCount++;
         console.log(`[optimize-images] ✔ Processed ${file}: ${(originalSize / 1024).toFixed(1)} KB -> ${(outputBuffer.length / 1024).toFixed(1)} KB (EXIF stripped)`);
       }
+
+      const updatedMeta = await sharp(outputBuffer).metadata();
+      metaMap['/gallery/gallery-images/' + file] = {
+        width: updatedMeta.width,
+        height: updatedMeta.height,
+        aspect: Number((updatedMeta.width / updatedMeta.height).toFixed(3))
+      };
     } catch (err) {
       console.error(`[optimize-images] ✖ Error processing ${file}:`, err.message);
     }
   }
+
+  // Persist gallery metadata manifest for Eleventy build
+  const dataDir = path.join(__dirname, '..', 'src', '_data');
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+  fs.writeFileSync(
+    path.join(dataDir, 'galleryMeta.json'),
+    JSON.stringify(metaMap, null, 2),
+    'utf8'
+  );
+  console.log(`[optimize-images] Wrote metadata for ${Object.keys(metaMap).length} gallery images to src/_data/galleryMeta.json`);
 
   if (processedCount > 0) {
     console.log(`[optimize-images] Processed ${processedCount} image(s).`);

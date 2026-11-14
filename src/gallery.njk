@@ -25,19 +25,35 @@ permalink: /gallery/
 
     <!-- Photography Gallery grouped by year -->
     {% set yearGroups = collections.gallery | reverse | groupByYear %}
+    {% set globalPhotoIndex = 0 %}
     {% for group in yearGroups %}
     <div class="gallery-year-group">
       <h2 class="gallery-year-heading">{{ group.year }}</h2>
       <div class="gallery-masonry" role="region" aria-label="Photos from {{ group.year }}">
         {% for item in group.posts %}
-        <figure class="gallery-card" data-gallery-item data-src="{{ item.data.image }}"
+        {% set isAboveTheFold = (globalPhotoIndex < 4) %}
+        {% set meta = item.data.image | galleryMeta %}
+        {% set aspect = meta.aspect if meta else 1.333 %}
+        {% set imgW = meta.width if meta else 1200 %}
+        {% set imgH = meta.height if meta else 800 %}
+        <figure class="gallery-card" data-gallery-item
+          data-aspect="{{ aspect }}"
+          style="--aspect: {{ aspect }}; flex-grow: {{ aspect }}; flex-basis: calc(var(--gallery-row-height, 260px) * {{ aspect }});"
+          data-src="{{ item.data.image }}"
           data-alt="{{ item.data.alt | escape }}" data-date="{{ item.data.date | galleryDate }}"
           data-location="{{ (item.data.location or '') | escape }}"
           data-desc="{{ (item.data.description or '') | escape }}">
           <button type="button" class="gallery-card__btn" aria-label="View photograph: {{ item.data.alt | escape }}"
             aria-haspopup="dialog">
             <div class="gallery-card__img-wrap">
-              <img src="{{ item.data.image }}" alt="{{ item.data.alt | escape }}" loading="lazy"
+              <img src="{{ item.data.image }}" alt="{{ item.data.alt | escape }}"
+                width="{{ imgW }}" height="{{ imgH }}"
+                {% if isAboveTheFold %}
+                loading="eager" fetchpriority="high"
+                {% else %}
+                loading="lazy"
+                {% endif %}
+                decoding="async"
                 class="gallery-card__img">
             </div>
             <div class="gallery-card__overlay">
@@ -66,6 +82,7 @@ permalink: /gallery/
             </div>
           </button>
         </figure>
+        {% set globalPhotoIndex = globalPhotoIndex + 1 %}
         {% endfor %}
       </div>
     </div>

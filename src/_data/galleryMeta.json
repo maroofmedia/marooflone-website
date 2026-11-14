@@ -1,0 +1,77 @@
+{
+  "/gallery/gallery-images/apples-2.jpg": {
+    "width": 2000,
+    "height": 1500,
+    "aspect": 1.333
+  },
+  "/gallery/gallery-images/apples.jpg": {
+    "width": 1500,
+    "height": 2000,
+    "aspect": 0.75
+  },
+  "/gallery/gallery-images/children-playing-cricket.jpeg": {
+    "width": 2000,
+    "height": 1125,
+    "aspect": 1.778
+  },
+  "/gallery/gallery-images/coca-cola-disposable glasses.jpg": {
+    "width": 1500,
+    "height": 2000,
+    "aspect": 0.75
+  },
+  "/gallery/gallery-images/eid-2026.jpg": {
+    "width": 1500,
+    "height": 2000,
+    "aspect": 0.75
+  },
+  "/gallery/gallery-images/into-the-woods.jpg": {
+    "width": 1500,
+    "height": 2000,
+    "aspect": 0.75
+  },
+  "/gallery/gallery-images/jamia-masjid-delhi.jpg": {
+    "width": 2000,
+    "height": 1500,
+    "aspect": 1.333
+  },
+  "/gallery/gallery-images/maroof-coca-cola-bg.jpg": {
+    "width": 1128,
+    "height": 2000,
+    "aspect": 0.564
+  },
+  "/gallery/gallery-images/maroof-qila-mubarak.jpg": {
+    "width": 1500,
+    "height": 2000,
+    "aspect": 0.75
+  },
+  "/gallery/gallery-images/maroof-sonmarg.jpg": {
+    "width": 1500,
+    "height": 2000,
+    "aspect": 0.75
+  },
+  "/gallery/gallery-images/mountains.jpg": {
+    "width": 1500,
+    "height": 2000,
+    "aspect": 0.75
+  },
+  "/gallery/gallery-images/old-style.jpg": {
+    "width": 1500,
+    "height": 2000,
+    "aspect": 0.75
+  },
+  "/gallery/gallery-images/qila-mubarak-bathinda-punjab.jpg": {
+    "width": 1500,
+    "height": 2000,
+    "aspect": 0.75
+  },
+  "/gallery/gallery-images/shiva-marbal-road-sopore.jpg": {
+    "width": 2000,
+    "height": 900,
+    "aspect": 2.222
+  },
+  "/gallery/gallery-images/wular-lake.jpg": {
+    "width": 1128,
+    "height": 2000,
+    "aspect": 0.564
+  }
+}
