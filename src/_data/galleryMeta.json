@@ -14,6 +14,11 @@
     "height": 2000,
     "aspect": 0.75
   },
+  "/gallery/gallery-images/bomai-sopore.jpeg": {
+    "width": 2000,
+    "height": 1943,
+    "aspect": 1.029
+  },
   "/gallery/gallery-images/children-playing-cricket.jpeg": {
     "width": 2000,
     "height": 1125,
@@ -68,6 +73,11 @@
     "width": 1500,
     "height": 2000,
     "aspect": 0.75
+  },
+  "/gallery/gallery-images/Montane-Eco-Park-Rajpora-01.jpg": {
+    "width": 1399,
+    "height": 2000,
+    "aspect": 0.7
   },
   "/gallery/gallery-images/Montane-Eco-Park-Rajpora.jpg": {
     "width": 1500,
