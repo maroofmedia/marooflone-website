@@ -4747,17 +4747,6 @@ pre {
   text-transform: uppercase;
 }
 
-.gallery-card__caption {
-  font-family: 'Jost', var(--font-main);
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-}
-
 .gallery-card__date {
   font-family: var(--font-mono);
   font-size: 0.68rem;
@@ -5048,11 +5037,6 @@ body.gallery-lightbox-open {
     padding: 10px;
   }
 
-  .gallery-card__caption {
-    font-size: 0.80rem;
-    line-height: 1.25;
-  }
-
   .gallery-card__location {
     font-size: 0.62rem;
   }
@@ -5079,9 +5063,6 @@ body.gallery-lightbox-open {
 
 @media (max-width: 360px) {
   .gallery-section-title {
-    font-size: 1.75rem;
-  }
-}
     font-size: 1.75rem;
   }
 }

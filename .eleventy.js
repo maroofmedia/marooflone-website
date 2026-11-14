@@ -112,52 +112,8 @@ module.exports = function (eleventyConfig) {
     return dt.isValid ? dt.toFormat("MMM d, yyyy") : "";
   });
 
-  // Gallery Image Metadata filter (aspect ratio, width, height)
-  eleventyConfig.addFilter("galleryMeta", (imagePath) => {
-    const fs = require("fs");
-    const path = require("path");
-    const metaFile = path.join(__dirname, "src", "_data", "galleryMeta.json");
-    try {
-      if (fs.existsSync(metaFile)) {
-        const meta = JSON.parse(fs.readFileSync(metaFile, "utf8"));
-        const normalized = imagePath.startsWith("/") ? imagePath : "/" + imagePath;
-        if (meta[normalized]) return meta[normalized];
-      }
-    } catch (e) {}
-    return { width: 1200, height: 800, aspect: 1.333 };
-  });
-
   // Google Photos Justified Layout Shortcode (Flickr justified-layout)
   eleventyConfig.addShortcode("justifiedGallery", require("./src/_includes/shortcodes/justifiedGallery.js"));
-
-  // Group collection by month (for gallery view like Google Photos)
-  eleventyConfig.addFilter("groupByMonth", (collection) => {
-    if (!collection) return [];
-    const groups = {};
-    for (const item of collection) {
-      let dt;
-      if (item.date instanceof Date) {
-        dt = DateTime.fromJSDate(item.date, { zone: "utc" });
-      } else if (typeof item.date === "string") {
-        dt = DateTime.fromISO(item.date, { zone: "utc" });
-      } else {
-        dt = DateTime.fromJSDate(new Date(item.date), { zone: "utc" });
-      }
-      const monthKey = dt.isValid ? dt.toFormat("yyyy-MM") : "Other";
-      const displayLabel = dt.isValid ? dt.toFormat("MMMM yyyy") : "Other";
-      if (!groups[monthKey]) {
-        groups[monthKey] = {
-          monthKey,
-          label: displayLabel,
-          posts: []
-        };
-      }
-      groups[monthKey].posts.push(item);
-    }
-    return Object.keys(groups)
-      .sort((a, b) => b.localeCompare(a))
-      .map((key) => groups[key]);
-  });
 
   // Group collection by year
   eleventyConfig.addFilter("groupByYear", (collection) => {
