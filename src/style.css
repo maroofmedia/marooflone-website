@@ -2052,6 +2052,13 @@ main {
 .main-article {
   padding-top: 48px;
   margin-bottom: 40px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.article-content {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .article-title {
