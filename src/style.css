@@ -5015,6 +5015,7 @@ body.gallery-lightbox-open {
   line-height: 1.65;
   margin: 0;
   max-width: 100%;
+  white-space: pre-line;
 }
 
 /* ==========================================================================

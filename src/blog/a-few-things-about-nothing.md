@@ -2,7 +2,7 @@
 title: "A Few Things About Nothing"
 description: Perhaps the missing parts are the story.
 author:
-  - Unknown (perhaps intentionally)
+  - Maroof Lone
 date: 2026-11-17
 tags:
   - post
