@@ -6,7 +6,7 @@ const { DateTime } = require('luxon');
 let imageSizeModule = null;
 try {
   imageSizeModule = require('image-size');
-} catch (e) {}
+} catch (e) { }
 
 function probeDiskDimensions(src) {
   if (!src) return null;
@@ -28,7 +28,7 @@ function probeDiskDimensions(src) {
         return { width: res.width, height: res.height };
       }
     }
-  } catch (err) {}
+  } catch (err) { }
   return null;
 }
 
@@ -42,7 +42,7 @@ function getGalleryMeta() {
       cachedMeta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
       return cachedMeta;
     }
-  } catch (e) {}
+  } catch (e) { }
   return {};
 }
 
@@ -202,7 +202,6 @@ function justifiedGalleryShortcode(items, options = {}) {
                 </svg>
                 ${escapeHtml(item.location)}
               </span>` : ''}
-              ${item.date ? `<span class="gallery-card__date">${escapeHtml(item.date)}</span>` : ''}
             </div>
             <div class="gallery-card__zoom-indicator" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

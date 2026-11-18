@@ -79,6 +79,11 @@
     "height": 973,
     "aspect": 2.055
   },
+  "/gallery/gallery-images/hilltop.jpg": {
+    "width": 1128,
+    "height": 2000,
+    "aspect": 0.564
+  },
   "/gallery/gallery-images/into-the-woods.jpg": {
     "width": 1500,
     "height": 2000,
@@ -163,6 +168,11 @@
     "width": 2000,
     "height": 900,
     "aspect": 2.222
+  },
+  "/gallery/gallery-images/sky-and-silence.png": {
+    "width": 1086,
+    "height": 1448,
+    "aspect": 0.75
   },
   "/gallery/gallery-images/sonmarg-snow.jpg": {
     "width": 1500,
