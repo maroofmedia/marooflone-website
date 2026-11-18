@@ -251,407 +251,407 @@ permalink: /gallery/
     // Sync bottombar width to match the rendered image width
     function syncMetaWidth() {
       if (!bottomBar || !imgEl.naturalWidth) return;
-        const unscaledWidth = imgEl.offsetWidth || (imgEl.getBoundingClientRect().width / (zoomLevel || 1));
-        if (unscaledWidth > 0) {
-          if (window.innerWidth <= 640) {
-            const mobileTarget = Math.max(unscaledWidth, Math.min(window.innerWidth - 28, 380));
-            bottomBar.style.width = mobileTarget + 'px';
-            bottomBar.style.maxWidth = '100%';
-          } else {
-            bottomBar.style.width = unscaledWidth + 'px';
-            bottomBar.style.maxWidth = '100%';
+      const unscaledWidth = imgEl.offsetWidth || (imgEl.getBoundingClientRect().width / (zoomLevel || 1));
+      if (unscaledWidth > 0) {
+        if (window.innerWidth <= 640) {
+          const mobileTarget = Math.max(unscaledWidth, Math.min(window.innerWidth - 28, 380));
+          bottomBar.style.width = mobileTarget + 'px';
+          bottomBar.style.maxWidth = '100%';
+        } else {
+          bottomBar.style.width = unscaledWidth + 'px';
+          bottomBar.style.maxWidth = '100%';
+        }
+      }
+      updateBadgeWrap();
+    }
+
+    window.addEventListener('resize', function () {
+      if (isOpen) {
+        syncMetaWidth();
+        if (zoomLevel > 1) {
+          clampPan();
+          applyZoom(false);
+        }
+      }
+    });
+
+    // Preload helper
+    function preloadImage(src) {
+      if (!src) return;
+      const img = new Image();
+      img.src = src;
+    }
+
+    function renderPhoto(index) {
+      if (index < 0 || index >= items.length) return;
+      resetZoom(false);
+      currentIndex = index;
+      const item = items[currentIndex];
+      const cardImg = item.querySelector('.gallery-card__img');
+      if (cardImg && cardImg.getAttribute('loading') === 'lazy') {
+        cardImg.setAttribute('loading', 'eager');
+      }
+
+      const src = item.getAttribute('data-src') || '';
+      const alt = item.getAttribute('data-alt') || '';
+      const date = item.getAttribute('data-date') || '';
+      const location = item.getAttribute('data-location') || '';
+      const desc = item.getAttribute('data-desc') || '';
+
+      // Fade transition for image
+      imgEl.style.opacity = '0.3';
+      imgEl.src = src;
+      imgEl.alt = alt;
+      imgEl.onload = function () {
+        imgEl.style.opacity = '1';
+        syncMetaWidth();
+      };
+
+      // Location badge
+      if (location) {
+        locationEl.textContent = location;
+        locationBadge.hidden = false;
+      } else {
+        locationBadge.hidden = true;
+      }
+
+      // Date badge
+      if (date) {
+        dateEl.textContent = date;
+        dateBadge.hidden = false;
+      } else {
+        dateBadge.hidden = true;
+      }
+
+      // Description
+      if (desc) {
+        descEl.textContent = desc;
+        descEl.style.display = 'block';
+      } else {
+        descEl.style.display = 'none';
+      }
+
+      updateBadgeWrap();
+
+      // Preload neighbours
+      const nextIdx = (currentIndex + 1) % items.length;
+      const prevIdx = (currentIndex - 1 + items.length) % items.length;
+      preloadImage(items[nextIdx].getAttribute('data-src'));
+      preloadImage(items[prevIdx].getAttribute('data-src'));
+    }
+
+    function openLightbox(index) {
+      lastActiveElement = document.activeElement;
+      isOpen = true;
+      lightbox.removeAttribute('hidden');
+
+      // Force reflow for CSS transition
+      void lightbox.offsetWidth;
+      lightbox.classList.add('is-active');
+      document.body.classList.add('gallery-lightbox-open');
+
+      renderPhoto(index);
+      requestAnimationFrame(syncMetaWidth);
+      closeBtn.focus();
+
+      // Push history state so hardware/browser Back button closes lightbox instead of leaving page
+      if (!window.location.hash || window.location.hash !== '#photo-view') {
+        history.pushState({ galleryLightbox: true }, '', '#photo-view');
+      }
+    }
+
+    function closeLightbox(fromHistory) {
+      if (!isOpen) return;
+      resetZoom(false);
+      isOpen = false;
+      lightbox.classList.remove('is-active');
+      document.body.classList.remove('gallery-lightbox-open');
+
+      // If closed via UI (close button, backdrop, Escape, swipe), revert the history hash
+      if (!fromHistory && window.location.hash === '#photo-view') {
+        history.back();
+      }
+
+      setTimeout(function () {
+        if (!isOpen) {
+          lightbox.setAttribute('hidden', '');
+          imgEl.src = '';
+          if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
+            lastActiveElement.focus();
           }
         }
-        updateBadgeWrap();
+      }, 220);
+    }
+
+    // Handle mobile/browser Back button to close lightbox
+    window.addEventListener('popstate', function () {
+      if (isOpen) {
+        closeLightbox(true);
       }
+    });
 
-      window.addEventListener('resize', function () {
-        if (isOpen) {
-          syncMetaWidth();
-          if (zoomLevel > 1) {
-            clampPan();
-            applyZoom(false);
-          }
-        }
-      });
+    function showNext() {
+      renderPhoto((currentIndex + 1) % items.length);
+    }
 
-      // Preload helper
-      function preloadImage(src) {
-        if (!src) return;
-        const img = new Image();
-        img.src = src;
-      }
+    function showPrev() {
+      renderPhoto((currentIndex - 1 + items.length) % items.length);
+    }
 
-      function renderPhoto(index) {
-        if (index < 0 || index >= items.length) return;
-        resetZoom(false);
-        currentIndex = index;
-        const item = items[currentIndex];
-        const cardImg = item.querySelector('.gallery-card__img');
-        if (cardImg && cardImg.getAttribute('loading') === 'lazy') {
-          cardImg.setAttribute('loading', 'eager');
-        }
-
-        const src = item.getAttribute('data-src') || '';
-        const alt = item.getAttribute('data-alt') || '';
-        const date = item.getAttribute('data-date') || '';
-        const location = item.getAttribute('data-location') || '';
-        const desc = item.getAttribute('data-desc') || '';
-
-        // Fade transition for image
-        imgEl.style.opacity = '0.3';
-        imgEl.src = src;
-        imgEl.alt = alt;
-        imgEl.onload = function () {
-          imgEl.style.opacity = '1';
-          syncMetaWidth();
-        };
-
-        // Location badge
-        if (location) {
-          locationEl.textContent = location;
-          locationBadge.hidden = false;
-        } else {
-          locationBadge.hidden = true;
-        }
-
-        // Date badge
-        if (date) {
-          dateEl.textContent = date;
-          dateBadge.hidden = false;
-        } else {
-          dateBadge.hidden = true;
-        }
-
-        // Description
-        if (desc) {
-          descEl.textContent = desc;
-          descEl.style.display = 'block';
-        } else {
-          descEl.style.display = 'none';
-        }
-
-        updateBadgeWrap();
-
-        // Preload neighbours
-        const nextIdx = (currentIndex + 1) % items.length;
-        const prevIdx = (currentIndex - 1 + items.length) % items.length;
-        preloadImage(items[nextIdx].getAttribute('data-src'));
-        preloadImage(items[prevIdx].getAttribute('data-src'));
-      }
-
-      function openLightbox(index) {
-        lastActiveElement = document.activeElement;
-        isOpen = true;
-        lightbox.removeAttribute('hidden');
-
-        // Force reflow for CSS transition
-        void lightbox.offsetWidth;
-        lightbox.classList.add('is-active');
-        document.body.classList.add('gallery-lightbox-open');
-
-        renderPhoto(index);
-        requestAnimationFrame(syncMetaWidth);
-        closeBtn.focus();
-
-        // Push history state so hardware/browser Back button closes lightbox instead of leaving page
-        if (!window.location.hash || window.location.hash !== '#photo-view') {
-          history.pushState({ galleryLightbox: true }, '', '#photo-view');
-        }
-      }
-
-      function closeLightbox(fromHistory) {
-        if (!isOpen) return;
-        resetZoom(false);
-        isOpen = false;
-        lightbox.classList.remove('is-active');
-        document.body.classList.remove('gallery-lightbox-open');
-
-        // If closed via UI (close button, backdrop, Escape, swipe), revert the history hash
-        if (!fromHistory && window.location.hash === '#photo-view') {
-          history.back();
-        }
-
-        setTimeout(function () {
-          if (!isOpen) {
-            lightbox.setAttribute('hidden', '');
-            imgEl.src = '';
-            if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
-              lastActiveElement.focus();
-            }
-          }
-        }, 220);
-      }
-
-      // Handle mobile/browser Back button to close lightbox
-      window.addEventListener('popstate', function () {
-        if (isOpen) {
-          closeLightbox(true);
-        }
-      });
-
-      function showNext() {
-        renderPhoto((currentIndex + 1) % items.length);
-      }
-
-      function showPrev() {
-        renderPhoto((currentIndex - 1 + items.length) % items.length);
-      }
-
-      // Attach click listeners to cards
-      items.forEach(function (item, idx) {
-        const btn = item.querySelector('.gallery-card__btn');
-        if (btn) {
-          btn.addEventListener('click', function (e) {
-            e.preventDefault();
-            openLightbox(idx);
-          });
-        }
-      });
-
-      // Control buttons
-      closeBtn.addEventListener('click', closeLightbox);
-      if (zoomBtn) {
-        zoomBtn.addEventListener('click', function (e) {
-          e.stopPropagation();
-          toggleZoom();
+    // Attach click listeners to cards
+    items.forEach(function (item, idx) {
+      const btn = item.querySelector('.gallery-card__btn');
+      if (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          openLightbox(idx);
         });
       }
-      nextBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        showNext();
-      });
-      prevBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        showPrev();
-      });
+    });
 
-      // Desktop mouse pan & click-to-zoom
-      imgEl.addEventListener('mousedown', function (e) {
-        if (e.button !== 0) return;
-        isDragging = true;
-        hasDragged = false;
-        startPointerX = e.clientX;
-        startPointerY = e.clientY;
+    // Control buttons
+    closeBtn.addEventListener('click', closeLightbox);
+    if (zoomBtn) {
+      zoomBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggleZoom();
+      });
+    }
+    nextBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      showNext();
+    });
+    prevBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      showPrev();
+    });
+
+    // Desktop mouse pan & click-to-zoom
+    imgEl.addEventListener('mousedown', function (e) {
+      if (e.button !== 0) return;
+      isDragging = true;
+      hasDragged = false;
+      startPointerX = e.clientX;
+      startPointerY = e.clientY;
+      startPanX = panX;
+      startPanY = panY;
+      lightbox.classList.add('is-dragging');
+      e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', function (e) {
+      if (!isDragging) return;
+      const dx = e.clientX - startPointerX;
+      const dy = e.clientY - startPointerY;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+        hasDragged = true;
+      }
+      if (zoomLevel > 1) {
+        panX = startPanX + dx;
+        panY = startPanY + dy;
+        clampPan();
+        applyZoom(false);
+      }
+    });
+
+    window.addEventListener('mouseup', function (e) {
+      if (!isDragging) return;
+      isDragging = false;
+      lightbox.classList.remove('is-dragging');
+      if (!hasDragged) {
+        toggleZoom(e.clientX, e.clientY);
+      }
+    });
+
+    // Backdrop click
+    lightbox.addEventListener('click', function (e) {
+      if (e.target.hasAttribute('data-action') && e.target.getAttribute('data-action') === 'close') {
+        closeLightbox();
+      }
+    });
+
+    // Click on stage/container background to close (if not clicking image or buttons)
+    const stage = document.getElementById('lightboxStage');
+    function handleBackgroundClick(e) {
+      if (e.target === stage || e.target === container || e.target === figureEl || e.target === contentEl) {
+        closeLightbox();
+      }
+    }
+    if (stage) stage.addEventListener('click', handleBackgroundClick);
+    if (container) container.addEventListener('click', handleBackgroundClick);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function (e) {
+      if (!isOpen) return;
+
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        if (zoomLevel > 1) {
+          resetZoom(true);
+        } else {
+          closeLightbox();
+        }
+      } else if (e.key === 'z' || e.key === 'Z') {
+        e.preventDefault();
+        toggleZoom();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        showNext();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        showPrev();
+      }
+    });
+
+    // Touch, Pinch-to-zoom & Swipe navigation for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+    let touchStartTime = 0;
+    let isTouchPanning = false;
+
+    lightbox.addEventListener('touchstart', function (e) {
+      if (!isOpen) return;
+
+      if (e.touches.length === 2) {
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        initialPinchDist = Math.hypot(dx, dy);
+        initialPinchScale = zoomLevel;
+        return;
+      }
+
+      if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        touchStartTime = Date.now();
         startPanX = panX;
         startPanY = panY;
-        lightbox.classList.add('is-dragging');
-        e.preventDefault();
-      });
 
-      window.addEventListener('mousemove', function (e) {
-        if (!isDragging) return;
-        const dx = e.clientX - startPointerX;
-        const dy = e.clientY - startPointerY;
-        if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
-          hasDragged = true;
-        }
-        if (zoomLevel > 1) {
-          panX = startPanX + dx;
-          panY = startPanY + dy;
-          clampPan();
-          applyZoom(false);
-        }
-      });
-
-      window.addEventListener('mouseup', function (e) {
-        if (!isDragging) return;
-        isDragging = false;
-        lightbox.classList.remove('is-dragging');
-        if (!hasDragged) {
-          toggleZoom(e.clientX, e.clientY);
-        }
-      });
-
-      // Backdrop click
-      lightbox.addEventListener('click', function (e) {
-        if (e.target.hasAttribute('data-action') && e.target.getAttribute('data-action') === 'close') {
-          closeLightbox();
-        }
-      });
-
-      // Click on stage/container background to close (if not clicking image or buttons)
-      const stage = document.getElementById('lightboxStage');
-      function handleBackgroundClick(e) {
-        if (e.target === stage || e.target === container || e.target === figureEl || e.target === contentEl) {
-          closeLightbox();
-        }
-      }
-      if (stage) stage.addEventListener('click', handleBackgroundClick);
-      if (container) container.addEventListener('click', handleBackgroundClick);
-
-      // Keyboard navigation
-      document.addEventListener('keydown', function (e) {
-        if (!isOpen) return;
-
-        if (e.key === 'Escape') {
-          e.preventDefault();
-          if (zoomLevel > 1) {
-            resetZoom(true);
-          } else {
-            closeLightbox();
-          }
-        } else if (e.key === 'z' || e.key === 'Z') {
-          e.preventDefault();
-          toggleZoom();
-        } else if (e.key === 'ArrowRight') {
-          e.preventDefault();
-          showNext();
-        } else if (e.key === 'ArrowLeft') {
-          e.preventDefault();
-          showPrev();
-        }
-      });
-
-      // Touch, Pinch-to-zoom & Swipe navigation for mobile
-      let touchStartX = 0;
-      let touchStartY = 0;
-      let touchEndX = 0;
-      let touchEndY = 0;
-      let touchStartTime = 0;
-      let isTouchPanning = false;
-
-      lightbox.addEventListener('touchstart', function (e) {
-        if (!isOpen) return;
-
-        if (e.touches.length === 2) {
-          const dx = e.touches[0].clientX - e.touches[1].clientX;
-          const dy = e.touches[0].clientY - e.touches[1].clientY;
-          initialPinchDist = Math.hypot(dx, dy);
-          initialPinchScale = zoomLevel;
-          return;
-        }
-
-        if (e.touches.length === 1) {
-          const touch = e.touches[0];
-          touchStartX = touch.clientX;
-          touchStartY = touch.clientY;
-          touchStartTime = Date.now();
-          startPanX = panX;
-          startPanY = panY;
-
-          if (zoomLevel > 1 && (e.target === imgEl || e.target.closest('#lightboxFigure'))) {
-            isTouchPanning = true;
-          } else {
-            isTouchPanning = false;
-          }
-        }
-      }, { passive: true });
-
-      lightbox.addEventListener('touchmove', function (e) {
-        if (!isOpen) return;
-
-        // Two-finger pinch to zoom
-        if (e.touches.length === 2 && initialPinchDist > 0) {
-          e.preventDefault();
-          const dx = e.touches[0].clientX - e.touches[1].clientX;
-          const dy = e.touches[0].clientY - e.touches[1].clientY;
-          const currentDist = Math.hypot(dx, dy);
-          const scaleFactor = currentDist / initialPinchDist;
-          zoomLevel = Math.min(4, Math.max(1, initialPinchScale * scaleFactor));
-          clampPan();
-          applyZoom(false);
-          return;
-        }
-
-        // Single finger pan when zoomed
-        if (e.touches.length === 1 && isTouchPanning && zoomLevel > 1) {
-          e.preventDefault();
-          const dx = e.touches[0].clientX - touchStartX;
-          const dy = e.touches[0].clientY - touchStartY;
-          panX = startPanX + dx;
-          panY = startPanY + dy;
-          clampPan();
-          applyZoom(false);
-        }
-      }, { passive: false });
-
-      lightbox.addEventListener('touchend', function (e) {
-        if (!isOpen) return;
-
-        if (e.touches.length === 0) {
-          initialPinchDist = 0;
+        if (zoomLevel > 1 && (e.target === imgEl || e.target.closest('#lightboxFigure'))) {
+          isTouchPanning = true;
+        } else {
           isTouchPanning = false;
-
-          if (zoomLevel < 1.05) {
-            resetZoom(true);
-          }
         }
+      }
+    }, { passive: true });
 
-        if (e.changedTouches.length === 0) return;
-        touchEndX = e.changedTouches[0].clientX;
-        touchEndY = e.changedTouches[0].clientY;
+    lightbox.addEventListener('touchmove', function (e) {
+      if (!isOpen) return;
 
-        const diffX = touchEndX - touchStartX;
-        const diffY = touchEndY - touchStartY;
-        const tapDuration = Date.now() - touchStartTime;
-
-        // Double tap to toggle zoom on image
-        if (e.target === imgEl && Math.abs(diffX) < 15 && Math.abs(diffY) < 15 && tapDuration < 300) {
-          const now = Date.now();
-          if (now - lastTapTime < 350) {
-            toggleZoom(touchEndX, touchEndY);
-            lastTapTime = 0;
-            return;
-          }
-          lastTapTime = now;
-        }
-
-        // Swipe navigation & swipe down dismiss ONLY when NOT zoomed
-        if (zoomLevel === 1) {
-          // Horizontal swipe
-          if (Math.abs(diffX) > 45 && Math.abs(diffX) > Math.abs(diffY)) {
-            if (diffX < 0) {
-              showNext();
-            } else {
-              showPrev();
-            }
-          }
-          // Swipe down to dismiss
-          else if (diffY > 90 && Math.abs(diffY) > Math.abs(diffX) * 1.5) {
-            closeLightbox();
-          }
-        }
-      }, { passive: true });
-
-      // Proactive viewport loader: ensures lazy gallery images reliably start loading well before entering viewport
-      if ('IntersectionObserver' in window) {
-        const lazyObserver = new IntersectionObserver(function (entries, observer) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              const card = entry.target;
-              const img = card.querySelector('.gallery-card__img');
-              if (img && img.getAttribute('loading') === 'lazy') {
-                img.loading = 'eager';
-                img.removeAttribute('loading');
-              }
-              observer.unobserve(card);
-            }
-          });
-        }, {
-          rootMargin: '500px 0px 500px 0px'
-        });
-
-        document.querySelectorAll('.gallery-card').forEach(function (card) {
-          const img = card.querySelector('.gallery-card__img');
-          if (img && img.complete && img.naturalWidth > 0) return;
-          lazyObserver.observe(card);
-        });
+      // Two-finger pinch to zoom
+      if (e.touches.length === 2 && initialPinchDist > 0) {
+        e.preventDefault();
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const currentDist = Math.hypot(dx, dy);
+        const scaleFactor = currentDist / initialPinchDist;
+        zoomLevel = Math.min(4, Math.max(1, initialPinchScale * scaleFactor));
+        clampPan();
+        applyZoom(false);
+        return;
       }
 
+      // Single finger pan when zoomed
+      if (e.touches.length === 1 && isTouchPanning && zoomLevel > 1) {
+        e.preventDefault();
+        const dx = e.touches[0].clientX - touchStartX;
+        const dy = e.touches[0].clientY - touchStartY;
+        panX = startPanX + dx;
+        panY = startPanY + dy;
+        clampPan();
+        applyZoom(false);
+      }
+    }, { passive: false });
 
-      // Protect images against right-click save and drag-to-download on desktop & mobile
-      document.addEventListener('contextmenu', function (e) {
-        if (e.target.closest('.gallery-card') || e.target.closest('.gallery-lightbox')) {
-          e.preventDefault();
+    lightbox.addEventListener('touchend', function (e) {
+      if (!isOpen) return;
+
+      if (e.touches.length === 0) {
+        initialPinchDist = 0;
+        isTouchPanning = false;
+
+        if (zoomLevel < 1.05) {
+          resetZoom(true);
         }
+      }
+
+      if (e.changedTouches.length === 0) return;
+      touchEndX = e.changedTouches[0].clientX;
+      touchEndY = e.changedTouches[0].clientY;
+
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+      const tapDuration = Date.now() - touchStartTime;
+
+      // Double tap to toggle zoom on image
+      if (e.target === imgEl && Math.abs(diffX) < 15 && Math.abs(diffY) < 15 && tapDuration < 300) {
+        const now = Date.now();
+        if (now - lastTapTime < 350) {
+          toggleZoom(touchEndX, touchEndY);
+          lastTapTime = 0;
+          return;
+        }
+        lastTapTime = now;
+      }
+
+      // Swipe navigation & swipe down dismiss ONLY when NOT zoomed
+      if (zoomLevel === 1) {
+        // Horizontal swipe
+        if (Math.abs(diffX) > 45 && Math.abs(diffX) > Math.abs(diffY)) {
+          if (diffX < 0) {
+            showNext();
+          } else {
+            showPrev();
+          }
+        }
+        // Swipe down to dismiss
+        else if (diffY > 90 && Math.abs(diffY) > Math.abs(diffX) * 1.5) {
+          closeLightbox();
+        }
+      }
+    }, { passive: true });
+
+    // Proactive viewport loader: ensures lazy gallery images reliably start loading well before entering viewport
+    if ('IntersectionObserver' in window) {
+      const lazyObserver = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            const card = entry.target;
+            const img = card.querySelector('.gallery-card__img');
+            if (img && img.getAttribute('loading') === 'lazy') {
+              img.loading = 'eager';
+              img.removeAttribute('loading');
+            }
+            observer.unobserve(card);
+          }
+        });
+      }, {
+        rootMargin: '500px 0px 500px 0px'
       });
 
-      document.addEventListener('dragstart', function (e) {
-        if (e.target.matches('.gallery-card__img, .gallery-lightbox__img')) {
-          e.preventDefault();
-        }
+      document.querySelectorAll('.gallery-card').forEach(function (card) {
+        const img = card.querySelector('.gallery-card__img');
+        if (img && img.complete && img.naturalWidth > 0) return;
+        lazyObserver.observe(card);
       });
+    }
 
-    }) ();
+
+    // Protect images against right-click save and drag-to-download on desktop & mobile
+    document.addEventListener('contextmenu', function (e) {
+      if (e.target.closest('.gallery-card') || e.target.closest('.gallery-lightbox')) {
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener('dragstart', function (e) {
+      if (e.target.matches('.gallery-card__img, .gallery-lightbox__img')) {
+        e.preventDefault();
+      }
+    });
+
+  })();
 </script>

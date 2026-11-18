@@ -112,6 +112,22 @@ module.exports = function (eleventyConfig) {
     return dt.isValid ? dt.toFormat("MMM d, yyyy") : "";
   });
 
+  // Gallery Image Metadata filter (aspect ratio, width, height)
+  eleventyConfig.addFilter("galleryMeta", (imagePath) => {
+    if (!imagePath) return { width: 1200, height: 800, aspect: 1.333 };
+    const fs = require("fs");
+    const path = require("path");
+    const metaFile = path.join(__dirname, "src", "_data", "galleryMeta.json");
+    try {
+      if (fs.existsSync(metaFile)) {
+        const meta = JSON.parse(fs.readFileSync(metaFile, "utf8"));
+        const normalized = imagePath.startsWith("/") ? imagePath : "/" + imagePath;
+        if (meta[normalized]) return meta[normalized];
+      }
+    } catch (e) {}
+    return { width: 1200, height: 800, aspect: 1.333 };
+  });
+
   // Google Photos Justified Layout Shortcode (Flickr justified-layout)
   eleventyConfig.addShortcode("justifiedGallery", require("./src/_includes/shortcodes/justifiedGallery.js"));
 
