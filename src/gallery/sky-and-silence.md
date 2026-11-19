@@ -8,4 +8,5 @@ galleryTags:
   - kashmir
   - nature
   - maroof
+  - ai-edit
 ---

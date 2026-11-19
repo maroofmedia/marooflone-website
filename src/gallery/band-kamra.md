@@ -11,4 +11,5 @@ description: |
 galleryTags:
   - kashmir
   - nature
+  - ai-edit
 ---
