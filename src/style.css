@@ -5049,6 +5049,10 @@ body.gallery-lightbox-open {
   z-index: 15;
 }
 
+.gallery-lightbox__nav:hover {
+  transform: translateY(-50%) scale(1.06);
+}
+
 .gallery-lightbox__nav--prev {
   left: 24px;
 }
