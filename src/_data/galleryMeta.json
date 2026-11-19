@@ -1,4 +1,9 @@
 {
+  "/gallery/gallery-images/aiims-bathinda.png": {
+    "width": 1086,
+    "height": 1448,
+    "aspect": 0.75
+  },
   "/gallery/gallery-images/apples-2.jpg": {
     "width": 2000,
     "height": 1500,
@@ -83,6 +88,11 @@
     "width": 1128,
     "height": 2000,
     "aspect": 0.564
+  },
+  "/gallery/gallery-images/house-01.jpg": {
+    "width": 1194,
+    "height": 2000,
+    "aspect": 0.597
   },
   "/gallery/gallery-images/into-the-woods.jpg": {
     "width": 1500,

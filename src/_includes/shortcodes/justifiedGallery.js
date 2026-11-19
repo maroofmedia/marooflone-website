@@ -99,6 +99,8 @@ function justifiedGalleryShortcode(items, options = {}) {
     if (item.data) {
       const src = item.data.image || '';
       const dims = resolveDimensions(src, null, null);
+      const galleryTags = Array.isArray(item.data.galleryTags) ? item.data.galleryTags : (item.data.galleryTags ? [item.data.galleryTags] : []);
+      const isAiEdit = galleryTags.includes('ai-edit') || galleryTags.includes('ai');
       return {
         src,
         width: dims.width,
@@ -106,13 +108,16 @@ function justifiedGalleryShortcode(items, options = {}) {
         alt: item.data.alt || '',
         date: formatDate(item.data.date),
         location: item.data.location || '',
-        desc: item.data.description || ''
+        desc: item.data.description || '',
+        isAiEdit
       };
     }
 
-    // Direct object format { src, originalWidth, originalHeight, alt, date, location, desc }
+    // Direct object format { src, originalWidth, originalHeight, alt, date, location, desc, galleryTags }
     const src = item.src || '';
     const dims = resolveDimensions(src, item.originalWidth || item.width, item.originalHeight || item.height);
+    const galleryTags = Array.isArray(item.galleryTags) ? item.galleryTags : (item.galleryTags ? [item.galleryTags] : []);
+    const isAiEdit = Boolean(item.isAiEdit || galleryTags.includes('ai-edit') || galleryTags.includes('ai'));
     return {
       src,
       width: dims.width,
@@ -120,7 +125,8 @@ function justifiedGalleryShortcode(items, options = {}) {
       alt: item.alt || '',
       date: item.date ? formatDate(item.date) : '',
       location: item.location || '',
-      desc: item.desc || item.caption || item.description || ''
+      desc: item.desc || item.caption || item.description || '',
+      isAiEdit
     };
   });
 
@@ -183,6 +189,7 @@ function justifiedGalleryShortcode(items, options = {}) {
         data-date="${escapeHtml(item.date)}"
         data-location="${escapeHtml(item.location)}"
         data-desc="${escapeHtml(item.desc)}"
+        data-ai-edit="${item.isAiEdit ? 'true' : 'false'}"
         style="--top: ${dTop}; --left: ${dLeft}; --w: ${dW}; --h: ${dH}; --top-m: ${mTop}; --left-m: ${mLeft}; --w-m: ${mW}; --h-m: ${mH};">
         <button type="button" class="gallery-card__btn" aria-label="View photograph: ${escapeHtml(item.alt)}" aria-haspopup="dialog">
           <div class="gallery-card__img-wrap">
