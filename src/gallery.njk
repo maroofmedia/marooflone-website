@@ -27,36 +27,15 @@ permalink: /gallery/
     {% set yearGroups = collections.gallery | reverse | groupByYear %}
     {% set currentPhotoIndex = 0 %}
     {% for group in yearGroups %}
-    <section class="gallery-year-group" id="gallery-year-{{ group.year }}" data-year="{{ group.year }}">
+    <div class="gallery-year-group">
       <h2 class="gallery-year-heading">{{ group.year }}</h2>
       {% justifiedGallery group.posts, { globalPhotoIndex: currentPhotoIndex } %}
-    </section>
+    </div>
     {% set currentPhotoIndex = currentPhotoIndex + group.posts.length %}
     {% endfor %}
 
   </div>
 </div>
-
-<!-- Google Photos Style Timeline Fast-Scroll Scrubber -->
-<aside class="gallery-scrubber" id="galleryScrubber" aria-label="Photo timeline navigation" aria-hidden="true">
-  <div class="gallery-scrubber__track" id="scrubberTrack">
-    <!-- Active floating indicator bubble -->
-    <div class="gallery-scrubber__thumb" id="scrubberThumb">
-      <div class="gallery-scrubber__bubble" id="scrubberBubble">2026</div>
-      <div class="gallery-scrubber__handle" aria-hidden="true"></div>
-    </div>
-
-    <!-- Timeline tick markers -->
-    <div class="gallery-scrubber__ticks" id="scrubberTicks">
-      {% for group in yearGroups %}
-      <div class="gallery-scrubber__tick" data-target-year="{{ group.year }}">
-        <span class="gallery-scrubber__tick-label">{{ group.year }}</span>
-        <span class="gallery-scrubber__dot"></span>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</aside>
 
 <!-- Fullscreen Responsive Lightbox -->
 <div id="galleryLightbox" class="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Photo Viewer" hidden>
@@ -857,161 +836,6 @@ permalink: /gallery/
         e.preventDefault();
       }
     });
-
-    // ==========================================================================
-    // Google Photos Style Fast-Scroll Timeline Scrubber
-    // ==========================================================================
-    const scrubber = document.getElementById('galleryScrubber');
-    const scrubberTrack = document.getElementById('scrubberTrack');
-    const scrubberThumb = document.getElementById('scrubberThumb');
-    const scrubberBubble = document.getElementById('scrubberBubble');
-    const yearSections = Array.from(document.querySelectorAll('.gallery-year-group'));
-
-    if (scrubber && scrubberTrack && scrubberThumb && yearSections.length > 1) {
-      let isDraggingScrubber = false;
-      let hideScrubberTimeout = null;
-      let cachedYearOffsets = [];
-
-      function cacheOffsets() {
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        cachedYearOffsets = yearSections.map(function (sec) {
-          const rect = sec.getBoundingClientRect();
-          const top = rect.top + window.scrollY - 100;
-          const year = sec.getAttribute('data-year') || '';
-          return {
-            el: sec,
-            year: year,
-            top: Math.max(0, top),
-            ratio: docHeight > 0 ? Math.min(1, Math.max(0, top / docHeight)) : 0
-          };
-        });
-      }
-
-      cacheOffsets();
-      window.addEventListener('resize', cacheOffsets);
-
-      // Show/hide scrubber smoothly on user scroll
-      function showScrubber() {
-        if (isOpen) return; // Hide when lightbox is open
-        scrubber.classList.add('is-visible');
-        clearTimeout(hideScrubberTimeout);
-        if (!isDraggingScrubber) {
-          hideScrubberTimeout = setTimeout(function () {
-            if (!isDraggingScrubber) {
-              scrubber.classList.remove('is-visible');
-              scrubber.classList.remove('is-active');
-            }
-          }, 1800);
-        }
-      }
-
-      // Find current visible year based on scroll position
-      function getCurrentYearInfo(scrollY) {
-        if (!cachedYearOffsets.length) return { year: '', ratio: 0 };
-        const probeY = scrollY + (window.innerHeight * 0.35);
-        let active = cachedYearOffsets[0];
-        for (let i = 0; i < cachedYearOffsets.length; i++) {
-          if (probeY >= cachedYearOffsets[i].top) {
-            active = cachedYearOffsets[i];
-          } else {
-            break;
-          }
-        }
-        return active;
-      }
-
-      // Update scrubber thumb position based on scroll ratio
-      function updateThumbFromScroll() {
-        if (isDraggingScrubber || isOpen) return;
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        if (maxScroll <= 150) {
-          scrubber.style.display = 'none';
-          return;
-        } else {
-          scrubber.style.display = '';
-        }
-
-        const scrollY = window.scrollY || window.pageYOffset;
-        const currentYear = getCurrentYearInfo(scrollY);
-
-        if (scrubberBubble && currentYear.year) {
-          scrubberBubble.textContent = currentYear.year;
-        }
-
-        const trackHeight = scrubberTrack.clientHeight;
-        const scrollProgress = Math.min(1, Math.max(0, scrollY / maxScroll));
-        const thumbY = scrollProgress * trackHeight;
-
-        scrubberThumb.style.transform = 'translate3d(0, ' + thumbY.toFixed(1) + 'px, 0)';
-      }
-
-      window.addEventListener('scroll', function () {
-        if (isOpen) return;
-        showScrubber();
-        requestAnimationFrame(updateThumbFromScroll);
-      }, { passive: true });
-
-      // Interactive Pointer Scrubbing (Mouse & Touch)
-      function scrubTo(clientY) {
-        const rect = scrubberTrack.getBoundingClientRect();
-        const offsetY = Math.min(rect.height, Math.max(0, clientY - rect.top));
-        const ratio = rect.height > 0 ? offsetY / rect.height : 0;
-
-        scrubberThumb.style.transform = 'translate3d(0, ' + offsetY.toFixed(1) + 'px, 0)';
-
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        const targetScrollY = ratio * maxScroll;
-
-        window.scrollTo({
-          top: targetScrollY,
-          behavior: 'auto'
-        });
-
-        const activeYear = getCurrentYearInfo(targetScrollY);
-        if (scrubberBubble && activeYear.year) {
-          scrubberBubble.textContent = activeYear.year;
-        }
-      }
-
-      scrubber.addEventListener('pointerdown', function (e) {
-        if (e.button !== 0 && e.pointerType === 'mouse') return;
-        isDraggingScrubber = true;
-        try {
-          if (typeof scrubber.setPointerCapture === 'function') {
-            scrubber.setPointerCapture(e.pointerId);
-          }
-        } catch (err) { }
-        scrubber.classList.add('is-visible', 'is-active');
-        clearTimeout(hideScrubberTimeout);
-        scrubTo(e.clientY);
-        e.preventDefault();
-      });
-
-      scrubber.addEventListener('pointermove', function (e) {
-        if (!isDraggingScrubber) return;
-        scrubTo(e.clientY);
-        e.preventDefault();
-      });
-
-      function stopScrubbing(e) {
-        if (!isDraggingScrubber) return;
-        isDraggingScrubber = false;
-        try {
-          scrubber.releasePointerCapture(e.pointerId);
-        } catch (err) { }
-        scrubber.classList.remove('is-active');
-        showScrubber();
-      }
-
-      scrubber.addEventListener('pointerup', stopScrubbing);
-      scrubber.addEventListener('pointercancel', stopScrubbing);
-
-      // Initial update
-      requestAnimationFrame(function () {
-        cacheOffsets();
-        updateThumbFromScroll();
-      });
-    }
 
   })();
 </script>
