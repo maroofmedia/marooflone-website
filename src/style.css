@@ -4650,56 +4650,35 @@ pre {
   line-height: 1.1;
 }
 
-/* Google Photos Justified Masonry */
-:root {
-  --gallery-row-height: 260px;
-}
-
 /* Google Photos Justified Layout (Flickr justified-layout) */
 .gallery-masonry {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
   position: relative;
   width: 100%;
   aspect-ratio: var(--container-w) / var(--container-h);
 }
 
-.gallery-masonry::after {
-  content: '';
-  flex-grow: 999999999;
-  flex-basis: 0;
-  height: 0;
-
-  @supports not (aspect-ratio: 1) {
-    .gallery-masonry {
-      height: 0;
-      padding-bottom: calc((var(--container-h) / var(--container-w)) * 100%);
-    }
+@supports not (aspect-ratio: 1) {
+  .gallery-masonry {
+    height: 0;
+    padding-bottom: calc((var(--container-h) / var(--container-w)) * 100%);
   }
+}
 
-  .gallery-card {
-    position: absolute;
-    margin: 0;
-    height: var(--gallery-row-height, 260px);
-    position: relative;
-    border-radius: 6px;
-    top: calc((var(--top) / var(--container-h)) * 100%);
-    left: calc((var(--left) / var(--container-w)) * 100%);
-    width: calc((var(--w) / var(--container-w)) * 100%);
-    height: calc((var(--h) / var(--container-h)) * 100%);
-    border-radius: 12px;
-    overflow: hidden;
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    flex-grow: var(--aspect, 1);
-    flex-shrink: 1;
-    flex-basis: calc(var(--gallery-row-height, 260px) * var(--aspect, 1));
-    max-width: 100%;
-    transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
-      border-color 0.25s ease,
-      box-shadow 0.28s ease;
-  }
+.gallery-card {
+  position: absolute;
+  margin: 0;
+  top: calc((var(--top) / var(--container-h)) * 100%);
+  left: calc((var(--left) / var(--container-w)) * 100%);
+  width: calc((var(--w) / var(--container-w)) * 100%);
+  height: calc((var(--h) / var(--container-h)) * 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.25s ease,
+    box-shadow 0.28s ease;
+}
 
   .gallery-card__btn {
     display: block;
@@ -5172,30 +5151,23 @@ pre {
    ========================================================================== */
 
   @media (max-width: 640px) {
-
-    :root,
     .gallery-masonry {
-      --gallery-row-height: 180px;
       aspect-ratio: var(--container-w-m) / var(--container-h-m);
     }
 
-    .gallery-masonry {
-      gap: 6px;
-
-      @supports not (aspect-ratio: 1) {
-        .gallery-masonry {
-          padding-bottom: calc((var(--container-h-m) / var(--container-w-m)) * 100%);
-        }
+    @supports not (aspect-ratio: 1) {
+      .gallery-masonry {
+        padding-bottom: calc((var(--container-h-m) / var(--container-w-m)) * 100%);
       }
+    }
 
-      .gallery-card {
-        border-radius: 5px;
-        top: calc((var(--top-m) / var(--container-h-m)) * 100%);
-        left: calc((var(--left-m) / var(--container-w-m)) * 100%);
-        width: calc((var(--w-m) / var(--container-w-m)) * 100%);
-        height: calc((var(--h-m) / var(--container-h-m)) * 100%);
-        border-radius: 12px;
-      }
+    .gallery-card {
+      top: calc((var(--top-m) / var(--container-h-m)) * 100%);
+      left: calc((var(--left-m) / var(--container-w-m)) * 100%);
+      width: calc((var(--w-m) / var(--container-w-m)) * 100%);
+      height: calc((var(--h-m) / var(--container-h-m)) * 100%);
+      border-radius: 12px;
+    }
 
       .gallery-card__overlay {
         padding: 10px;
