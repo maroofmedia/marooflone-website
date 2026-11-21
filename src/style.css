@@ -5302,6 +5302,10 @@ body.gallery-lightbox-open {
    ========================================================================== */
 
 @media (max-width: 640px) {
+  .gallery-page-section {
+    padding-top: 24px;
+  }
+
   .gallery-masonry {
     aspect-ratio: var(--container-w-m) / var(--container-h-m);
   }
