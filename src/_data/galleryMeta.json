@@ -14,6 +14,11 @@
     "height": 2000,
     "aspect": 0.75
   },
+  "/gallery/gallery-images/baba-shukurdin.jpg": {
+    "width": 2000,
+    "height": 900,
+    "aspect": 2.222
+  },
   "/gallery/gallery-images/band-kamra.png": {
     "width": 1199,
     "height": 1312,
@@ -60,6 +65,11 @@
     "aspect": 0.655
   },
   "/gallery/gallery-images/eid-2026.jpg": {
+    "width": 1500,
+    "height": 2000,
+    "aspect": 0.75
+  },
+  "/gallery/gallery-images/food-done.jpg": {
     "width": 1500,
     "height": 2000,
     "aspect": 0.75
@@ -149,6 +159,11 @@
     "height": 2000,
     "aspect": 0.75
   },
+  "/gallery/gallery-images/mountain-afternoon.png": {
+    "width": 1254,
+    "height": 1254,
+    "aspect": 1
+  },
   "/gallery/gallery-images/mountains.jpg": {
     "width": 1500,
     "height": 2000,
@@ -173,6 +188,11 @@
     "width": 1500,
     "height": 2000,
     "aspect": 0.75
+  },
+  "/gallery/gallery-images/Reshwari.jpg": {
+    "width": 2000,
+    "height": 1500,
+    "aspect": 1.333
   },
   "/gallery/gallery-images/shiva-marbal-road-sopore.jpg": {
     "width": 2000,
@@ -218,5 +238,10 @@
     "width": 1128,
     "height": 2000,
     "aspect": 0.564
+  },
+  "/gallery/gallery-images/Yamberzalwari.jpg": {
+    "width": 1500,
+    "height": 2000,
+    "aspect": 0.75
   }
 }

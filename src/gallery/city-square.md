@@ -1,5 +1,5 @@
 ---
-date: "2026-03-02"
+date: "2026-05-02"
 image: "/gallery/gallery-images/city-square.jpg"
 alt: "City Square Mall"
 location: "Green City Square, Bathinda"
