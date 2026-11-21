@@ -5347,7 +5347,14 @@ body.gallery-lightbox-open {
   }
 
   .gallery-lightbox__stage {
+    flex: 0 0 auto;
+    justify-content: safe center;
     padding: 56px 14px 24px;
+    min-height: 100%;
+  }
+
+  .gallery-lightbox__content {
+    margin: auto 0;
   }
 
   .gallery-lightbox__nav {

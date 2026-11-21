@@ -305,7 +305,6 @@ permalink: /gallery/
       if (index < 0 || index >= items.length) return;
       resetZoom(false);
       if (typeof onImageLoaded !== 'function') {
-        contentVerticalOffset = 0;
         if (contentEl) contentEl.style.transform = '';
       }
       currentIndex = index;
@@ -321,6 +320,7 @@ permalink: /gallery/
       const location = item.getAttribute('data-location') || '';
       const desc = item.getAttribute('data-desc') || '';
       const isAiEdit = item.getAttribute('data-ai-edit') === 'true';
+      if (container) container.scrollTop = 0;
 
       // Reset AI popover
       if (aiBadge) {
@@ -388,7 +388,6 @@ permalink: /gallery/
       lightbox.classList.remove('is-closing');
 
       // Reset inline styles from any previous drag/swipe
-      contentVerticalOffset = 0;
       if (contentEl) {
         contentEl.style.transform = '';
         contentEl.style.opacity = '';
@@ -417,7 +416,6 @@ permalink: /gallery/
     function closeLightbox(fromHistory) {
       if (!isOpen) return;
       resetZoom(false);
-      contentVerticalOffset = 0;
       if (contentEl) contentEl.style.transform = '';
       isOpen = false;
       lightbox.classList.remove('is-active');
@@ -623,7 +621,7 @@ permalink: /gallery/
     let incomingSlideOffset = 0;
     let incomingSlideVerticalOffset = 0;
     let swipeDragX = 0;
-    let contentVerticalOffset = 0;
+    let touchStartScrollTop = 0;
 
     lightbox.addEventListener('touchstart', function (e) {
       if (!isOpen || isSwipeAnimating) return;
@@ -642,6 +640,7 @@ permalink: /gallery/
         touchStartX = touch.clientX;
         touchStartY = touch.clientY;
         touchStartTime = Date.now();
+        touchStartScrollTop = container ? container.scrollTop : 0;
         startPanX = panX;
         startPanY = panY;
         isPullingDown = false;
@@ -694,6 +693,10 @@ permalink: /gallery/
         const dy = currentY - touchStartY;
         const dx = currentX - touchStartX;
 
+        if (touchStartScrollTop > 0 && Math.abs(dy) > Math.abs(dx)) {
+          return;
+        }
+
         if (canSwipeHorizontally &&
           (isHorizontalSwiping || (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy) * 1.15))) {
           isHorizontalSwiping = true;
@@ -708,14 +711,11 @@ permalink: /gallery/
           }
           if (contentEl) {
             contentEl.style.transition = 'none';
-            contentEl.style.transform = 'translate3d(' + dx.toFixed(1) + 'px, ' +
-              contentVerticalOffset.toFixed(1) + 'px, 0)';
+            contentEl.style.transform = 'translate3d(' + dx.toFixed(1) + 'px, 0, 0)';
             contentEl.style.opacity = '1';
           }
           if (incomingSlide) {
-            incomingSlide.style.transform = 'translate3d(calc(-50% + ' +
-              (dx + incomingSlideOffset).toFixed(1) + 'px), calc(-50% + ' +
-              incomingSlideVerticalOffset.toFixed(1) + 'px), 0)';
+            incomingSlide.style.transform = getIncomingSlideTransform(dx + incomingSlideOffset);
           }
           return;
         }
@@ -739,7 +739,7 @@ permalink: /gallery/
 
           if (contentEl) {
             contentEl.style.transform = 'translate3d(0, ' +
-              (contentVerticalOffset + dampedY).toFixed(1) + 'px, 0) scale(' + scale.toFixed(3) + ')';
+              dampedY.toFixed(1) + 'px, 0) scale(' + scale.toFixed(3) + ')';
           }
           const backdropEl = lightbox.querySelector('.gallery-lightbox__backdrop');
           if (backdropEl) backdropEl.style.opacity = backdropOpacity.toFixed(2);
@@ -804,7 +804,7 @@ permalink: /gallery/
           // Snap back smoothly to center
           if (contentEl) {
             contentEl.style.transition = 'transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease';
-            contentEl.style.transform = 'translate3d(0, ' + contentVerticalOffset.toFixed(1) + 'px, 0)';
+            contentEl.style.transform = '';
             contentEl.style.opacity = '';
           }
           if (backdropEl) {
@@ -830,14 +830,12 @@ permalink: /gallery/
           animateSwipeTo(swipeDirection);
         } else if (contentEl) {
           contentEl.style.transition = 'transform 0.28s cubic-bezier(0.22, 0.7, 0.2, 1)';
-          contentEl.style.transform = 'translate3d(0, ' + contentVerticalOffset.toFixed(1) + 'px, 0)';
+          contentEl.style.transform = '';
           contentEl.style.opacity = '';
           if (incomingSlide) {
             const returningSlide = incomingSlide;
             incomingSlide.style.transition = 'transform 0.28s cubic-bezier(0.22, 0.7, 0.2, 1)';
-            incomingSlide.style.transform = 'translate3d(calc(-50% + ' +
-              incomingSlideOffset.toFixed(1) + 'px), calc(-50% + ' +
-              incomingSlideVerticalOffset.toFixed(1) + 'px), 0)';
+            incomingSlide.style.transform = getIncomingSlideTransform(incomingSlideOffset);
             setTimeout(function () {
               if (incomingSlide === returningSlide) removeIncomingSlide();
             }, 300);
@@ -861,7 +859,8 @@ permalink: /gallery/
       // Swipe navigation ONLY when NOT zoomed
       if (zoomLevel === 1) {
         // Fallback swipe down to dismiss
-        if (diffY > 90 && Math.abs(diffY) > Math.abs(diffX) * 1.5) {
+        if (touchStartScrollTop === 0 && diffY > 90 &&
+          Math.abs(diffY) > Math.abs(diffX) * 1.5) {
           closeLightbox();
         }
       }
@@ -874,6 +873,14 @@ permalink: /gallery/
       }
       incomingSlideOffset = 0;
       incomingSlideVerticalOffset = 0;
+    }
+
+    function getIncomingSlideTransform(xOffset) {
+      if (window.innerWidth <= 640) {
+        return 'translate3d(calc(-50% + ' + xOffset.toFixed(1) + 'px), 0, 0)';
+      }
+      return 'translate3d(calc(-50% + ' + xOffset.toFixed(1) +
+        'px), calc(-50% + ' + incomingSlideVerticalOffset.toFixed(1) + 'px), 0)';
     }
 
     function prepareIncomingSlide(direction) {
@@ -929,12 +936,17 @@ permalink: /gallery/
       clone.style.position = 'fixed';
       const stageRect = stage.getBoundingClientRect();
       const stageStyles = window.getComputedStyle(stage);
+      const isMobile = window.innerWidth <= 640;
+      const stagePaddingTop = parseFloat(stageStyles.paddingTop);
+      const stagePaddingBottom = parseFloat(stageStyles.paddingBottom);
       const stageContentWidth = Math.max(1,
         stage.clientWidth -
         parseFloat(stageStyles.paddingLeft) -
         parseFloat(stageStyles.paddingRight));
       clone.style.left = (stageRect.left + stageRect.width / 2) + 'px';
-      clone.style.top = (stageRect.top + stageRect.height / 2) + 'px';
+      clone.style.top = isMobile
+        ? (stageRect.top + stagePaddingTop) + 'px'
+        : (stageRect.top + stageRect.height / 2) + 'px';
       clone.style.width = stageContentWidth + 'px';
       clone.style.height = 'auto';
       clone.style.maxWidth = 'none';
@@ -942,7 +954,9 @@ permalink: /gallery/
       clone.style.zIndex = '10001';
       clone.style.pointerEvents = 'none';
       clone.style.transition = 'none';
-      clone.style.transform = 'translate3d(-50%, -50%, 0)';
+      clone.style.transform = isMobile
+        ? 'translate3d(-50%, 0, 0)'
+        : 'translate3d(-50%, -50%, 0)';
       clone.style.opacity = '0';
       if (cloneBottomBar) {
         cloneBottomBar.style.width = '';
@@ -956,7 +970,6 @@ permalink: /gallery/
       function sizeIncomingSlide() {
         if (!cloneImg || !cloneImg.naturalWidth || incomingSlide !== clone) return;
 
-        const isMobile = window.innerWidth <= 640;
         const imageWidth = cloneImg.getBoundingClientRect().width;
         const contentWidth = isMobile
           ? Math.max(imageWidth, Math.min(window.innerWidth - 28, 380))
@@ -978,15 +991,21 @@ permalink: /gallery/
         }
 
         const cloneFigureRect = cloneFigure.getBoundingClientRect();
+        if (isMobile) {
+          const freeHeight = stage.clientHeight - stagePaddingTop - stagePaddingBottom - clone.offsetHeight;
+          clone.style.top = (stageRect.top + stagePaddingTop + Math.max(0, freeHeight / 2)) + 'px';
+        }
         const incomingFigureWidth = cloneFigureRect.width;
-        const currentFigureCenterY = currentFigure.top + currentFigure.height / 2;
-        incomingSlideVerticalOffset = currentFigureCenterY -
-          (cloneFigureRect.top + cloneFigureRect.height / 2);
+        if (!isMobile) {
+          const currentFigureCenterY = currentFigure.top + currentFigure.height / 2;
+          incomingSlideVerticalOffset = currentFigureCenterY -
+            (cloneFigureRect.top + cloneFigureRect.height / 2);
+        } else {
+          incomingSlideVerticalOffset = 0;
+        }
         const gap = 16;
         incomingSlideOffset = direction * -(currentFigure.width / 2 + incomingFigureWidth / 2 + gap);
-        clone.style.transform = 'translate3d(calc(-50% + ' +
-          (incomingSlideOffset + swipeDragX).toFixed(1) + 'px), calc(-50% + ' +
-          incomingSlideVerticalOffset.toFixed(1) + 'px), 0)';
+        clone.style.transform = getIncomingSlideTransform(incomingSlideOffset + swipeDragX);
         clone.style.opacity = '1';
       }
 
@@ -1007,7 +1026,6 @@ permalink: /gallery/
       const incomingFigure = incomingSlide.querySelector('.gallery-lightbox__figure');
       const incomingFigureRect = incomingFigure ? incomingFigure.getBoundingClientRect() : currentFigure;
       const incomingFigureWidth = incomingFigureRect.width;
-      const incomingFigureCenterY = incomingFigureRect.top + incomingFigureRect.height / 2;
       const exitX = direction * (currentFigure.width / 2 + incomingFigureWidth / 2 + 16);
       let completed = false;
       let fallbackTimer;
@@ -1036,11 +1054,7 @@ permalink: /gallery/
             return;
           }
 
-          const renderedFigure = figureEl.getBoundingClientRect();
-          contentVerticalOffset = incomingFigureCenterY -
-            (renderedFigure.top + renderedFigure.height / 2);
-          contentEl.style.transform = 'translate3d(0, ' +
-            contentVerticalOffset.toFixed(1) + 'px, 0)';
+          contentEl.style.transform = '';
           contentEl.style.opacity = '1';
           requestAnimationFrame(function () {
             requestAnimationFrame(function () {
@@ -1061,12 +1075,10 @@ permalink: /gallery/
 
       contentEl.addEventListener('transitionend', onExitTransitionEnd);
       contentEl.style.transition = 'transform 0.28s cubic-bezier(0.22, 0.7, 0.2, 1)';
-      contentEl.style.transform = 'translate3d(' + exitX + 'px, ' +
-        contentVerticalOffset.toFixed(1) + 'px, 0)';
+      contentEl.style.transform = 'translate3d(' + exitX + 'px, 0, 0)';
       if (incomingSlide) {
         incomingSlide.style.transition = 'transform 0.28s cubic-bezier(0.22, 0.7, 0.2, 1)';
-        incomingSlide.style.transform = 'translate3d(-50%, calc(-50% + ' +
-          incomingSlideVerticalOffset.toFixed(1) + 'px), 0)';
+        incomingSlide.style.transform = getIncomingSlideTransform(0);
       }
       fallbackTimer = setTimeout(finishSwipe, 340);
     }
